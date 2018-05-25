@@ -22,7 +22,7 @@ class BattleManager
 
 	public void update()
 	{
-
+		
 	}
 
 	public void render()
