@@ -63,6 +63,11 @@ class BattleEntity : CSprite
     override public void destroy()
     {
         base.destroy();
+
+        this.skills = null;
+        this.name = null;
+        this.maxHealth = null;
+        this.currentHealth = null;
     }
 
     /// <summary>
