@@ -66,11 +66,20 @@ class BattleEntity : CSprite
     }
 
     /// <summary>
-    /// Setea la vida de la entidad
+    ///     Setea la vida de la entidad
     /// </summary>
     /// <param name="health"> Nueva vida de la entidad </param>
     public void setHealth(int health)
     {
         //this.currentHealth = health > this.maxHealth ? this.maxHealth : health;
+
+        if(health > this.maxHealth)
+        {
+            this.currentHealth = this.maxHealth;
+        }
+        else
+        {
+            this.currentHealth = health;
+        }
     }
 }
