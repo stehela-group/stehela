@@ -8,11 +8,9 @@
     
 
     protected int damage = 0;
-    protected int castTime = 0;
+    protected int castTime = 3;
     protected int reachTime = 0;
     protected int affectTime = 0;
-
-    protected int pepe = 0;
 
     public Skill() 
     {
@@ -26,10 +24,16 @@
         {
             case (Skill.CASTING):
                 //Establish the Skill Function
+                if (getTimeState > castTime)
+                    setState(REACHING);
                 break;
             case (Skill.REACHING):
+                if (getTimeState > reachTime) 
+                setState(AFFECTING);
                 break;
             case (Skill.AFFECTING):
+                if (getTimeState > affectTime)
+                    setState(FINISHED);
                 break;
             case (Skill.FINISHED):
                 break;
