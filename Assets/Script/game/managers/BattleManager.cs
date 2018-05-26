@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 class BattleManager
 {
 	// Equipo del Jugador
@@ -12,8 +14,8 @@ class BattleManager
 	// Entidad del jugador seleccionada en este momento
 	protected BattleEntity selectedBattleEntity;
 
-	static int SELECTING_ACTIONS = 0;
-	static int PERFORMING_ACTIONS = 1;
+	const int SELECTING_ACTIONS = 0;
+	const int PERFORMING_ACTIONS = 1;
 
 	public BattleManager() 
 	{
