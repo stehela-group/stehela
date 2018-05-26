@@ -1,16 +1,18 @@
 ﻿class Skill : CSprite
 {
 
-    const int CASTING = 1;
-    const int REACHING = 2;
-    const int AFFECTING = 3;
-    const int FINISHED = 4;
+    public const int CASTING = 1;
+    public const int REACHING = 2;
+    public const int AFFECTING = 3;
+    public const int FINISHED = 4;
     
 
-    public int damage = 0;
-    public int castTime = 0;
-    public int reachTime = 0;
-    public int affectTime = 0;
+    protected int damage = 0;
+    protected int castTime = 0;
+    protected int reachTime = 0;
+    protected int affectTime = 0;
+
+    protected int pepe = 0;
 
     public Skill() 
     {

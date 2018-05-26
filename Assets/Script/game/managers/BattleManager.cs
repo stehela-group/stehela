@@ -34,6 +34,6 @@ class BattleManager
 
 	public void destroy()
 	{
-
+        
 	}
 }
