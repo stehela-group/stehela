@@ -66,8 +66,8 @@ class BattleEntity : CSprite
 
         this.skills = null;
         this.name = null;
-        this.maxHealth = null;
-        this.currentHealth = null;
+        this.maxHealth = 0;
+        this.currentHealth = 0;
     }
 
     /// <summary>
