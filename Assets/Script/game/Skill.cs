@@ -12,6 +12,11 @@
     protected int reachTime = 0;
     protected int affectTime = 0;
 
+    private int[] mFramesCasting = new int[] { };
+    private int[] mFramesReaching = new int[] { };
+    private int[] mFramesAffecting = new int[] { };
+
+
     /*
         TODO: 
             - Variables para guardar las animaciones de casting, reaching, y affecting.
@@ -22,6 +27,7 @@
 
     public Skill() 
     {
+        
     }
 
     override public void update()
@@ -51,6 +57,10 @@
             case (Skill.FINISHED):
                 break;
         }
+        
     }
-
+    private getDamage(aDamage);
+    {
+        return aDamage;
+    }
 }
