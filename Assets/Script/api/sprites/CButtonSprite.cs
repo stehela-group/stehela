@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class CButtonSprite : CAnimatedSprite
 {
@@ -9,15 +10,18 @@ public class CButtonSprite : CAnimatedSprite
 	public CButtonSprite(string buttonText = null)
 	{
 		this.setName("Button - " + buttonText);
-		this.buttonText = new CText(buttonText);
-
 		this.setFrames(Resources.LoadAll<Sprite>("Sprites/ui"));
 		this.gotoAndStop(1);
 		this.setWidth(190);
 		this.setHeight(50);
 		this.setSortingLayerName("UI");
 
-		Debug.Log("Boton creado wn");
+		this.buttonText = new CText(buttonText);
+		this.buttonText.setColor(Color.black);
+		this.buttonText.setWidth(this.getWidth());
+		this.buttonText.setHeight(this.getHeight());
+		this.buttonText.setAlignment(TextAlignmentOptions.Midline);
+		this.buttonText.setFontSize(300f);
 	}
 
 	public override void destroy()
@@ -60,7 +64,8 @@ public class CButtonSprite : CAnimatedSprite
 		setScale (scale);
 		gotoAndStop (frame);
 
-		this.buttonText.setXY((this.getX() + this.getWidth()) / 2, (this.getY() + this.getHeight()) / 2);
+		this.buttonText.setXY(this.getX(), this.getY());
+		this.buttonText.update();
 	}
 
 	public override void render()
