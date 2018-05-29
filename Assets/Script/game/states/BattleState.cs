@@ -35,7 +35,7 @@ class BattleState : CGameState
         foreach (var entity in playerParty)
         {
             CButtonSprite selectEntity = new CButtonSprite(entity.getEntityName());
-            selectEntity.setXY( 200, 200 * this.battleEntitySelector.Count + 50);
+            selectEntity.setXY( 200, (selectEntity.getHeight() * this.battleEntitySelector.Count) + 50);
             this.battleEntitySelector.Add(selectEntity, entity);
         }
     }
