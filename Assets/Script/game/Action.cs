@@ -9,8 +9,8 @@ class Action: CGameObject
     protected Skill skill;
     protected BattleEntity target;
 
-    public const PERFORMING = 0;
-    public const FINISHED = 0;
+    public const int PERFORMING = 0;
+    public const int FINISHED = 1;
 
     public void init ()
     {
@@ -23,9 +23,9 @@ class Action: CGameObject
         switch (this.getState())
         {
             case (Action.PERFORMING):
-                if (skill.getState() == skill.FINISHED)
+                if (skill.getState() == Skill.FINISHED)
                 {
-                    this.setState(this.FINISHED);
+                    this.setState(Action.FINISHED);
                 }
                 break;
             case (Action.FINISHED):

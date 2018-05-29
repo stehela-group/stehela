@@ -59,8 +59,8 @@
         }
         
     }
-    private getDamage(aDamage);
+    public int getDamage()
     {
-        return aDamage;
+        return this.damage;
     }
 }
