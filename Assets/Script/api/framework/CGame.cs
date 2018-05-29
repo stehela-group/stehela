@@ -21,7 +21,7 @@ public class CGame : MonoBehaviour
 		CKeyboard.init ();
 
 		//setState(new CLevelState ());
-		setState(new CMainMenuState ());
+		setState(new BattleState());
 	}
 
 	static public CGame inst()

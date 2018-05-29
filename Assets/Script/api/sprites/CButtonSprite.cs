@@ -4,9 +4,20 @@ using System.Collections;
 public class CButtonSprite : CAnimatedSprite
 {
 	public bool mIsMouseOver = false;
+	protected CText buttonText;
 
-	public CButtonSprite()
+	public CButtonSprite(string buttonText = null)
 	{
+		this.setName("Button - " + buttonText);
+		this.buttonText = new CText(buttonText);
+
+		this.setFrames(Resources.LoadAll<Sprite>("Sprites/ui"));
+		this.gotoAndStop(1);
+		this.setWidth(190);
+		this.setHeight(50);
+		this.setSortingLayerName("UI");
+
+		Debug.Log("Boton creado wn");
 	}
 
 	public override void destroy()
@@ -48,11 +59,14 @@ public class CButtonSprite : CAnimatedSprite
 
 		setScale (scale);
 		gotoAndStop (frame);
+
+		this.buttonText.setXY((this.getX() + this.getWidth()) / 2, (this.getY() + this.getHeight()) / 2);
 	}
 
 	public override void render()
 	{
 		base.render ();
+		this.buttonText.render();
 	}
 
 	public bool isMouseOver()
