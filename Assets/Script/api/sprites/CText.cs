@@ -37,6 +37,14 @@ public class CText : CGameObject
 		this.displayText.transform.position = pos;
 	}
 
+	override public void destroy()
+	{
+		base.destroy();
+
+		Object.Destroy(this.displayText);
+		Object.Destroy(this.text);
+	}
+
 	override public void setName(string aName)
 	{
 		base.setName("Texto - " + aName);

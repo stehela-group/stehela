@@ -13,22 +13,18 @@ public class BattleEntity : CSprite
     protected int currentHealth = 0;
 
     protected string name;
-    protected List<Skill> skills = new List<Skill>();
-    // Use this for initialization
-    public BattleEntity (string characterName, int characterMaxHealth)
+    private List<Skill> skillsList = new List<Skill>();
+
+    protected List<Skill> skills
     {
-        //Nombre de la entidad
-        this.name = characterName;
-        this.maxHealth = characterMaxHealth;
-        this.setHealth(characterMaxHealth);
-        this.setName(characterName);
-        
-        //List<Skill> skills: Lista de skills de la entidad
-        //Estados:
-        //IDLE: Estado mientras la entidad está en espera 
-        //RECEIVING_DAMAGE: Estado de la entidad al ser atacada
-        //ATTACKING: Estado de la entidad al atacar
+        get
+        {
+            return this.skillsList;
+        }
     }
+
+    // Use this for initialization
+    public BattleEntity () {}
 
     override public void update ()
     {
@@ -64,7 +60,7 @@ public class BattleEntity : CSprite
     {
         base.destroy();
 
-        this.skills = null;
+        this.skillsList = null;
         this.name = null;
         this.maxHealth = 0;
         this.currentHealth = 0;
@@ -88,7 +84,23 @@ public class BattleEntity : CSprite
         }
     }
 
-    public string getEntityName()
+    public void setMaxHealth(int maxHealth)
+    {
+        this.maxHealth = maxHealth;
+    }
+
+    public int getMaxHealth()
+    {
+        return this.maxHealth;
+    }
+
+    override public void setName(string aName)
+    {
+        base.setName("BattleEntity - " + aName);
+        this.name = aName;
+    }
+
+    override public string getName()
     {
         return this.name;
     }

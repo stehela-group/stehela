@@ -7,7 +7,6 @@ public class Curar : Skill
     public Curar()
     {
         this.setSkillName("Curar");
-        this.setDamage(-10);
+        this.setDamage(10);
     }
-
 }

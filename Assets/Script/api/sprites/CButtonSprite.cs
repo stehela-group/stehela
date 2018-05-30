@@ -24,11 +24,6 @@ public class CButtonSprite : CAnimatedSprite
 		this.buttonText.setFontSize(300f);
 	}
 
-	public override void destroy()
-	{
-		base.destroy ();
-	}
-
 	public override void update()
 	{
 		base.update ();
@@ -72,6 +67,13 @@ public class CButtonSprite : CAnimatedSprite
 	{
 		base.render ();
 		this.buttonText.render();
+	}
+
+	public override void destroy()
+	{
+		base.destroy ();
+
+		this.buttonText.destroy();
 	}
 
 	public bool isMouseOver()

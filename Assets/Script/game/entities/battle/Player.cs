@@ -1,10 +1,9 @@
 public class Player : BattleEntity
 {
-	public Player(string characterName, int characterMaxHealth) : base(characterName, characterMaxHealth)
+	public Player()
 	{
-		Skill s = new Skill();
-		s.setSkillName("Skill 1");
-		s.setDamage(10);
-		this.skills.Add(s);
+		this.setName("Player");
+		this.skills.Add(new Atacar());
+		this.skills.Add(new Hielo());
 	}
 }
