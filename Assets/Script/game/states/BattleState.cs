@@ -17,10 +17,14 @@ class BattleState : CGameState
 	// Entidad del jugador seleccionada en este momento
 	protected BattleEntity selectedBattleEntity = null;
 
+    // Entidad de skill seleccionada en este momento
+    protected BattleEntity selectedSkill = null; 
+
     protected Dictionary<CButtonSprite, Skill> battleEntitySkillsButtons = new Dictionary<CButtonSprite, Skill>();
 
     protected Dictionary<CButtonSprite, BattleEntity> battleEntityButtons = new Dictionary<CButtonSprite, BattleEntity>();
 
+    protected Dictionary<CButtonSprite, BattleEntity> battleEntityEnemyButtons = new Dictionary<CButtonSprite, BattleEntity>();
 
     public BattleState()
     {
@@ -53,10 +57,10 @@ class BattleState : CGameState
             entry.Key.update();
 
             //Si se hizo click en el botón y la entidad es diferente a la actual
-            if(entry.Key.clicked() && this.selectedBattleEntity != entry.Value)
+            if (entry.Key.clicked() && this.selectedBattleEntity != entry.Value)
             {
                 this.selectedBattleEntity = entry.Value;
-                
+
                 // Destruimos botones antiguos
                 foreach (var skillButton in this.battleEntitySkillsButtons)
                 {
@@ -74,9 +78,28 @@ class BattleState : CGameState
                         X = Ancho de pantalla - (Ancho de Botón + Margen)
                         Y = Alto de pantalla - (Alto de Botón * (Cantidad total de Skills - Cantidad de skills ya mostradas en botones))
                      */
-					skillButton.setXY(CGameConstants.SCREEN_WIDTH - (skillButton.getWidth() + 50), 
+                    skillButton.setXY(CGameConstants.SCREEN_WIDTH - (skillButton.getWidth() + 50),
                         CGameConstants.SCREEN_HEIGHT - (skillButton.getHeight() * (this.selectedBattleEntity.getSkills().Count - this.battleEntitySkillsButtons.Count)));
                     this.battleEntitySkillsButtons.Add(skillButton, skill);
+                }
+            }
+            // Si se hizo click en el botón de skill y la entidad es diferente a la actual
+            else if (entry.Key.clicked() && this.selectedBattleEntity != entry.Value)
+            {
+                this.selectedBattleEntity = entry.Value;
+
+                // Agregamos botones con los enemigos de la entidad
+                foreach (var entity in playerParty)
+                {
+                    CButtonSprite selectEntity = new CButtonSprite(entity.getName());
+
+                    /*
+                        Posición de botones:
+                        X = Ancho de pantalla - (Ancho de Botón + Margen)
+                        Y = Alto de pantalla - (Alto de Botón * (Cantidad total de Skills - Cantidad de skills ya mostradas en botones))
+                     */
+                    selectEntity.setXY(500, (selectEntity.getHeight() * this.battleEntityButtons.Count) + 40);
+                    this.battleEntityButtons.Add(selectEntity, entity);
                 }
             }
         }
@@ -85,6 +108,11 @@ class BattleState : CGameState
         foreach (var entry in this.battleEntitySkillsButtons)
         {
             entry.Key.update();
+        }
+        // Botones de Enemigos
+        foreach (var item in this.battleEntityButtons)
+        {
+            item.Key.update();
         }
     }
 
