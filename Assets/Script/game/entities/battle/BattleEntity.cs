@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-class BattleEntity : CSprite 
+public class BattleEntity : CSprite 
 {
     public const int IDLE = 0;
     public const int RECEIVING_DAMAGE = 1;
@@ -91,5 +91,10 @@ class BattleEntity : CSprite
     public string getEntityName()
     {
         return this.name;
+    }
+
+    public List<Skill> getSkills()
+    {
+        return this.skills;
     }
 }

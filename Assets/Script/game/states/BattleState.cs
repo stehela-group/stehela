@@ -14,9 +14,11 @@ class BattleState : CGameState
 	protected List<Action> selectedActions = new List<Action>();
 
 	// Entidad del jugador seleccionada en este momento
-	protected BattleEntity selectedBattleEntity;
+	protected BattleEntity selectedBattleEntity = null;
 
-    protected Dictionary<CButtonSprite, BattleEntity> battleEntitySelector = new Dictionary<CButtonSprite, BattleEntity>();
+    protected Dictionary<CButtonSprite, Skill> battleEntitySkillsButtons = new Dictionary<CButtonSprite, Skill>();
+
+    protected Dictionary<CButtonSprite, BattleEntity> battleEntityButtons = new Dictionary<CButtonSprite, BattleEntity>();
 
 
     public BattleState()
@@ -35,24 +37,52 @@ class BattleState : CGameState
         foreach (var entity in playerParty)
         {
             CButtonSprite selectEntity = new CButtonSprite(entity.getEntityName());
-            selectEntity.setXY( 200, (selectEntity.getHeight() * this.battleEntitySelector.Count) + 50);
-            this.battleEntitySelector.Add(selectEntity, entity);
+            selectEntity.setXY( 200, (selectEntity.getHeight() * this.battleEntityButtons.Count) + 50);
+            this.battleEntityButtons.Add(selectEntity, entity);
         }
     }
 
     override public void update()
     {
-        foreach (var item in battleEntitySelector)
+        // Botones de seleccion de personaje
+        foreach (var entry in this.battleEntityButtons)
         {
-            item.Key.update();
+            // entry.Key = CButtonSprite
+            // entry.Value = BattleEntity
+            entry.Key.update();
+
+            if(entry.Key.clicked())
+            {
+                this.selectedBattleEntity = entry.Value;
+                this.battleEntitySkillsButtons.Clear();
+                foreach (var skill in this.selectedBattleEntity.getSkills())
+                {
+                    CButtonSprite skillButton = new CButtonSprite(skill.getName());
+					skillButton.setXY(1600, (skillButton.getHeight() * this.battleEntityButtons.Count) + 50);
+                    this.battleEntitySkillsButtons.Add(skillButton, skill);
+                }
+            }
+        }
+
+        // Botones de skills
+        foreach (var entry in this.battleEntitySkillsButtons)
+        {
+            entry.Key.update();
         }
     }
 
     override public void render()
     {
-		foreach (var item in battleEntitySelector)
+        // Botones de seleccion de personaje
+		foreach (var item in this.battleEntityButtons)
 		{
 			item.Key.render();
+		}
+
+		// Botones de skills
+		foreach (var entry in this.battleEntitySkillsButtons)
+		{
+			entry.Key.update();
 		}
     }
 

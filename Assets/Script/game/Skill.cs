@@ -1,4 +1,4 @@
-﻿class Skill : CSprite
+﻿public class Skill : CSprite
 {
 
     public const int CASTING = 1;
@@ -7,6 +7,7 @@
     public const int FINISHED = 4;
     
 
+    protected string name = "";
     protected int damage = 0;
     protected int castTime = 0;
     protected int reachTime = 0;
@@ -59,8 +60,25 @@
         }
         
     }
+
+    public void setDamage(int damage)
+    {
+        this.damage = damage;
+    }
+
     public int getDamage()
     {
         return this.damage;
+    }
+
+    public void setSkillName(string name)
+    {
+        this.name = name;
+        this.setName("Skill - " + this.name);
+    }
+
+    public string getSkillName()
+    {
+        return this.name;
     }
 }
