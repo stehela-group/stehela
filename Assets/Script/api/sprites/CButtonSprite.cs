@@ -100,4 +100,10 @@ public class CButtonSprite : CAnimatedSprite
 
 		return false;
 	}
+	
+	override public void setVisible(bool aIsVisible)
+	{
+		base.setVisible(aIsVisible);
+		this.buttonText.setVisible(aIsVisible);
+	}
 }
