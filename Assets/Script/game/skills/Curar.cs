@@ -6,7 +6,12 @@ public class Curar : Skill
 
     public Curar()
     {
+        //Heal an ally for 200% of the caster's attackDamage
+        //CD = 1 turn
+
         this.setSkillName("Curar");
-        this.setDamage(10);
+        this.setHeal(200);
+
+        this.setCooldown(1);
     }
 }

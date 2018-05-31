@@ -8,10 +8,33 @@
     
 
     protected string name = "";
-    protected int damage = 0;
+
+    // % of damage dealt, depending on the entity attackDamage
+    protected int damagePercentage = 0;
+
+    // % of heal dealt, depending on the entity attacDamage
+    protected int healPercentage = 0;
+
+    // animation related variables, which determine the skill's current state.
     protected int castTime = 0;
     protected int reachTime = 0;
     protected int affectTime = 0;
+
+    // amount of turns it takes the caster to use ability
+    protected int castingTurns = 0;
+    // amount of turns the target stays affected by ability
+    protected int affectingTurns = 0;
+
+    // amount of turns it takes for the caster to be able to use the ability again
+    protected int cooldown = 0;
+
+    //skill attributes that affect the target
+    protected bool stun = false;
+    protected bool poison = false;
+    protected bool attackDebuff = false;
+
+    protected int poisonPercentage = 0;
+    protected int attackDebuffPercentage = 0;
 
     private int[] mFramesCasting = new int[] { };
     private int[] mFramesReaching = new int[] { };
@@ -60,17 +83,55 @@
         }
         
     }
-
+    // DAMAGE FUNCTIONS
     public void setDamage(int damage)
     {
-        this.damage = damage;
-    }
+        this.damagePercentage = damage;
+    } 
 
     public int getDamage()
     {
-        return this.damage;
+        return this.damagePercentage;
     }
 
+    // HEAL FUNCTIONS
+    public void setHeal(int heal)
+    {
+        this.healPercentage = heal;
+    }
+
+    public int getHeal()
+    {
+        return this.healPercentage;
+    }
+
+    // ATTRIBUTE FUNCTIONS
+    public void setStun (bool aStun)
+    {
+        this.stun = aStun;
+    }
+
+    public void setPoison(bool aPoison)
+    {
+        this.poison = aPoison;
+    }
+    public void setPoisonPercentage(int aDamage)
+    {
+        this.poisonPercentage = aDamage;
+    }
+
+    public void setAttackDebuff(bool aDebuff)
+    {
+        this.attackDebuff = aDebuff;
+    }
+    public void setAttackDebuffPercentage(int aAmount)
+    {
+        this.attackDebuffPercentage = aAmount;
+    }
+
+
+
+    // NAME FUNCTIONS
     public void setSkillName(string name)
     {
         this.name = name;
@@ -81,4 +142,35 @@
     {
         return this.name;
     }
+
+    // TURN RELATED FUNCTIONS
+    public void setCastingTurns(int turns)
+    {
+        this.castingTurns = turns;
+    }
+    public void setAffectingTurns(int turns)
+    {
+        this.affectingTurns = turns;
+    }
+
+    // COLDDOWN FUNCTIONS
+    public void setCooldown(int turns)
+    {
+        this.cooldown = turns;
+    }
+
+    // ANIMATION FUNCTIONS
+    public void setCastTime (int time)
+    {
+        this.castTime = time;
+    }
+    public void setReachTime(int time)
+    {
+        this.reachTime = time;
+    }
+    public void setAffectTime (int time)
+    {
+        this.affectTime = time;
+    }
 }
+    

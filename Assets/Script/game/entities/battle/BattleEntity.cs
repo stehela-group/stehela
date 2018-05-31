@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleEntity : CSprite 
+public class BattleEntity : CSprite
 {
     public const int IDLE = 0;
     public const int RECEIVING_DAMAGE = 1;
@@ -11,6 +11,9 @@ public class BattleEntity : CSprite
 
     protected int maxHealth = 0;
     protected int currentHealth = 0;
+
+
+    protected float attackDamage = 0.0f;
 
     protected string name;
     private List<Skill> skillsList = new List<Skill>();
@@ -24,12 +27,12 @@ public class BattleEntity : CSprite
     }
 
     // Use this for initialization
-    public BattleEntity () {}
+    public BattleEntity() { }
 
-    override public void update ()
+    override public void update()
     {
         base.update();
-		switch (this.getState())
+        switch (this.getState())
         {
             case (BattleEntity.IDLE):
                 break;
@@ -40,8 +43,8 @@ public class BattleEntity : CSprite
             case (BattleEntity.DEAD):
                 break;
         }
-	}
-    override public void render ()
+    }
+    override public void render()
     {
         base.render();
         switch (this.getState())
@@ -74,7 +77,7 @@ public class BattleEntity : CSprite
     {
         //this.currentHealth = health > this.maxHealth ? this.maxHealth : health;
 
-        if(health > this.maxHealth)
+        if (health > this.maxHealth)
         {
             this.currentHealth = this.maxHealth;
         }
@@ -103,6 +106,14 @@ public class BattleEntity : CSprite
     override public string getName()
     {
         return this.name;
+    }
+    public void setAttackDamage(float attack)
+    {
+        this.attackDamage = attack;
+    }
+    public float getAttackDamage()
+    {
+        return this.attackDamage;
     }
 
     public List<Skill> getSkills()
