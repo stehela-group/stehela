@@ -70,4 +70,9 @@ public class CText : CGameObject
 	{
 		this.displayText.alignment = alignment;
 	}
+
+	public void setVisible(bool visible)
+	{
+		this.displayText.enabled = visible;
+	}
 }

@@ -12,9 +12,11 @@ class Action: CGameObject
     public const int PERFORMING = 0;
     public const int FINISHED = 1;
 
-    public void init ()
+    public Action (BattleEntity caster, Skill skill, BattleEntity target)
     {
-        
+        this.caster = caster;
+        this.skill = skill;
+        this.target = target;
     }
     override public void update ()
     {

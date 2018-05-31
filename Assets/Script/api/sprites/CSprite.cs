@@ -153,7 +153,7 @@ public class CSprite : CGameObject
 		return color.a;
 	}
 
-	public void setVisible(bool aIsVisible)
+	virtual public void setVisible(bool aIsVisible)
 	{
 		mSpriteRenderer.enabled = aIsVisible;
 	}
