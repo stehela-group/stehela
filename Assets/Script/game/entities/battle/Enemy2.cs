@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public class Enemy2 : BattleEntity
 {
     public  Enemy2()
@@ -7,5 +9,12 @@ public class Enemy2 : BattleEntity
         this.setMaxHealth(125);
         this.setAttackDamage(10);
         this.skills.Add(new Atacar());
+    }
+
+    override public Action decideAction(List<BattleEntity> playerParty, List<BattleEntity> enemyParty)
+    {
+        Skill skill = this.skills[CMath.randomIntBetween(0, this.skills.Count - 1)];
+
+        return new Action(this, skill, playerParty[CMath.randomIntBetween(0, playerParty.Count - 1)]);
     }
 }

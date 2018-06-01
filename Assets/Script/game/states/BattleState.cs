@@ -14,9 +14,6 @@ class BattleState : CGameState
 	// Acciones a realizar este turno
 	protected List<Action> selectedActions = new List<Action>();
 
-    // enemy casting and Skill
-    protected Dictionary<BattleEntity, Skill> enemyActions = new Dictionary<BattleEntity, Skill>();
-
 	// Entidad del jugador seleccionada en este momento
 	protected BattleEntity selectedBattleEntity = null;
 
@@ -67,7 +64,8 @@ class BattleState : CGameState
             case BattleState.SELECTING_ACTIONS:
                 // TODO: add variable to do this only once per turn.
                 // cada oponente decide que habilidad utilizar.
-                foreach(var entity in this.enemyParty)
+                /*
+				foreach(var entity in this.enemyParty)
                 {
                     entity.clearAvailableSkills();
                     entity.checkCooldowns();
@@ -81,6 +79,7 @@ class BattleState : CGameState
                     
 
                 }
+				*/
 				// Botones de seleccion de personaje
 				foreach (var entry in this.playerPartyButtons)
 				{
@@ -153,8 +152,36 @@ class BattleState : CGameState
             break;
 
             case BattleState.PERFORMING_ACTIONS:
+				
+				Debug.Log(this.selectedActions.Count);
+
+				if (this.selectedActions.Count <= 0)
+				{
+					this.setState(BattleState.SELECTING_ACTIONS);
+				}
+				else
+				{
+
+					this.selectedActions[0].update();
+
+					if(this.selectedActions[0].getState() == Action.FINISHED)
+					{
+						this.selectedActions[0].destroy();
+						this.selectedActions.RemoveAt(0);
+					}
+				}
             break;
         }
+
+		foreach (var player in this.playerParty)
+		{
+			player.update();
+		}
+
+		foreach (var enemy in this.enemyParty)
+		{
+			enemy.update();
+		}
     }
 
     override public void render()
@@ -176,6 +203,16 @@ class BattleState : CGameState
 		{
 			entry.Key.render();
 		}
+
+		foreach (var player in this.playerParty)
+		{
+			player.render();
+		}
+
+		foreach (var enemy in this.enemyParty)
+		{
+			enemy.render();
+		}
     }
 
     override public void destroy()
@@ -187,8 +224,16 @@ class BattleState : CGameState
         Action action = new Action(caster, skill, target);
         this.selectedActions.Add(action);
 
+
+		// Si la cantidad de acciones es igual a la cantidad de la player party entonces el jugador ya terminó de elegir acciones
+		// Ahora hay que hacer que los enemigos elijan las suyas
         if(this.selectedActions.Count == this.playerParty.Count)
         {
+			foreach(var enemy in this.enemyParty)
+			{
+				this.selectedActions.Add(enemy.decideAction(this.playerParty, this.enemyParty));
+			}
+
             this.setState(BattleState.PERFORMING_ACTIONS);
         }
 

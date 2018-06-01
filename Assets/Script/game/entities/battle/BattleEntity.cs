@@ -133,6 +133,12 @@ public class BattleEntity : CSprite
         {
             this.currentHealth = health;
         }
+        Debug.Log(this.name + " - Vida: " + this.getHealth());
+    }
+
+    public int getHealth()
+    {
+        return this.currentHealth;
     }
 
     public void setMaxHealth(int maxHealth)
@@ -155,10 +161,12 @@ public class BattleEntity : CSprite
     {
         return this.name;
     }
+
     public void setAttackDamage(float attack)
     {
         this.attackDamage = attack;
     }
+
     public float getAttackDamage()
     {
         return this.attackDamage;
@@ -172,5 +180,10 @@ public class BattleEntity : CSprite
     public List<Skill> getSkills()
     {
         return this.skills;
+    }
+
+    virtual public Action decideAction(List<BattleEntity> playerParty, List<BattleEntity> enemyParty) 
+    {
+        return null;
     }
 }
