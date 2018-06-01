@@ -12,13 +12,46 @@ public class Player : BattleEntity
 		this.skills.Add(new Hielo());
         this.skills.Add(new Envenenar());
 
-	}
-
-        public init()
-        {
         //setFrames(Resources.Loadall<Sprites>("Sprites/player"))
         setName("Player");
         setSortingLayerName("Player");
+        setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
+        setBoundAction(CGameObject.STOP);
 
+    }
+    override public void update()
+    {
+        base.update();
+        
+    }
+    override public void render()
+	{
+		base.render ();
+	}
+
+    override public void destroy()
+    {
+        base.destroy();
+        
+    }
+    private void move()
+    {
+        if (CKeyboard.pressed(CKeyboard.LEFT))
+        {
+            setVelX(-50);
         }
+        if (CKeyboard.pressed(CKeyboard.RIGHT))
+        {
+            setVelX(50);
+        }
+
+        if (CKeyboard.pressed(CKeyboard.UP))
+        {
+            setVelY(50);
+        }
+        if (CKeyboard.pressed(CKeyboard.DOWN))
+        {
+            setVelY(-50);
+        }
+    }
 }
