@@ -5,6 +5,8 @@ class BattleState : CGameState
 	const int SELECTING_ACTIONS = 0;
 	const int PERFORMING_ACTIONS = 1;
 
+    private CBackground mBackground;
+
     // Equipo del jugador
 	protected List<BattleEntity> playerParty = new List<BattleEntity>();
 
@@ -39,6 +41,7 @@ class BattleState : CGameState
 
     override public void init()
     {
+
         foreach (var entity in this.playerParty)
         {
             CButtonSprite playerButton = new CButtonSprite(entity.getName());
@@ -55,6 +58,10 @@ class BattleState : CGameState
 				(enemyButton.getHeight() * this.enemyPartyButtons.Count) + 40);
 			this.enemyPartyButtons.Add(enemyButton, entity);
 		}
+
+
+        mBackground = new CBackground();
+        mBackground.setXY(0, 0);
     }
 
     override public void update()
