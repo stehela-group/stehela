@@ -13,4 +13,12 @@ public class Player : BattleEntity
         this.skills.Add(new Envenenar());
 
 	}
+
+        public init()
+        {
+        //setFrames(Resources.Loadall<Sprites>("Sprites/player"))
+        setName("Player");
+        setSortingLayerName("Player");
+
+        }
 }
