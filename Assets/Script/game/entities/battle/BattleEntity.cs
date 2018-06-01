@@ -13,7 +13,7 @@ public class BattleEntity : CSprite
     protected int currentHealth = 0;
 
 
-    protected float attackDamage = 0.0f;
+    protected int attackDamage = 0;
 
     protected bool entityCasting = false;
     protected string name;
@@ -162,12 +162,12 @@ public class BattleEntity : CSprite
         return this.name;
     }
 
-    public void setAttackDamage(float attack)
+    public void setAttackDamage(int attack)
     {
         this.attackDamage = attack;
     }
 
-    public float getAttackDamage()
+    public int getAttackDamage()
     {
         return this.attackDamage;
     }

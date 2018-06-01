@@ -42,11 +42,20 @@ public class Action: CGameObject
                     
                     caster.setState(BattleEntity.IDLE);
                 }
-                //If the state of Skill is AFFECTING (next state of skill after reaching) and the caster state is not RECEIVING_DAMAGE, set the state to RECEIVING_DAMAGE.
-                else if (skill.getState() == Skill.AFFECTING && caster.getState() != BattleEntity.RECEIVING_DAMAGE)
+                //If the state of Skill is AFFECTING (next state of skill after reaching) and the //TARGET// state is not RECEIVING_DAMAGE, set the state to RECEIVING_DAMAGE.
+                else if (skill.getState() == Skill.AFFECTING && target.getState() != BattleEntity.RECEIVING_DAMAGE)
                 {
-                    target.setHealth(target.getHealth() - skill.getDamage());
-                    caster.setState(BattleEntity.RECEIVING_DAMAGE);
+                    // si la skill tiene porcentaje de curacion, cambia la vida actual del target para sumarle el porcentaje por el attackDamage del caster.
+                    if (skill.getHeal() > 0){
+                        target.setHealth(target.getHealth() + skill.getHeal() * caster.getAttackDamage());
+                    }
+                    else
+                    { 
+                    //el pocentaje de daño de skill se multiplica por el attackDamage del caster.
+                    target.setHealth(target.getHealth() - skill.getDamage() * caster.getAttackDamage());
+                    
+                    target.setState(BattleEntity.RECEIVING_DAMAGE);
+                    }
                 }
                 //if the Skill is ended
                 else if (skill.getState() == Skill.FINISHED)

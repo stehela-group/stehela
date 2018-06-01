@@ -88,7 +88,8 @@
     // DAMAGE FUNCTIONS
     public void setDamage(int damage)
     {
-        this.damagePercentage = damage;
+        //dividido 100 para ser porcentual y poder utilizarlo para multiplicar el attackDamage del caster para daño
+        this.damagePercentage = damage/100;
     } 
 
     public int getDamage()
@@ -99,7 +100,8 @@
     // HEAL FUNCTIONS
     public void setHeal(int heal)
     {
-        this.healPercentage = heal;
+        //dividido 100 para ser porcentual y poder utilizarlo para multiplicar el attackDamage del caster para curar
+        this.healPercentage = heal/100;
     }
 
     public int getHeal()
