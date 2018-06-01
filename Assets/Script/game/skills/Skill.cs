@@ -121,7 +121,7 @@
     }
     public void setPoisonPercentage(int aDamage)
     {
-        this.poisonPercentage = aDamage;
+        this.poisonPercentage = aDamage/100;
     }
 
     public void setAttackDebuff(bool aDebuff)
@@ -130,7 +130,7 @@
     }
     public void setAttackDebuffPercentage(int aAmount)
     {
-        this.attackDebuffPercentage = aAmount;
+        this.attackDebuffPercentage = aAmount/100;
     }
 
 
