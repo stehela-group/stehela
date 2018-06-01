@@ -15,8 +15,13 @@ public class BattleEntity : CSprite
 
     protected float attackDamage = 0.0f;
 
+    protected bool entityCasting = false;
     protected string name;
     private List<Skill> skillsList = new List<Skill>();
+
+    private List<Skill> availableSkills = new List<Skill>();
+
+    private Skill selectedSkill;
 
     protected List<Skill> skills
     {
@@ -44,6 +49,49 @@ public class BattleEntity : CSprite
                 break;
         }
     }
+    
+
+        // limpia la lista de habilidades disponibles
+    public void clearAvailableSkills()
+    {
+        this.availableSkills.Clear();
+    }
+        // reduce en uno el CD de cada habilidad
+    public void checkCooldowns()
+    {
+        foreach (var skill in this.skillsList)
+        {
+            int t;
+            t = skill.getCurrentCooldown();
+            if (t > 0)
+            {
+                skill.loseCurrentCooldown();
+            }
+
+        }
+    }
+        // agrega a la lista de availableSkills las habilidades que no tengan CD
+    public void getSelectedAction()
+    {
+        foreach(var skill in this.skillsList)
+        {
+            int y;
+            y = skill.getCurrentCooldown();
+            if (y == 0)
+            {
+                availableSkills.Add(skill);
+            }
+        }
+        int selection = CMath.randomIntBetween(1, availableSkills.Count);
+        //le restamos uno a selection ya que la lista comienza en 0 y termina en su length-1
+        selectedSkill = availableSkills[selection - 1];
+    }
+    public Skill castingSkill()
+    {
+        return this.selectedSkill;
+    }
+
+
     override public void render()
     {
         base.render();
@@ -114,6 +162,11 @@ public class BattleEntity : CSprite
     public float getAttackDamage()
     {
         return this.attackDamage;
+    }
+
+    public bool isCasting()
+    {
+        return this.entityCasting;
     }
 
     public List<Skill> getSkills()

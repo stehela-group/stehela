@@ -28,6 +28,8 @@
     // amount of turns it takes for the caster to be able to use the ability again
     protected int cooldown = 0;
 
+    protected int currentCooldown = 0;
+
     //skill attributes that affect the target
     protected bool stun = false;
     protected bool poison = false;
@@ -157,6 +159,19 @@
     public void setCooldown(int turns)
     {
         this.cooldown = turns;
+    }
+    public int getCooldown()
+    {
+        return this.cooldown;
+    }
+
+    public int getCurrentCooldown()
+    {
+        return currentCooldown;
+    }
+    public void loseCurrentCooldown()
+    {
+        this.currentCooldown -= 1;
     }
 
     // ANIMATION FUNCTIONS

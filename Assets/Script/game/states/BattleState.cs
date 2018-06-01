@@ -14,6 +14,9 @@ class BattleState : CGameState
 	// Acciones a realizar este turno
 	protected List<Action> selectedActions = new List<Action>();
 
+    // enemy casting and Skill
+    protected Dictionary<BattleEntity, Skill> enemyActions = new Dictionary<BattleEntity, Skill>();
+
 	// Entidad del jugador seleccionada en este momento
 	protected BattleEntity selectedBattleEntity = null;
 
@@ -62,6 +65,22 @@ class BattleState : CGameState
         switch (this.getState())
         {
             case BattleState.SELECTING_ACTIONS:
+                // TODO: add variable to do this only once per turn.
+                // cada oponente decide que habilidad utilizar.
+                foreach(var entity in this.enemyParty)
+                {
+                    entity.clearAvailableSkills();
+                    entity.checkCooldowns();
+                    if (!entity.isCasting()){
+                        entity.getSelectedAction();
+                        
+             
+                    }
+                    //agrega al diccionario la entidad y la skill que usará
+                    enemyActions.Add(entity, entity.castingSkill());
+                    
+
+                }
 				// Botones de seleccion de personaje
 				foreach (var entry in this.playerPartyButtons)
 				{
