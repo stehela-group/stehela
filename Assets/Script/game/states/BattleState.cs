@@ -131,6 +131,7 @@ class BattleState : CGameState
 				// Botones de Enemigos
 				foreach (var entry in this.enemyPartyButtons)
 				{
+                    //Si no se ha clickeado un boton de skill anteriormente, el boton de enemigo no es visible.
 					if (this.selectedSkill == null)
 					{
 						entry.Key.setVisible(false);
