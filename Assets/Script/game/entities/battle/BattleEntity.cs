@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleEntity : CSprite
+public class BattleEntity : CAnimatedSprite
 {
     public const int IDLE = 0;
     public const int RECEIVING_DAMAGE = 1;

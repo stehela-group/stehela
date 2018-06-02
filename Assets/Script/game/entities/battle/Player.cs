@@ -1,3 +1,6 @@
+using UnityEngine;
+using System.Collections;
+
 public class Player : BattleEntity
 {
 	public Player()
@@ -12,11 +15,12 @@ public class Player : BattleEntity
 		this.skills.Add(new Hielo());
         this.skills.Add(new Envenenar());
 
-        //setFrames(Resources.Loadall<Sprites>("Sprites/player"))
+        setFrames (Resources.LoadAll <Sprite>("Sprites/player"));
         setName("Player");
         setSortingLayerName("Player");
         setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
         setBoundAction(CGameObject.STOP);
+        setFlip(true);
 
     }
     override public void update()
