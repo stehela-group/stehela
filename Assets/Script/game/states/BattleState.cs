@@ -90,6 +90,7 @@ class BattleState : CGameState
 				// Botones de seleccion de personaje
 				foreach (var entry in this.playerPartyButtons)
 				{
+                    
 					// entry.Key = CButtonSprite
 					// entry.Value = BattleEntity
 					entry.Key.update();
@@ -120,7 +121,9 @@ class BattleState : CGameState
 							this.skillButtons.Add(skillButton, skill);
 						}
 					}
-				}
+                    //for each entry in playerPartyButtons, if the entity is Dead, its key(button) and Value(unit) are 
+                    deletebuttonsOfPartyMembers(entry.Key, entry.Value);
+                }
 
 				// Botones de skills
 				foreach (var entry in this.skillButtons)
@@ -265,6 +268,13 @@ class BattleState : CGameState
 			skillButton.Key.setVisible(false);
 		}
 	}
+    protected void deletebuttonsOfPartyMembers(CButtonSprite aKey, BattleEntity aValue)
+    {
+        if (aKey.isDead())
+        {
+            playerPartyButtons.Remove(aKey);
+        }
+    }
 
 	protected void hideEnemyButtons()
 	{
