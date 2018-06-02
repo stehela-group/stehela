@@ -17,4 +17,8 @@ public class Enemy2 : BattleEntity
 
         return new Action(this, skill, playerParty[CMath.randomIntBetween(0, playerParty.Count - 1)]);
     }
+    override public void render()
+    {
+        return;
+    }
 }

@@ -12,4 +12,8 @@ public class Companion1 : BattleEntity
 		this.skills.Add(new Atacar());
 		this.skills.Add(new Curar());
 	}
+    override public void render()
+    {
+        return;
+    }
 }
