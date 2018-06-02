@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Enemy1 : BattleEntity
 {
@@ -8,7 +9,13 @@ public class Enemy1 : BattleEntity
 
         this.setMaxHealth(500);
         this.setAttackDamage(35);
-
+        setFrames(Resources.LoadAll<Sprite>("Sprites/enemyBoss"));
+        setScale(3);
+        setSortingLayerName("Default");
+        setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
+        setBoundAction(CGameObject.STOP);
+        setXY(1450, 650);
+        Debug.Log("Holi soy el boss ");
 
         this.skills.Add(new Atacar());
         this.skills.Add(new Curar());
