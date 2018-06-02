@@ -20,6 +20,7 @@ public class Player : BattleEntity
         setSortingLayerName("Player");
         setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
         setBoundAction(CGameObject.STOP);
+        setXY(100, 700);
         setFlip(true);
 
     }
