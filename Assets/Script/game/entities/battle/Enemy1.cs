@@ -14,7 +14,7 @@ public class Enemy1 : BattleEntity
         setSortingLayerName("Default");
         setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
         setBoundAction(CGameObject.STOP);
-        setXY(1450, 650);
+        setXY(1395, 330);
         Debug.Log("Holi soy el boss ");
 
         this.skills.Add(new Atacar());

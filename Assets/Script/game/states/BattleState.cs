@@ -36,7 +36,7 @@ class BattleState : CGameState
 
 		
         this.enemyParty.Add(new Enemy1());
-		this.enemyParty.Add(new Enemy2());
+        this.enemyParty.Add(new Enemy2());
     }
 
     override public void init()
