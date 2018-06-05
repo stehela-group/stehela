@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Player : BattleEntity
 {
+    private float initialX;
+
 	public Player()
 	{
 		this.setName("Player");
@@ -22,13 +24,38 @@ public class Player : BattleEntity
         setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
         setBoundAction(CGameObject.STOP);
         setXY(478, 784);
+        this.initialX = this.getX();
         setFlip(true);
 
     }
+
     override public void update()
     {
         base.update();
-        
+
+
+        switch (this.getState())
+        {
+            case ATTACKING:
+                if (getX() >= this.initialX + 50)
+                {
+                    this.setVelX(-50);
+
+                }
+
+                if (getX() <= this.initialX - 50)
+                {
+                    this.setVelX(50);
+
+                }
+
+                break;
+                  
+
+            default:
+                break;
+        }
+
     }
     override public void render()
 	{
@@ -40,6 +67,23 @@ public class Player : BattleEntity
         base.destroy();
         
     }
+
+    override public void setState(int aState)
+    {
+        base.setState(aState);
+
+        if(aState == Player.ATTACKING)
+        {
+            this.setVelX(50);
+        }
+
+        if (aState == Player.IDLE)
+        {
+            setX(initialX);
+            this.setVelX(0);
+        }
+    }
+
     private void move()
     {
         if (CKeyboard.pressed(CKeyboard.LEFT))
