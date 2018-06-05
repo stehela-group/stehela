@@ -31,7 +31,7 @@ class BattleState : CGameState
     public BattleState()
     {
 		
-        this.playerParty.Add(new BattlePlayer());
+        this.playerParty.Add(new Player());
 		this.playerParty.Add(new Companion1());
 
 		

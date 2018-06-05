@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public class BattlePlayer : BattleEntity
+public class Player : BattleEntity
 {
     private float initialX;
 
-	public BattlePlayer()
+	public Player()
 	{
 		this.setName("Player");
 
@@ -72,12 +72,12 @@ public class BattlePlayer : BattleEntity
     {
         base.setState(aState);
 
-        if(aState == BattlePlayer.ATTACKING)
+        if(aState == Player.ATTACKING)
         {
             this.setVelX(50);
         }
 
-        if (aState == BattlePlayer.IDLE)
+        if (aState == Player.IDLE)
         {
             setX(initialX);
             this.setVelX(0);
