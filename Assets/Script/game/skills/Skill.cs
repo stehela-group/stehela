@@ -37,12 +37,17 @@
 
     protected int poisonPercentage = 0;
     protected int attackDebuffPercentage = 0;
+    
 
     private int[] mFramesCasting = new int[] { };
     private int[] mFramesReaching = new int[] { };
     private int[] mFramesAffecting = new int[] { };
 
-
+    public const int TARGET_ENEMIES = 0;
+    public const int TARGET_ALLIES = 1;
+    public const int TARGET_BOTH = 2;
+    // initially all skills start with their default target enemies.
+    public int skillTarget = TARGET_ENEMIES;
     /*
         TODO: 
             - Variables para guardar las animaciones de casting, reaching, y affecting.
@@ -85,6 +90,17 @@
         }
         
     }
+
+    // TARGET FUNCTIONS
+    public void setTarget(int choise)
+    {
+        this.skillTarget = choise;
+    }
+    public int getTarget()
+    {
+        return this.skillTarget;
+    }
+    
     // DAMAGE FUNCTIONS
     public void setDamage(int damage)
     {
