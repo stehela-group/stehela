@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
 class BattleState : CGameState
 {
@@ -13,8 +14,14 @@ class BattleState : CGameState
 	// Equipo Enemigo
 	protected List<BattleEntity> enemyParty = new List<BattleEntity>();
 
+    // variable para chequear que todos los enemigos esten muertos
+    protected int deadEnemiesCount = 0;
+
 	// Acciones a realizar este turno
 	protected List<Action> selectedActions = new List<Action>();
+
+    // Acciones a realizar por el enemigo
+    protected Dictionary<BattleEntity, Skill> enemySelectedActions = new Dictionary<BattleEntity, Skill>();
 
 	// Entidad del jugador seleccionada en este momento
 	protected BattleEntity selectedBattleEntity = null;
@@ -27,6 +34,7 @@ class BattleState : CGameState
     protected Dictionary<CButtonSprite, BattleEntity> playerPartyButtons = new Dictionary<CButtonSprite, BattleEntity>();
 
     protected Dictionary<CButtonSprite, BattleEntity> enemyPartyButtons = new Dictionary<CButtonSprite, BattleEntity>();
+
 
     public BattleState()
     {
@@ -72,20 +80,7 @@ class BattleState : CGameState
                 // TODO: add variable to do this only once per turn.
                 // cada oponente decide que habilidad utilizar.
                 /*
-				foreach(var entity in this.enemyParty)
-                {
-                    entity.clearAvailableSkills();
-                    entity.checkCooldowns();
-                    if (!entity.isCasting()){
-                        entity.getSelectedAction();
-                        
-             
-                    }
-                    //agrega al diccionario la entidad y la skill que usará
-                    enemyActions.Add(entity, entity.castingSkill());
-                    
-
-                }
+				
 				*/
 				// Botones de seleccion de personaje
 				foreach (var entry in this.playerPartyButtons)
@@ -283,4 +278,44 @@ class BattleState : CGameState
 			enemyButton.Key.setVisible(false);
 		}
 	}
+
+    override public void setState(int aState)
+    {
+        base.setState(aState);
+
+        int c = this.getState();
+        // Si se pasa a selecting actions utilizando setState, suceden las siguientes acciones antes de comenzar el turno.
+        if (c == BattleState.SELECTING_ACTIONS)
+        {
+            //win condition
+            deadEnemiesCount = 0;
+            foreach (var entity in enemyParty)
+            {
+                int h = entity.getHealth();
+                if (h == 0)
+                {
+                    deadEnemiesCount += 1;
+                }
+            }
+            //TODO If deadEnemiesCount == cantidad de enemigos en enemyParty: cortar loop y finalizar la partida.
+
+            //logica de seleccion de habilidad para el oponente.
+            //TODO no hay logica hacia el target de la skill
+            foreach (var entity in this.enemyParty)
+            {
+                entity.clearAvailableSkills();
+                entity.checkCooldowns();
+                if (!entity.isCasting())
+                {
+                    entity.getSelectedAction();
+
+
+                }
+                //agrega al diccionario la entidad y la skill que usará
+                enemySelectedActions.Add(entity, entity.castingSkill());
+                //TODO ver como almacenar tambien el target de esta skill y seleccionarlo.
+
+            }
+        }
+    }
 }
