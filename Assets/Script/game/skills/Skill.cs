@@ -42,6 +42,8 @@
     private int[] mFramesReaching = new int[] { };
     private int[] mFramesAffecting = new int[] { };
 
+    private BattleEntity skillTarget;
+
 
     /*
         TODO: 
@@ -89,7 +91,7 @@
     public void setDamage(int damage)
     {
         //dividido 100 para ser porcentual y poder utilizarlo para multiplicar el attackDamage del caster para daño
-        this.damagePercentage = damage/100;
+        this.damagePercentage = damage;
     } 
 
     public int getDamage()
@@ -101,7 +103,7 @@
     public void setHeal(int heal)
     {
         //dividido 100 para ser porcentual y poder utilizarlo para multiplicar el attackDamage del caster para curar
-        this.healPercentage = heal/100;
+        this.healPercentage = heal;
     }
 
     public int getHeal()
@@ -121,7 +123,11 @@
     }
     public void setPoisonPercentage(int aDamage)
     {
-        this.poisonPercentage = aDamage/100;
+        this.poisonPercentage = aDamage;
+    }
+    public int getPoisonPercentage()
+    {
+        return this.poisonPercentage;
     }
 
     public void setAttackDebuff(bool aDebuff)
@@ -130,7 +136,11 @@
     }
     public void setAttackDebuffPercentage(int aAmount)
     {
-        this.attackDebuffPercentage = aAmount/100;
+        this.attackDebuffPercentage = aAmount;
+    }
+    public int getAttackDebuffPercentage()
+    {
+        return this.attackDebuffPercentage;
     }
 
 
@@ -156,6 +166,11 @@
     {
         this.affectingTurns = turns;
     }
+    public int getAffectingTurns()
+    {
+        return this.affectingTurns;
+    }
+
 
     // COLDDOWN FUNCTIONS
     public void setCooldown(int turns)
@@ -188,6 +203,16 @@
     public void setAffectTime (int time)
     {
         this.affectTime = time;
+    }
+
+    // TARGET FUNCTIONS
+    public void setTarget(BattleEntity selectedTarget)
+    {
+        skillTarget = selectedTarget;
+    }
+    public BattleEntity getTarget()
+    {
+        return skillTarget;
     }
 }
     

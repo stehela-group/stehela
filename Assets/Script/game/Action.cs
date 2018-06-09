@@ -8,6 +8,7 @@ public class Action: CGameObject
     protected BattleEntity caster;
     protected Skill skill;
     protected BattleEntity target;
+    protected int turns;
 
     public const int PERFORMING = 0;
     public const int FINISHED = 1;
@@ -19,6 +20,7 @@ public class Action: CGameObject
         this.caster = caster;
         this.skill = skill;
         this.target = target;
+        turns = skill.getAffectingTurns();
         this.setState(Action.PERFORMING);
         this.skill.setState(Skill.CASTING);
     }
@@ -70,7 +72,11 @@ public class Action: CGameObject
                     {
                         target.setState(BattleEntity.DEAD);
                     }
-
+                    if (this.turns > 0)
+                        {
+                        turnActionManager.inst().addAction(skill, target, turns);
+                        }
+                    
                     this.setState(Action.FINISHED);
                 }
             break;

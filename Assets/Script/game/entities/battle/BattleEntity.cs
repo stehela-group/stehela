@@ -71,7 +71,7 @@ public class BattleEntity : CAnimatedSprite
         }
     }
         // agrega a la lista de availableSkills las habilidades que no tengan CD
-    public void getSelectedAction()
+    public void setSelectedAction()
     {
         foreach(var skill in this.skillsList)
         {
@@ -86,9 +86,13 @@ public class BattleEntity : CAnimatedSprite
         //le restamos uno a selection ya que la lista comienza en 0 y termina en su length-1
         selectedSkill = availableSkills[selection - 1];
     }
-    public Skill castingSkill()
+    public Skill getSelectedAction()
     {
-        return this.selectedSkill;
+        return selectedSkill;
+    }
+    public void setTarget(Skill skill, BattleEntity selectedTarget)
+    {
+        skill.setTarget(selectedTarget);
     }
 
 
@@ -181,6 +185,7 @@ public class BattleEntity : CAnimatedSprite
     {
         return this.skills;
     }
+
 
     virtual public Action decideAction(List<BattleEntity> playerParty, List<BattleEntity> enemyParty) 
     {

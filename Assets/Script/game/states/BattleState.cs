@@ -8,6 +8,8 @@ class BattleState : CGameState
 
     private CBackground mBackground;
 
+    private turnActionManager mTurnActionManager;
+
     // Equipo del jugador
 	protected List<BattleEntity> playerParty = new List<BattleEntity>();
 
@@ -45,6 +47,8 @@ class BattleState : CGameState
 		
         this.enemyParty.Add(new Enemy1());
         this.enemyParty.Add(new Enemy2());
+
+        mTurnActionManager = new turnActionManager();
     }
 
     override public void init()
@@ -188,6 +192,9 @@ class BattleState : CGameState
 		{
 			enemy.update();
 		}
+
+        //se encarga de que cuando una abilidad que tiene efecto tardio y se esta performeando, se cargue la animacion
+        mTurnActionManager.update();
     }
 
     override public void render()
@@ -219,10 +226,14 @@ class BattleState : CGameState
 		{
 			enemy.render();
 		}
+
+        mTurnActionManager.render();
     }
 
     override public void destroy()
     {
+        mTurnActionManager.destroy();
+        mTurnActionManager = null;
     }
 
     protected void addAction(BattleEntity caster, Skill skill, BattleEntity target)
@@ -300,20 +311,34 @@ class BattleState : CGameState
             //TODO If deadEnemiesCount == cantidad de enemigos en enemyParty: cortar loop y finalizar la partida.
 
             //logica de seleccion de habilidad para el oponente.
-            //TODO no hay logica hacia el target de la skill
             foreach (var entity in this.enemyParty)
             {
                 entity.clearAvailableSkills();
                 entity.checkCooldowns();
                 if (!entity.isCasting())
                 {
-                    entity.getSelectedAction();
+                    entity.setSelectedAction();
+                    // si es un heal, el enemigo targetea a un aliado suyo.
+                    if (entity.getSelectedAction().getHeal() > 0)
+                    {
+                        int g;
+                        g = CMath.randomIntBetween(1, enemyParty.Count);
 
+                        entity.setTarget(entity.getSelectedAction(), enemyParty[g]);
+                    }
+                    // de lo contrario targeta al playerParty
+                    else
+                    {
+                        int i;
+                        i = CMath.randomIntBetween(1, playerParty.Count);
 
+                        entity.setTarget(entity.getSelectedAction(), playerParty[i]);
+                    }
                 }
                 //agrega al diccionario la entidad y la skill que usará
-                enemySelectedActions.Add(entity, entity.castingSkill());
-                //TODO ver como almacenar tambien el target de esta skill y seleccionarlo.
+                enemySelectedActions.Add(entity, entity.getSelectedAction());
+
+                //TODO logica del manager de efectos por turno (que hagan su efecto una vez por turno, que se bajen su variable turnos y si eso es igual a 0 eliminarlo del manager.)
 
             }
         }
