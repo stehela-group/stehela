@@ -21,6 +21,14 @@ public class COverWorldPlayer : CAnimatedSprite
 
         base.update();
 
+        if (!CKeyboard.pressed(CKeyboard.UP) && (!CKeyboard.pressed(CKeyboard.DOWN)))
+        {
+            setVelY(0);
+        }
+        if ((!CKeyboard.pressed(CKeyboard.LEFT)) && (!CKeyboard.pressed(CKeyboard.RIGHT)))
+        {
+            setVelX(0);
+        }
         if (CKeyboard.pressed(CKeyboard.LEFT))
         {
             setVelX(-50);
@@ -29,21 +37,13 @@ public class COverWorldPlayer : CAnimatedSprite
         {
             setVelX(50);
         }
-
         if (CKeyboard.pressed(CKeyboard.UP))
-        {
-            setVelY(50);
-        }
-        if (CKeyboard.pressed(CKeyboard.DOWN))
         {
             setVelY(-50);
         }
-        else
+        if (CKeyboard.pressed(CKeyboard.DOWN))
         {
-            setVelX(0.0f);
-            setVelY(0.0f);
-
-            
+            setVelY(50);
         }
 
 
