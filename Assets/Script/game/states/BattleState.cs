@@ -10,8 +10,10 @@ class BattleState : CGameState
 
     private turnActionManager mTurnActionManager;
 
+    private CTileMap mMap;
+
     // Equipo del jugador
-	protected List<BattleEntity> playerParty = new List<BattleEntity>();
+    protected List<BattleEntity> playerParty = new List<BattleEntity>();
 
 	// Equipo Enemigo
 	protected List<BattleEntity> enemyParty = new List<BattleEntity>();
@@ -74,10 +76,14 @@ class BattleState : CGameState
 
         mBackground = new CBackground();
         mBackground.setXY(0, 0);
+        //Creo el mapa 
+        //mMap = new CTileMap();
     }
 
     override public void update()
     {
+        //updateo el mapa 
+        //mMap.update();
         switch (this.getState())
         {
             case BattleState.SELECTING_ACTIONS:
@@ -199,6 +205,9 @@ class BattleState : CGameState
 
     override public void render()
     {
+
+        //mMap.render();
+
         // Botones de player party
 		foreach (var entry in this.playerPartyButtons)
 		{
@@ -234,6 +243,9 @@ class BattleState : CGameState
     {
         mTurnActionManager.destroy();
         mTurnActionManager = null;
+
+        //mMap.destroy();
+        //mMap = null;
     }
 
     protected void addAction(BattleEntity caster, Skill skill, BattleEntity target)

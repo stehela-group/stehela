@@ -15,8 +15,9 @@ public class CLevelState : CGameState
 	{
         base.init();
         mMap = new CTileMap();
-        mBackground = new CBackground();
-        mBackground.setXY(0, 0);
+        //mBackground = new CBackground();
+        //mBackground.setXY(0, 0);
+
 
         mOverworldPlayer = new COverWorldPlayer();
         mOverworldPlayer.setXY(CGameConstants.SCREEN_WIDTH / 2, CGameConstants.SCREEN_HEIGHT / 2);

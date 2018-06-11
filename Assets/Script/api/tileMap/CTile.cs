@@ -13,7 +13,9 @@ public class CTile : CSprite
 		setTileIndex(aTileIndex);
 
 		setImage (aSprite);
-		setSortingLayerName ("TileMap");
+		setSortingLayerName ("Background");
+
+        setScale(2.0f);
 	}
 
 	public void setTileIndex(int aTileIndex)
