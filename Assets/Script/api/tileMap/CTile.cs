@@ -13,7 +13,7 @@ public class CTile : CSprite
 		setTileIndex(aTileIndex);
 
 		setImage (aSprite);
-		setSortingLayerName ("Background");
+		setSortingLayerName ("MapExplorer");
 
         setScale(2.0f);
 	}

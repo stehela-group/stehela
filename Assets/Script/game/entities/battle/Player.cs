@@ -20,7 +20,7 @@ public class BattlePlayer : BattleEntity
         setFrames (Resources.LoadAll <Sprite>("Sprites/player"));
         setName("Player");
         setScale(5);
-        setSortingLayerName("Default");
+        setSortingLayerName("Personajes");
         setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
         setBoundAction(CGameObject.STOP);
         setXY(478, 784);

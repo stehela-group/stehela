@@ -7,9 +7,9 @@ public class COverWorldPlayer : CAnimatedSprite
 
     public COverWorldPlayer()
     {
-        /*setFrames(Resources.LoadAll<Sprite>("Sprites/player"));
+        setFrames(Resources.LoadAll<Sprite>("Sprites/player"));
         setName("Overworld player");
-        setSortingLayerName("Player");*/
+        setSortingLayerName("Personajes");
 
         setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
         setBoundAction(CGameObject.STOP);

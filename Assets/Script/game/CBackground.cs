@@ -8,7 +8,7 @@ public class CBackground : CSprite
     {
         setImage(Resources.Load<Sprite>("Sprites/Background/game_background"));
         // Define el nombre del background cuando se crea.
-        setName("background");
+        setName("Background_Battle");
 
         // Define en que capa va el background.
         setSortingLayerName("Background");

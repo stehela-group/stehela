@@ -74,8 +74,8 @@ class BattleState : CGameState
 		}
 
 
-        mBackground = new CBackground();
-        mBackground.setXY(0, 0);
+       mBackground = new CBackground();
+       mBackground.setXY(0, 0);
         //Creo el mapa 
         //mMap = new CTileMap();
     }
@@ -83,7 +83,7 @@ class BattleState : CGameState
     override public void update()
     {
         //updateo el mapa 
-        //mMap.update();
+       // mMap.update();
         switch (this.getState())
         {
             case BattleState.SELECTING_ACTIONS:

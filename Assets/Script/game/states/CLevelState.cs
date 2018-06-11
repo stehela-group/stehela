@@ -18,7 +18,7 @@ public class CLevelState : CGameState
         //mBackground = new CBackground();
         //mBackground.setXY(0, 0);
 
-
+        
         mOverworldPlayer = new COverWorldPlayer();
         mOverworldPlayer.setXY(CGameConstants.SCREEN_WIDTH / 2, CGameConstants.SCREEN_HEIGHT / 2);
         mOverworldPlayer.setXY(300, 300);
@@ -30,7 +30,7 @@ public class CLevelState : CGameState
 	{
         base.update();
         mMap.update();
-        mBackground.update();
+       // mBackground.update();
         mOverworldPlayer.update();
 
 
@@ -40,7 +40,7 @@ public class CLevelState : CGameState
 	{
         base.render();
         mMap.render();
-        mBackground.render();
+        //mBackground.render();
         mOverworldPlayer.render();
     }
 
@@ -49,8 +49,8 @@ public class CLevelState : CGameState
         base.destroy();
         mMap.destroy();
         mMap = null;
-        mBackground.destroy();
-        mBackground = null;
+       // mBackground.destroy();
+       // mBackground = null;
 
         mOverworldPlayer.destroy();
         mOverworldPlayer = null;
