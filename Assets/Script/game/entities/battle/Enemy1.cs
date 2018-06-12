@@ -8,13 +8,15 @@ public class Enemy1 : BattleEntity
         this.setName("prototype_Boss");
 
         this.setMaxHealth(500);
+        this.setHealth(getMaxHealth());
         this.setAttackDamage(35);
         setFrames(Resources.LoadAll<Sprite>("Sprites/enemyBoss"));
-        setScale(3);
+        initAnimation(1, 8, 8, true);
+        setScale(300);
         setSortingLayerName("Personajes");
         setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
         setBoundAction(CGameObject.STOP);
-        setXY(1395, 330);
+        setXY(1047, 59);
         Debug.Log("Holi soy el boss ");
 
         this.skills.Add(new Atacar());

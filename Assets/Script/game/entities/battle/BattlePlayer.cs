@@ -10,6 +10,7 @@ public class BattlePlayer : BattleEntity
 		this.setName("Player");
 
         this.setMaxHealth(150);
+        this.setHealth(getMaxHealth());
         this.setAttackDamage(30);
 
 
@@ -23,9 +24,9 @@ public class BattlePlayer : BattleEntity
         setSortingLayerName("Personajes");
         setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
         setBoundAction(CGameObject.STOP);
-        setXY(478, 784);
+        setXY(251, 545);
         this.initialX = this.getX();
-        setFlip(true);
+        //setFlip(true);
 
     }
 

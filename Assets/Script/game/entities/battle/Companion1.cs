@@ -5,6 +5,7 @@ public class Companion1 : BattleEntity
 		this.setName("prototype_ally");
 
         this.setMaxHealth(120);
+        this.setHealth(getMaxHealth());
         this.setAttackDamage(20);
 
 

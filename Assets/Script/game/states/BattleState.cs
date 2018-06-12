@@ -60,6 +60,7 @@ class BattleState : CGameState
         {
             CButtonSprite playerButton = new CButtonSprite(entity.getName());
             playerButton.setXY( 200, (playerButton.getHeight() * this.playerPartyButtons.Count) + 50);
+            //playerButton.setSortingLayerName("Game");
             this.playerPartyButtons.Add(playerButton, entity);
         }
 
@@ -70,6 +71,7 @@ class BattleState : CGameState
 
 			enemyButton.setXY(CGameConstants.SCREEN_WIDTH - (enemyButton.getWidth() + 50),
 				(enemyButton.getHeight() * this.enemyPartyButtons.Count) + 40);
+            //enemyButton.setSortingLayerName("Game");
 			this.enemyPartyButtons.Add(enemyButton, entity);
 		}
 
@@ -117,7 +119,8 @@ class BattleState : CGameState
 							 */
 							skillButton.setXY(CGameConstants.SCREEN_WIDTH - (skillButton.getWidth() + 50),
 								CGameConstants.SCREEN_HEIGHT - (skillButton.getHeight() * (this.selectedBattleEntity.getSkills().Count - this.skillButtons.Count)));
-							this.skillButtons.Add(skillButton, skill);
+                            //skillButton.setSortingLayerName("Game");
+                            this.skillButtons.Add(skillButton, skill);
 						}
 					}
                     //for each entry in playerPartyButtons, if the entity is Dead, its key(button) and Value(unit) are 

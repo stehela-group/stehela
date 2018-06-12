@@ -42,7 +42,9 @@ public class BattleEntity : CAnimatedSprite
         base.update();
 
         this.lifeText.setText("Vida: " + this.currentHealth + "/" + this.maxHealth);
-        this.lifeText.setXY(this.getX() + this.getWidth() / 2 - this.lifeText.getWidth() / 2, this.getY() + this.getHeight() + 20 /* MARGEN */);
+        this.lifeText.setXY(this.getX() - 20, this.getY() - 20 /* MARGEN */);
+        this.lifeText.setFontSize(250);
+        //this.lifeText.setCanAutoSize(true);
         this.lifeText.update();
 
         switch (this.getState())
