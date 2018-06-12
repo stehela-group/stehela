@@ -186,9 +186,14 @@
     {
         return currentCooldown;
     }
-    public void loseCurrentCooldown()
+    public void loseCurrentCooldownBy(int quantity)
     {
-        this.currentCooldown -= 1;
+        this.currentCooldown -= quantity;
+        
+        if(this.currentCooldown < 0)
+        {
+            this.currentCooldown = 0;
+        }
     }
 
     // ANIMATION FUNCTIONS

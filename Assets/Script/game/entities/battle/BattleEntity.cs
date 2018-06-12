@@ -57,17 +57,14 @@ public class BattleEntity : CAnimatedSprite
         this.availableSkills.Clear();
     }
         // reduce en uno el CD de cada habilidad
-    public void checkCooldowns()
+    public void reduceCooldowns(int quantity)
     {
         foreach (var skill in this.skillsList)
         {
-            int t;
-            t = skill.getCurrentCooldown();
-            if (t > 0)
+            if (skill.getCurrentCooldown() > 0)
             {
-                skill.loseCurrentCooldown();
+                skill.loseCurrentCooldown(quantity);
             }
-
         }
     }
         // agrega a la lista de availableSkills las habilidades que no tengan CD

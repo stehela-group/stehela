@@ -87,15 +87,9 @@ class BattleState : CGameState
         switch (this.getState())
         {
             case BattleState.SELECTING_ACTIONS:
-                // TODO: add variable to do this only once per turn.
-                // cada oponente decide que habilidad utilizar.
-                /*
-				
-				*/
 				// Botones de seleccion de personaje
 				foreach (var entry in this.playerPartyButtons)
 				{
-                    
 					// entry.Key = CButtonSprite
 					// entry.Value = BattleEntity
 					entry.Key.update();
@@ -326,7 +320,8 @@ class BattleState : CGameState
             foreach (var entity in this.enemyParty)
             {
                 entity.clearAvailableSkills();
-                entity.checkCooldowns();
+                entity.reduceCooldowns(1);
+
                 if (!entity.isCasting())
                 {
                     entity.setSelectedAction();
@@ -351,7 +346,6 @@ class BattleState : CGameState
                 enemySelectedActions.Add(entity, entity.getSelectedAction());
 
                 //TODO logica del manager de efectos por turno (que hagan su efecto una vez por turno, que se bajen su variable turnos y si eso es igual a 0 eliminarlo del manager.)
-
             }
         }
     }
