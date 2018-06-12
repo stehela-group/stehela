@@ -63,7 +63,7 @@ public class BattleEntity : CAnimatedSprite
         {
             if (skill.getCurrentCooldown() > 0)
             {
-                skill.loseCurrentCooldown(quantity);
+                skill.loseCurrentCooldownBy(quantity);
             }
         }
     }
