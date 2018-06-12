@@ -73,9 +73,9 @@ public class Action: CGameObject
                         target.setState(BattleEntity.DEAD);
                     }
                     if (this.turns > 0)
-                        {
+                    {
                         turnActionManager.inst().addAction(skill, target, turns);
-                        }
+                    }
                     
                     this.setState(Action.FINISHED);
                 }

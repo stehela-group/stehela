@@ -12,16 +12,19 @@ public class BattleEntity : CAnimatedSprite
     protected int maxHealth = 0;
     protected int currentHealth = 0;
 
-
     protected int attackDamage = 0;
 
     protected bool entityCasting = false;
     protected string name;
+
+    protected CText lifeText = new CText("");
+
     private List<Skill> skillsList = new List<Skill>();
 
     private List<Skill> availableSkills = new List<Skill>();
 
     private Skill selectedSkill;
+
 
     protected List<Skill> skills
     {
@@ -37,6 +40,11 @@ public class BattleEntity : CAnimatedSprite
     override public void update()
     {
         base.update();
+
+        this.lifeText.setText("Vida: " + this.currentHealth + "/" + this.maxHealth);
+        this.lifeText.setXY(this.getX() + this.getWidth() / 2 - this.lifeText.getWidth() / 2, this.getY() + this.getHeight() + 20 /* MARGEN */);
+        this.lifeText.update();
+
         switch (this.getState())
         {
             case (BattleEntity.IDLE):
@@ -96,6 +104,7 @@ public class BattleEntity : CAnimatedSprite
     override public void render()
     {
         base.render();
+        this.lifeText.render();
         switch (this.getState())
         {
             case (BattleEntity.IDLE):
