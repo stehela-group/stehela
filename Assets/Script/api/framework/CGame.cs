@@ -21,9 +21,6 @@ public class CGame : MonoBehaviour
 		CKeyboard.init ();
 
         setState(new BattleState());
-
-        
-        //setState(new BattleState());
 	}
 
 	static public CGame inst()

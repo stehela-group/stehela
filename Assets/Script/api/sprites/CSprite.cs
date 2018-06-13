@@ -81,6 +81,8 @@ public class CSprite : CGameObject
 	public void setImage(Sprite aSprite)
 	{
 		mSpriteRenderer.sprite = aSprite;
+		this.setHeight((int) aSprite.rect.height);
+		this.setWidth((int) aSprite.rect.width);
 	}
 
 	public void setFlip(bool aFlip)

@@ -34,7 +34,6 @@ public class BattlePlayer : BattleEntity
     {
         base.update();
 
-
         switch (this.getState())
         {
             case ATTACKING:

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BattleEntity : CAnimatedSprite
 {
@@ -35,16 +36,20 @@ public class BattleEntity : CAnimatedSprite
     }
 
     // Use this for initialization
-    public BattleEntity() { }
+    public BattleEntity() 
+    {
+		this.lifeText.setColor(Color.white);
+		this.lifeText.setAlignment(TextAlignmentOptions.Left);
+		this.lifeText.setFontSize(450f);
+        this.lifeText.setWrapping(false);
+     }
 
     override public void update()
     {
         base.update();
 
         this.lifeText.setText("Vida: " + this.currentHealth + "/" + this.maxHealth);
-        this.lifeText.setXY(this.getX() - 20, this.getY() - 20 /* MARGEN */);
-        this.lifeText.setFontSize(250);
-        //this.lifeText.setCanAutoSize(true);
+        this.lifeText.setXY(this.getX(), this.getY() - 20 /* MARGEN */);
         this.lifeText.update();
 
         switch (this.getState())
@@ -140,6 +145,10 @@ public class BattleEntity : CAnimatedSprite
         if (health > this.maxHealth)
         {
             this.currentHealth = this.maxHealth;
+        }
+        else if( health < 0)
+        {
+            this.currentHealth = 0;
         }
         else
         {

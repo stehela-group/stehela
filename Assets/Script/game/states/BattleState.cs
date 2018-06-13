@@ -165,9 +165,6 @@ class BattleState : CGameState
             break;
 
             case BattleState.PERFORMING_ACTIONS:
-				
-				Debug.Log(this.selectedActions.Count);
-
 				if (this.selectedActions.Count <= 0)
 				{
 					this.setState(BattleState.SELECTING_ACTIONS);
@@ -179,6 +176,7 @@ class BattleState : CGameState
 
 					if(this.selectedActions[0].getState() == Action.FINISHED)
 					{
+						Debug.Log("Accion: Terminada");
 						this.selectedActions[0].destroy();
 						this.selectedActions.RemoveAt(0);
 					}
@@ -317,39 +315,9 @@ class BattleState : CGameState
                     deadEnemiesCount += 1;
                 }
             }
-            //TODO If deadEnemiesCount == cantidad de enemigos en enemyParty: cortar loop y finalizar la partida.
+			//TODO If deadEnemiesCount == cantidad de enemigos en enemyParty: cortar loop y finalizar la partida.
 
-            //logica de seleccion de habilidad para el oponente.
-            foreach (var entity in this.enemyParty)
-            {
-                entity.clearAvailableSkills();
-                entity.reduceCooldowns(1);
-
-                if (!entity.isCasting())
-                {
-                    entity.setSelectedAction();
-                    // si es un heal, el enemigo targetea a un aliado suyo.
-                    if (entity.getSelectedAction().getHeal() > 0)
-                    {
-                        int g;
-                        g = CMath.randomIntBetween(1, enemyParty.Count);
-
-                        entity.setTarget(entity.getSelectedAction(), enemyParty[g]);
-                    }
-                    // de lo contrario targeta al playerParty
-                    else
-                    {
-                        int i;
-                        i = CMath.randomIntBetween(1, playerParty.Count);
-
-                        entity.setTarget(entity.getSelectedAction(), playerParty[i]);
-                    }
-                }
-                //agrega al diccionario la entidad y la skill que usará
-                enemySelectedActions.Add(entity, entity.getSelectedAction());
-
-                //TODO logica del manager de efectos por turno (que hagan su efecto una vez por turno, que se bajen su variable turnos y si eso es igual a 0 eliminarlo del manager.)
-            }
+			//TODO logica del manager de efectos por turno (que hagan su efecto una vez por turno, que se bajen su variable turnos y si eso es igual a 0 eliminarlo del manager.)
         }
     }
 }

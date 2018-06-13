@@ -16,8 +16,7 @@ public class Enemy1 : BattleEntity
         setSortingLayerName("Personajes");
         setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
         setBoundAction(CGameObject.STOP);
-        setXY(1047, 59);
-        Debug.Log("Holi soy el boss ");
+		setXY(1047, 59);
 
         this.skills.Add(new Atacar());
         this.skills.Add(new Curar());

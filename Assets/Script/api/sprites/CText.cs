@@ -75,4 +75,9 @@ public class CText : CGameObject
 	{
 		this.displayText.enabled = visible;
 	}
+
+	public void setWrapping(bool wrapping)
+	{
+		this.displayText.enableWordWrapping = wrapping;
+	}
 }
