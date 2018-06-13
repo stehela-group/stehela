@@ -1,10 +1,13 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 class BattleState : CGameState
 {
 	const int SELECTING_ACTIONS = 0;
 	const int PERFORMING_ACTIONS = 1;
+	const int PLAYER_WON = 2;
+	const int PLAYER_LOST = 3;
 
     private CBackground mBackground;
 
@@ -322,16 +325,42 @@ class BattleState : CGameState
 			}
 
             //win condition
-            deadEnemiesCount = 0;
+            this.deadEnemiesCount = 0;
             foreach (var entity in enemyParty)
             {
-                int h = entity.getHealth();
-                if (h == 0)
+                if (entity.getHealth() == 0)
                 {
-                    deadEnemiesCount += 1;
+                    this.deadEnemiesCount += 1;
                 }
             }
-			//TODO If deadEnemiesCount == cantidad de enemigos en enemyParty: cortar loop y finalizar la partida.
+
+			//TODO: Realmente hacer algo en la win y lose condition en vez de setear un estado y nada más.
+
+			// Si toda la party del jugador está muerta, entonces perdió.
+			if(this.playerParty.Where( x => x.getHealth() == 0).ToList().Count == this.playerParty.Count)
+			{
+				this.setState(BattleState.PLAYER_LOST);
+				return;
+			};
+
+			//Si todos los enemigos están muertos entonces pasamos al estado PLAYER_WON y paramos la funcion
+			if(this.deadEnemiesCount == this.enemyParty.Count)
+			{
+				this.setState(BattleState.PLAYER_WON);
+				return;
+			}
+			else if(this.deadEnemiesCount > 0)
+			{
+				//Si hay algún enemigo muerto entonces lo revivimos a full vida porque estamos re tryhard
+				foreach (var entity in enemyParty)
+				{
+					if (entity.getHealth() == 0)
+					{
+						entity.setHealth(entity.getMaxHealth());
+					}
+				}	
+			}
+
 
 			//TODO logica del manager de efectos por turno (que hagan su efecto una vez por turno, que se bajen su variable turnos y si eso es igual a 0 eliminarlo del manager.)
         }
