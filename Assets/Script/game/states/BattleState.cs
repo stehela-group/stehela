@@ -158,6 +158,16 @@ class BattleState : CGameState
 					if (entry.Key.clicked())
 					{
 						this.addAction(this.selectedBattleEntity, this.selectedSkill, entry.Value);
+
+						//Esconder el botón de el jugador que ya escogió accion
+						foreach (var playerButton in this.playerPartyButtons)
+						{
+							if(playerButton.Value == this.selectedBattleEntity)
+							{
+								playerButton.Key.setVisible(false);
+							}	
+						}
+
 						this.selectedSkill = null;
 						this.selectedBattleEntity = null;
 					}
@@ -305,6 +315,12 @@ class BattleState : CGameState
         // Si se pasa a selecting actions utilizando setState, suceden las siguientes acciones antes de comenzar el turno.
         if (c == BattleState.SELECTING_ACTIONS)
         {
+			//Volver a mostrar botones escondidos
+			foreach (var entry in this.playerPartyButtons)
+			{
+				entry.Key.setVisible(true);
+			}
+
             //win condition
             deadEnemiesCount = 0;
             foreach (var entity in enemyParty)
