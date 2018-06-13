@@ -79,8 +79,9 @@ class BattleState : CGameState
 		}
 
 
-       mBackground = new CBackground();
-       mBackground.setXY(0, 0);
+        mBackground = new CBackground();
+        mBackground.setXY(0, 0);
+        mBackground.setSortingLayerName("Background");
         //Creo el mapa 
         //mMap = new CTileMap();
     }

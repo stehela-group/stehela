@@ -34,27 +34,27 @@ public class Action: CGameObject
         {
             case (Action.PERFORMING):
                 //If the state of Skill is CASTING and the caster state is not Attacking, set the state to Attacking.
-                if(skill.getState() == Skill.CASTING && caster.getState() != BattleEntity.ATTACKING)
+                if (skill.getState() == Skill.CASTING && caster.getState() != BattleEntity.ATTACKING)
                 {
                     caster.setState(BattleEntity.ATTACKING);
                 }
                 //If the state of Skill is REACHING (next state of skill after casting) and the caster state is not idle, set the state to idle.
-                else if(skill.getState() == Skill.REACHING && caster.getState() != BattleEntity.IDLE)
+                else if (skill.getState() == Skill.REACHING && caster.getState() != BattleEntity.IDLE)
                 {
-                    
+
                     caster.setState(BattleEntity.IDLE);
                 }
                 //If the state of Skill is AFFECTING (next state of skill after reaching) and the //TARGET// state is not RECEIVING_DAMAGE, set the state to RECEIVING_DAMAGE.
                 else if (skill.getState() == Skill.AFFECTING && target.getState() != BattleEntity.RECEIVING_DAMAGE)
-                {
+                { 
                     // si la skill tiene porcentaje de curacion, cambia la vida actual del target para sumarle el porcentaje por el attackDamage del caster.
                     if (skill.getHeal() > 0){
-                        target.setHealth(target.getHealth() + skill.getHeal() * caster.getAttackDamage());
+                        target.setHealth(target.getHealth() + skill.getHeal() * caster.getAttackDamage() / 100);
                     }
                     else
                     { 
                     //el pocentaje de daño de skill se multiplica por el attackDamage del caster.
-                    target.setHealth(target.getHealth() - skill.getDamage() * caster.getAttackDamage());
+                    target.setHealth(target.getHealth() - skill.getDamage() * caster.getAttackDamage() / 100);
                     
                     target.setState(BattleEntity.RECEIVING_DAMAGE);
                     }
@@ -79,7 +79,7 @@ public class Action: CGameObject
                     
                     this.setState(Action.FINISHED);
                 }
-            break;
+                break;
             case (Action.FINISHED):
                 this.destroy();
                 break;

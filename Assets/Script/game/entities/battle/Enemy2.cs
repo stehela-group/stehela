@@ -10,6 +10,7 @@ public class Enemy2 : BattleEntity
         this.setHealth(getMaxHealth());
         this.setAttackDamage(10);
         this.skills.Add(new Atacar());
+        this.setXY(500, 700);
     }
 
     override public Action decideAction(List<BattleEntity> playerParty, List<BattleEntity> enemyParty)
