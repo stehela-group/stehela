@@ -9,7 +9,8 @@ public class CLevelState : CGameState
 
     public const int IN_PROGRESS = 0;
     public const int FINISHED = 1;
-
+    
+    private CBackgroundFloor mBackgroundFloor;
     public CLevelState()
 	{
 	}
@@ -28,6 +29,10 @@ public class CLevelState : CGameState
         mOverworldPlayer.setXY(300, 300);
 
         /*CGame.inst().setPlayer(mPlayer);*/
+
+        mBackgroundFloor = new CBackgroundFloor();
+        mBackgroundFloor.setXY(0, 0);
+        mBackgroundFloor.setSortingLayerName("Background");
     }
 
 	override public void update()
