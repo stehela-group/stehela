@@ -5,9 +5,9 @@ using System.Collections.Generic;
 public class CTileMap
 {
     //Cantidad de columnas
-    public const int MAP_WIDTH = 25;
+    public const int MAP_WIDTH = 20;
     //Cantidad de filas
-    public const int MAP_HEIGHT = 17;
+    public const int MAP_HEIGHT = 12;
 
     //48x48 pixeles mide cada tile, aumenta la distancia
     public const int TILE_WIDTH = 48 * 2;
@@ -28,23 +28,18 @@ public class CTileMap
     //Es el mapa con el indice de los tipos de tiles, despues hay que hacer el mapa
     //TODO Ver la cantidad optima para el overworld.
     public static int[][] LEVEL_001 = {
-        new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1,1,1,1,1,1,1,1},
-        new int[] {1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1,1,1,1,1,1,1,1,1,1,1},
-        new int[] {1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,1,1,1,1,1,1,1,1,1,1},
-        new int[] {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,1,1,1,1,1,1,1,1,1,1},
-        new int[] {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,1,1,1,1,1,1,1,1,1,1},
-        new int[] {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,1,1,1,1,1,1,1,1,1,1},
-        new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,1,1,1,1,1,1,1,1,1},
-        new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,1,1,1,1,1,1,1,1,1},
-        new int[] {0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0,0,1,1,1,1,1,1,1,1,1},
-        new int[] {0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,0,1,1,1,1,1,1,1,1,1},
-        new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1,1,1,1,1,1,1,1},
-        new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1,1,1,1,1,1,1,1},
-        new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1,1,1,1,1,1,1,1},
-        new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1,1,1,1,1,1,1,1},
-        new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1,1,1,1,1,1,1,1},
-        new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1,1,1,1,1,1,1,1},
-        new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1,1,1,1,1,1,1,1},
+        new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1,1,1},
+        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
+        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
+        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
+        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
+        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
+        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
+        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
+        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
+        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
+        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
+        new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1,1,1},
 
     };
 
@@ -53,12 +48,12 @@ public class CTileMap
     public CTileMap()
     {
         mTiles = new Sprite[NUM_TILES];
-        mTiles[0] = Resources.Load<Sprite>("Sprites/tiles/tile000");
-        mTiles[1] = Resources.Load<Sprite>("Sprites/tiles/tile001");
-        mTiles[2] = Resources.Load<Sprite>("Sprites/tiles/tile002");
+        mTiles[0] = Resources.Load<Sprite>("Sprites/tiles/empty_tile");
+        mTiles[1] = Resources.Load<Sprite>("Sprites/tiles/tile_wall1");
+        /*mTiles[2] = Resources.Load<Sprite>("Sprites/tiles/tile002");
         mTiles[3] = Resources.Load<Sprite>("Sprites/tiles/tile003");
         mTiles[4] = Resources.Load<Sprite>("Sprites/tiles/tile004");
-        mTiles[5] = Resources.Load<Sprite>("Sprites/tiles/tile005");
+        mTiles[5] = Resources.Load<Sprite>("Sprites/tiles/tile005");*/
 
         //TODO: Cargar todo junto con LOADALL
         loadLevel();

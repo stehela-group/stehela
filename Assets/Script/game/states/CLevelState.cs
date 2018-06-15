@@ -6,7 +6,7 @@ public class CLevelState : CGameState
     private CBackground mBackground;
     private COverWorldPlayer mOverworldPlayer;
     private CTileMap mMap;
-
+    private CBackgroundFloor mBackgroundFloor;
     public CLevelState()
 	{
 	}
@@ -24,6 +24,10 @@ public class CLevelState : CGameState
         mOverworldPlayer.setXY(300, 300);
 
         /*CGame.inst().setPlayer(mPlayer);*/
+
+        mBackgroundFloor = new CBackgroundFloor();
+        mBackgroundFloor.setXY(0, 0);
+        mBackground.setSortingLayerName("Background");
     }
 
 	override public void update()
