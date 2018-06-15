@@ -3,13 +3,15 @@ using System.Collections;
 
 public class COverWorldPlayer : CAnimatedSprite
 {
+    private const float SPEED = 400.0f;
     
 
     public COverWorldPlayer()
     {
-        setFrames(Resources.LoadAll<Sprite>("Sprites/player"));
+        setFrames(Resources.LoadAll<Sprite>("Sprites/worldPlayer"));
         setName("Overworld player");
         setSortingLayerName("Personajes");
+        setScale(75);
 
         setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
         setBoundAction(CGameObject.STOP);
@@ -31,19 +33,19 @@ public class COverWorldPlayer : CAnimatedSprite
         }
         if (CKeyboard.pressed(CKeyboard.LEFT))
         {
-            setVelX(-50);
+            setVelX(-SPEED);
         }
         if (CKeyboard.pressed(CKeyboard.RIGHT))
         {
-            setVelX(50);
+            setVelX(SPEED);
         }
         if (CKeyboard.pressed(CKeyboard.UP))
         {
-            setVelY(-50);
+            setVelY(-SPEED);
         }
         if (CKeyboard.pressed(CKeyboard.DOWN))
         {
-            setVelY(50);
+            setVelY(SPEED);
         }
 
 
