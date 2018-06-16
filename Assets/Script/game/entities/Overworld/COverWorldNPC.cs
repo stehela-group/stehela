@@ -12,7 +12,7 @@ public class COverWorldNPC : CAnimatedSprite
         setSortingLayerName("Personajes");
 
         setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
-        setBoundAction(CGameObject.STOP);
+        setBoundAction(CGameObject.NONE);
 
     }
 
