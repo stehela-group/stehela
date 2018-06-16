@@ -5,6 +5,10 @@ public class CLevelState : CGameState
 {
     private COverWorldPlayer mOverworldPlayer;
     private CTileMap mMap;
+
+    public const int IN_PROGRESS = 0;
+    public const int FINISHED = 1;
+    
     private CBackgroundFloor mBackgroundFloor;
     private COverWorldNPC mOverworldNPC;
     public CLevelState()
@@ -15,6 +19,7 @@ public class CLevelState : CGameState
 	{
         base.init();
         mMap = new CTileMap();
+        setState(CLevelState.IN_PROGRESS);
         //mBackground = new CBackground();
         //mBackground.setXY(0, 0);
 
@@ -41,6 +46,14 @@ public class CLevelState : CGameState
         mOverworldPlayer.update();
         mOverworldNPC.update();
 
+        if (this.getState() == CLevelState.IN_PROGRESS)
+        {
+            if (mOverworldPlayer.getX() > 500)
+            {
+                this.setState(CLevelState.FINISHED);
+                return;
+            }
+        }
 
     }
 
