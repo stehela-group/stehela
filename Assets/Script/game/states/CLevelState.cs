@@ -3,10 +3,10 @@ using System.Collections;
 
 public class CLevelState : CGameState
 {
-    private CBackground mBackground;
     private COverWorldPlayer mOverworldPlayer;
     private CTileMap mMap;
     private CBackgroundFloor mBackgroundFloor;
+    private COverWorldNPC mOverworldNPC;
     public CLevelState()
 	{
 	}
@@ -23,11 +23,14 @@ public class CLevelState : CGameState
         mOverworldPlayer.setXY(CGameConstants.SCREEN_WIDTH / 2, CGameConstants.SCREEN_HEIGHT / 2);
         mOverworldPlayer.setXY(300, 300);
 
+        mOverworldNPC = new COverWorldNPC();
+        mOverworldNPC.setXY(CGameConstants.SCREEN_WIDTH - 100, CGameConstants.SCREEN_HEIGHT / 2);
+
         /*CGame.inst().setPlayer(mPlayer);*/
 
         mBackgroundFloor = new CBackgroundFloor();
         mBackgroundFloor.setXY(0, 0);
-        mBackground.setSortingLayerName("Background");
+        mBackgroundFloor.setSortingLayerName("Background");
     }
 
 	override public void update()
@@ -36,6 +39,7 @@ public class CLevelState : CGameState
         mMap.update();
        // mBackground.update();
         mOverworldPlayer.update();
+        mOverworldNPC.update();
 
 
     }
@@ -46,6 +50,7 @@ public class CLevelState : CGameState
         mMap.render();
         //mBackground.render();
         mOverworldPlayer.render();
+        mOverworldNPC.render();
     }
 
 	override public void destroy()
@@ -58,5 +63,7 @@ public class CLevelState : CGameState
 
         mOverworldPlayer.destroy();
         mOverworldPlayer = null;
+        mOverworldNPC.destroy();
+        mOverworldNPC = null;
     }
 }
