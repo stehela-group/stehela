@@ -20,11 +20,11 @@ public class BattlePlayer : BattleEntity
 
         setFrames (Resources.LoadAll <Sprite>("Sprites/player"));
         setName("Player");
-        setScale(5);
         setSortingLayerName("Personajes");
         setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
         setBoundAction(CGameObject.STOP);
-        setXY(251, 545);
+        setXY(100, 600);
+        setScale(4);
         this.initialX = this.getX();
         //setFlip(true);
 

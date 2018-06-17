@@ -52,11 +52,10 @@ public class Action: CGameObject
                         target.setHealth(target.getHealth() + skill.getHeal() * caster.getAttackDamage() / 100);
                     }
                     else
-                    { 
-                    //el pocentaje de daño de skill se multiplica por el attackDamage del caster.
-                    target.setHealth(target.getHealth() - skill.getDamage() * caster.getAttackDamage() / 100);
-                    
-                    target.setState(BattleEntity.RECEIVING_DAMAGE);
+                    { //el pocentaje de daño de skill se multiplica por el attackDamage del caster.
+                        target.setHealth(target.getHealth() - skill.getDamage() * caster.getAttackDamage() / 100);
+                        
+                        target.setState(BattleEntity.RECEIVING_DAMAGE);
                     }
                 }
                 //if the Skill is ended
@@ -71,10 +70,6 @@ public class Action: CGameObject
                     if(target.getHealth() <= 0)
                     {
                         target.setState(BattleEntity.DEAD);
-                    }
-                    if (this.turns > 0)
-                    {
-                        turnActionManager.inst().addAction(skill, target, turns);
                     }
                     
                     this.setState(Action.FINISHED);

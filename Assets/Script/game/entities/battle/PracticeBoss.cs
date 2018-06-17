@@ -1,22 +1,22 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy1 : BattleEntity
+public class PracticeBoss : BattleEntity
 {
-    public  Enemy1()
+    public  PracticeBoss()
     {
-        this.setName("prototype_Boss");
+        this.setName("Practice Boss");
 
         this.setMaxHealth(500);
         this.setHealth(getMaxHealth());
         this.setAttackDamage(35);
         setFrames(Resources.LoadAll<Sprite>("Sprites/enemyBoss"));
         initAnimation(1, 8, 8, true);
-        setScale(300);
         setSortingLayerName("Personajes");
         setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
         setBoundAction(CGameObject.STOP);
-		setXY(1047, 59);
+		setXY(1000, 50);
+        setScale(2);
 
         this.skills.Add(new Atacar());
         this.skills.Add(new Curar());

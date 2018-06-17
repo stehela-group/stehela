@@ -167,7 +167,6 @@ public class BattleEntity : CAnimatedSprite
         {
             this.currentHealth = health;
         }
-        Debug.Log(this.name + " - Vida: " + this.getHealth());
     }
 
     public int getHealth()

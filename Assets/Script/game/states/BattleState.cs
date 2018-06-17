@@ -11,7 +11,7 @@ class BattleState : CGameState
 
     private CBackground mBackground;
 
-    private turnActionManager mTurnActionManager;
+    //private turnActionManager mTurnActionManager;
 
     // Equipo del jugador
     protected List<BattleEntity> playerParty = new List<BattleEntity>();
@@ -48,10 +48,10 @@ class BattleState : CGameState
 		this.playerParty.Add(new Companion1());
 
 		
-        this.enemyParty.Add(new Enemy1());
+        this.enemyParty.Add(new PracticeBoss());
         this.enemyParty.Add(new Enemy2());
 
-        mTurnActionManager = new turnActionManager();
+        //mTurnActionManager = new turnActionManager();
     }
 
     override public void init()
@@ -70,8 +70,8 @@ class BattleState : CGameState
 		{
 			CButtonSprite enemyButton = new CButtonSprite(entity.getName());
 
-			enemyButton.setXY(CGameConstants.SCREEN_WIDTH - (enemyButton.getWidth() + 50),
-				(enemyButton.getHeight() * this.enemyPartyButtons.Count) + 40);
+			enemyButton.setXY(CGameConstants.SCREEN_WIDTH - (enemyButton.getWidth() * 1.1f),
+								CGameConstants.SCREEN_HEIGHT - (enemyButton.getHeight() * (this.enemyParty.Count - this.enemyPartyButtons.Count)));
             //enemyButton.setSortingLayerName("Game");
 			this.enemyPartyButtons.Add(enemyButton, entity);
 		}
@@ -80,10 +80,12 @@ class BattleState : CGameState
         mBackground = new CBackground();
         mBackground.setXY(0, 0);
         mBackground.setSortingLayerName("Background");
+		this.setState(BattleState.SELECTING_ACTIONS);
     }
 
     override public void update()
     {
+
         switch (this.getState())
         {
             case BattleState.SELECTING_ACTIONS:
@@ -115,7 +117,7 @@ class BattleState : CGameState
 								X = Ancho de pantalla - (Ancho de Botón + Margen)
 								Y = Alto de pantalla - (Alto de Botón * (Cantidad total de Skills - Cantidad de skills ya mostradas en botones))
 							 */
-							skillButton.setXY(CGameConstants.SCREEN_WIDTH - (skillButton.getWidth() + 50),
+							skillButton.setXY(CGameConstants.SCREEN_WIDTH - (skillButton.getWidth() * 2.5f),
 								CGameConstants.SCREEN_HEIGHT - (skillButton.getHeight() * (this.selectedBattleEntity.getSkills().Count - this.skillButtons.Count)));
                             //skillButton.setSortingLayerName("Game");
                             this.skillButtons.Add(skillButton, skill);
@@ -203,7 +205,7 @@ class BattleState : CGameState
 		}
 
         //se encarga de que cuando una abilidad que tiene efecto tardio y se esta performeando, se cargue la animacion
-        mTurnActionManager.update();
+        //mTurnActionManager.update();
     }
 
     override public void render()
@@ -236,13 +238,13 @@ class BattleState : CGameState
 			enemy.render();
 		}
 
-        mTurnActionManager.render();
+        //mTurnActionManager.render();
     }
 
     override public void destroy()
     {
-        mTurnActionManager.destroy();
-        mTurnActionManager = null;
+        //mTurnActionManager.destroy();
+        //mTurnActionManager = null;
 		
 		mBackground.destroy();
 
@@ -284,7 +286,6 @@ class BattleState : CGameState
         Action action = new Action(caster, skill, target);
         this.selectedActions.Add(action);
 
-
 		// Si la cantidad de acciones es igual a la cantidad de la player party entonces el jugador ya terminó de elegir acciones
 		// Ahora hay que hacer que los enemigos elijan las suyas
         if(this.selectedActions.Count == this.playerParty.Count)
@@ -293,7 +294,6 @@ class BattleState : CGameState
 			{
 				this.selectedActions.Add(enemy.decideAction(this.playerParty, this.enemyParty));
 			}
-
             this.setState(BattleState.PERFORMING_ACTIONS);
         }
 
@@ -336,10 +336,8 @@ class BattleState : CGameState
     override public void setState(int aState)
     {
         base.setState(aState);
-
-        int c = this.getState();
         // Si se pasa a selecting actions utilizando setState, suceden las siguientes acciones antes de comenzar el turno.
-        if (c == BattleState.SELECTING_ACTIONS)
+        if (this.getState() == BattleState.SELECTING_ACTIONS)
         {
 			//Volver a mostrar botones escondidos
 			foreach (var entry in this.playerPartyButtons)
@@ -383,8 +381,6 @@ class BattleState : CGameState
 					}
 				}	
 			}
-
-
 			//TODO logica del manager de efectos por turno (que hagan su efecto una vez por turno, que se bajen su variable turnos y si eso es igual a 0 eliminarlo del manager.)
         }
     }

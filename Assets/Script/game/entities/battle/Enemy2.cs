@@ -10,7 +10,7 @@ public class Enemy2 : BattleEntity
         this.setHealth(getMaxHealth());
         this.setAttackDamage(10);
         this.skills.Add(new Atacar());
-        this.setXY(500, 700);
+        this.setXY(1500, 50);
     }
 
     override public Action decideAction(List<BattleEntity> playerParty, List<BattleEntity> enemyParty)
@@ -18,9 +18,5 @@ public class Enemy2 : BattleEntity
         Skill skill = this.skills[CMath.randomIntBetween(0, this.skills.Count - 1)];
 
         return new Action(this, skill, playerParty[CMath.randomIntBetween(0, playerParty.Count - 1)]);
-    }
-    override public void render()
-    {
-        return;
     }
 }

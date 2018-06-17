@@ -7,15 +7,9 @@ public class Companion1 : BattleEntity
         this.setMaxHealth(120);
         this.setHealth(getMaxHealth());
         this.setAttackDamage(20);
-        this.setXY(200, 700);
-
-
+        this.setXY(600, 600);
 
         this.skills.Add(new Atacar());
 		this.skills.Add(new Curar());
 	}
-    override public void render()
-    {
-        return;
-    }
 }
