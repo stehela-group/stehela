@@ -13,8 +13,6 @@ class BattleState : CGameState
 
     private turnActionManager mTurnActionManager;
 
-    private CTileMap mMap;
-
     // Equipo del jugador
     protected List<BattleEntity> playerParty = new List<BattleEntity>();
 
@@ -82,14 +80,10 @@ class BattleState : CGameState
         mBackground = new CBackground();
         mBackground.setXY(0, 0);
         mBackground.setSortingLayerName("Background");
-        //Creo el mapa 
-        //mMap = new CTileMap();
     }
 
     override public void update()
     {
-        //updateo el mapa 
-       // mMap.update();
         switch (this.getState())
         {
             case BattleState.SELECTING_ACTIONS:
@@ -214,9 +208,6 @@ class BattleState : CGameState
 
     override public void render()
     {
-
-        //mMap.render();
-
         // Botones de player party
 		foreach (var entry in this.playerPartyButtons)
 		{
@@ -252,9 +243,40 @@ class BattleState : CGameState
     {
         mTurnActionManager.destroy();
         mTurnActionManager = null;
+		
+		mBackground.destroy();
 
-        //mMap.destroy();
-        //mMap = null;
+		foreach (var enemy in this.enemyParty)
+		{
+			enemy.destroy();
+		}
+
+		foreach (var player in this.playerParty)
+		{
+			player.destroy();
+		}
+
+		foreach(var action in this.selectedActions)
+		{
+			action.destroy();
+		}
+
+		this.enemySelectedActions = null;
+
+		foreach(var entry in this.skillButtons)
+		{
+			entry.Key.destroy();
+		}
+
+		foreach(var entry in this.enemyPartyButtons)
+		{
+			entry.Key.destroy();
+		}
+		
+		foreach(var entry in this.playerPartyButtons)
+		{
+			entry.Key.destroy();
+		}
     }
 
     protected void addAction(BattleEntity caster, Skill skill, BattleEntity target)

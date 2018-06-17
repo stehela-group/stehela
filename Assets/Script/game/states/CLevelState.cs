@@ -71,8 +71,8 @@ public class CLevelState : CGameState
         base.destroy();
         mMap.destroy();
         mMap = null;
-       // mBackground.destroy();
-       // mBackground = null;
+        mBackgroundFloor.destroy();
+		mBackgroundFloor = null;
 
         mOverworldPlayer.destroy();
         mOverworldPlayer = null;

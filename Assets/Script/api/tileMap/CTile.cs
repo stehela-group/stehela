@@ -40,5 +40,7 @@ public class CTile : CSprite
 
 	override public void destroy()
 	{
+		base.destroy();
+		this.mTileIndex = 0;
 	}
 }

@@ -128,10 +128,23 @@ public class BattleEntity : CAnimatedSprite
     {
         base.destroy();
 
-        this.skillsList = null;
         this.name = null;
         this.maxHealth = 0;
         this.currentHealth = 0;
+        this.lifeText.destroy();
+        this.lifeText = null;
+        
+        foreach (var skill in this.skillsList)
+        {
+            skill.destroy();
+        }
+		this.skillsList = null;
+
+        foreach (var skill in this.availableSkills)
+        {
+            skill.destroy();
+        }
+		this.availableSkills = null;
     }
 
     /// <summary>
