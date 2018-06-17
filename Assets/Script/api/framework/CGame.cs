@@ -49,11 +49,14 @@ public class CGame : MonoBehaviour
 		CMouse.update ();
 		CKeyboard.update ();
 		mState.update ();
-        if ( mState.getState() == CLevelState.FINISHED)
-            {
-            setState(new BattleState());
-            return;
-            }
+        if ( mState is CLevelState)
+		{
+			if( mState.getState() == CLevelState.FINISHED)
+			{
+            	setState(new BattleState());
+            	return;
+			}
+		}
         if (CKeyboard.firstPress(CKeyboard.KEY_J))
         {
             setState(new CLevelState());
