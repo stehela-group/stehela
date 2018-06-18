@@ -7,7 +7,7 @@ public class PracticeBoss : BattleEntity
     {
         this.setName("Practice Boss");
 
-        this.setMaxHealth(500);
+        this.setMaxHealth(10);
         this.setHealth(getMaxHealth());
         this.setAttackDamage(35);
         setFrames(Resources.LoadAll<Sprite>("Sprites/enemyBoss"));

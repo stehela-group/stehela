@@ -57,10 +57,20 @@ public class CGame : MonoBehaviour
             	return;
 			}
 		}
-        if (CKeyboard.firstPress(CKeyboard.KEY_J))
+        else if (mState is BattleState)
         {
-            setState(new CLevelState());
-            return;
+            if (mState.getState() == BattleState.PLAYER_WON)
+            {
+                //GIVE player rewards.
+                setState(new CLevelState());
+                return;
+            }
+            else if (mState.getState() == BattleState.PLAYER_LOST)
+            {
+                //GAME OVER 
+                setState(new CLevelState());
+                return;
+            }
         }
 	}
 

@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 class BattleState : CGameState
 {
-	const int SELECTING_ACTIONS = 0;
-	const int PERFORMING_ACTIONS = 1;
-	const int PLAYER_WON = 2;
-	const int PLAYER_LOST = 3;
+	public const int SELECTING_ACTIONS = 0;
+	public const int PERFORMING_ACTIONS = 1;
+	public const int PLAYER_WON = 2;
+	public const int PLAYER_LOST = 3;
 
     private CBackground mBackground;
 

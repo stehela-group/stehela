@@ -6,7 +6,7 @@ public class Enemy2 : BattleEntity
     {
         this.setName("prototype_minion");
 
-        this.setMaxHealth(125);
+        this.setMaxHealth(10);
         this.setHealth(getMaxHealth());
         this.setAttackDamage(10);
         this.skills.Add(new Atacar());
