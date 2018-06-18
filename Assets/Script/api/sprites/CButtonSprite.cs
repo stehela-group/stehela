@@ -88,6 +88,11 @@ public class CButtonSprite : CAnimatedSprite
 
 	public bool clicked()
 	{
+		if(!this.isVisible())
+		{
+			return false;
+		}
+		
 		Vector3 mousePos = CMouse.getPos ();
 
 		if (CMouse.release ()) 

@@ -6,7 +6,12 @@
     public const int AFFECTING = 3;
     public const int FINISHED = 4;
     
-
+    public enum Target
+    {
+        ENEMIES,
+        ALLIES,
+        BOTH,
+    }
     protected string name = "";
 
     // % of damage dealt, depending on the entity attackDamage
@@ -218,6 +223,11 @@
     public BattleEntity getTarget()
     {
         return skillTarget;
+    }
+
+    virtual public Target getPossibleTargets()
+    {
+        return Target.ENEMIES;
     }
 }
     

@@ -216,8 +216,24 @@ public class BattleEntity : CAnimatedSprite
     }
 
 
+    //Logica por default, elige una habilidad random y la castea a aliados o enemigos segun los posibles objetivos.
     virtual public Action decideAction(List<BattleEntity> playerParty, List<BattleEntity> enemyParty) 
     {
-        return null;
+		Skill skill = this.skills[CMath.randomIntBetween(0, this.skills.Count - 1)];
+
+		if (skill.getPossibleTargets() == Skill.Target.ALLIES)
+		{
+			return new Action(this, skill, enemyParty[CMath.randomIntBetween(0, enemyParty.Count - 1)]);
+		}
+		else if (skill.getPossibleTargets() == Skill.Target.ENEMIES)
+		{
+			return new Action(this, skill, playerParty[CMath.randomIntBetween(0, playerParty.Count - 1)]);
+		}
+		else if (skill.getPossibleTargets() == Skill.Target.BOTH)
+		{
+			Debug.Log("Skill puede ir a ambos lados, la entidad todavia no implementa la logica para seleccionar aca.");
+		}
+
+		return null;
     }
 }

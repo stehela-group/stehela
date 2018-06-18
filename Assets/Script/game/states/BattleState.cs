@@ -38,7 +38,7 @@ class BattleState : CGameState
 
     protected Dictionary<CButtonSprite, BattleEntity> playerPartyButtons = new Dictionary<CButtonSprite, BattleEntity>();
 
-    protected Dictionary<CButtonSprite, BattleEntity> enemyPartyButtons = new Dictionary<CButtonSprite, BattleEntity>();
+    protected Dictionary<CButtonSprite, BattleEntity> targetButtons = new Dictionary<CButtonSprite, BattleEntity>();
 
 
     public BattleState()
@@ -64,17 +64,6 @@ class BattleState : CGameState
             //playerButton.setSortingLayerName("Game");
             this.playerPartyButtons.Add(playerButton, entity);
         }
-
-		// Agregamos botones con los enemigos de la entidad
-		foreach (var entity in this.enemyParty)
-		{
-			CButtonSprite enemyButton = new CButtonSprite(entity.getName());
-
-			enemyButton.setXY(CGameConstants.SCREEN_WIDTH - (enemyButton.getWidth() * 1.1f),
-								CGameConstants.SCREEN_HEIGHT - (enemyButton.getHeight() * (this.enemyParty.Count - this.enemyPartyButtons.Count)));
-            //enemyButton.setSortingLayerName("Game");
-			this.enemyPartyButtons.Add(enemyButton, entity);
-		}
 
 
         mBackground = new CBackground();
@@ -105,7 +94,7 @@ class BattleState : CGameState
 						this.selectedSkill = null;
 
 						// Destruimos botones antiguos de skills
-						this.clearSkillButtons();
+						this.clearButtonDictionary(this.skillButtons);
 
 						// Agregamos botones con los skills de la entidad actual
 						foreach (var skill in this.selectedBattleEntity.getSkills())
@@ -137,11 +126,12 @@ class BattleState : CGameState
 					if (entry.Key.clicked() && this.selectedSkill != entry.Value)
 					{
 						this.selectedSkill = entry.Value;
+						this.setTargetButtons();
 					}
 				}
 
 				// Botones de Enemigos
-				foreach (var entry in this.enemyPartyButtons)
+				foreach (var entry in this.targetButtons)
 				{
                     //Si no se ha clickeado un boton de skill anteriormente, el boton de enemigo no es visible.
 					if (this.selectedSkill == null)
@@ -223,7 +213,7 @@ class BattleState : CGameState
 		}
 
 		// Botones de enemy party
-		foreach (var entry in this.enemyPartyButtons)
+		foreach (var entry in this.targetButtons)
 		{
 			entry.Key.render();
 		}
@@ -270,7 +260,7 @@ class BattleState : CGameState
 			entry.Key.destroy();
 		}
 
-		foreach(var entry in this.enemyPartyButtons)
+		foreach(var entry in this.targetButtons)
 		{
 			entry.Key.destroy();
 		}
@@ -286,11 +276,11 @@ class BattleState : CGameState
         Action action = new Action(caster, skill, target);
         this.selectedActions.Add(action);
 
-		// Si la cantidad de acciones es igual a la cantidad de la player party entonces el jugador ya terminó de elegir acciones
+		// Si la cantidad de acciones es igual a la cantidad de la player party vivos, entonces el jugador ya terminó de elegir acciones
 		// Ahora hay que hacer que los enemigos elijan las suyas
-        if(this.selectedActions.Count == this.playerParty.Count)
+        if(this.selectedActions.Count == this.playerParty.Where(x => x.getState() != BattleEntity.DEAD).ToList().Count)
         {
-			foreach(var enemy in this.enemyParty)
+			foreach(var enemy in this.enemyParty.Where(x => x.getState() != BattleEntity.DEAD).ToList())
 			{
 				this.selectedActions.Add(enemy.decideAction(this.playerParty, this.enemyParty));
 			}
@@ -301,13 +291,13 @@ class BattleState : CGameState
 		this.hideSkillButtons();
     }
 
-	protected void clearSkillButtons()
+	protected void clearButtonDictionary<T>(Dictionary<CButtonSprite, T> dictionary)
 	{
-		foreach (var skillButton in this.skillButtons)
+		foreach (var entry in dictionary)
 		{
-			skillButton.Key.destroy();
+			entry.Key.destroy();
 		}
-		this.skillButtons.Clear();
+		dictionary.Clear();
 	}
 
 	protected void hideSkillButtons()
@@ -327,7 +317,7 @@ class BattleState : CGameState
 
 	protected void hideEnemyButtons()
 	{
-		foreach (var enemyButton in this.enemyPartyButtons)
+		foreach (var enemyButton in this.targetButtons)
 		{
 			enemyButton.Key.setVisible(false);
 		}
@@ -342,7 +332,10 @@ class BattleState : CGameState
 			//Volver a mostrar botones escondidos
 			foreach (var entry in this.playerPartyButtons)
 			{
-				entry.Key.setVisible(true);
+				if(entry.Value.getState() != BattleEntity.DEAD)
+				{
+					entry.Key.setVisible(true);
+				}
 			}
 
             //win condition
@@ -384,4 +377,35 @@ class BattleState : CGameState
 			//TODO logica del manager de efectos por turno (que hagan su efecto una vez por turno, que se bajen su variable turnos y si eso es igual a 0 eliminarlo del manager.)
         }
     }
+
+	private void setTargetButtons()
+	{
+		this.clearButtonDictionary(this.targetButtons);
+
+		if(this.selectedSkill.getPossibleTargets() == Skill.Target.ALLIES || this.selectedSkill.getPossibleTargets() == Skill.Target.BOTH)
+		{
+			foreach (var entity in this.playerParty)
+			{
+				CButtonSprite playerButton = new CButtonSprite(entity.getName());
+				this.targetButtons.Add(playerButton, entity);
+			}
+		}
+
+		if(this.selectedSkill.getPossibleTargets() == Skill.Target.ENEMIES || this.selectedSkill.getPossibleTargets() == Skill.Target.BOTH)
+		{
+			foreach (var entity in this.enemyParty)
+			{
+				CButtonSprite enemyButton = new CButtonSprite(entity.getName());
+				this.targetButtons.Add(enemyButton, entity);
+			}
+		}
+
+		int settedButtons = 0;
+		foreach (var entry in this.targetButtons)
+		{
+			entry.Key.setXY(CGameConstants.SCREEN_WIDTH - (entry.Key.getWidth() * 1.1f),
+									CGameConstants.SCREEN_HEIGHT - (entry.Key.getHeight() * (this.targetButtons.Count - settedButtons)));
+			settedButtons++;
+		}
+	}
 }

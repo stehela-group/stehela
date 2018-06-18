@@ -14,4 +14,9 @@ public class Curar : Skill
 
         this.setCooldown(1);
     }
+
+    override public Target getPossibleTargets()
+    {
+        return Target.ALLIES;
+    }
 }
