@@ -3,7 +3,7 @@ using System.Collections;
 
 public class COverWorldNPC : CAnimatedSprite
 {
-
+    
 
     public COverWorldNPC()
     {
