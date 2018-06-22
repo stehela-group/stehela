@@ -57,7 +57,6 @@ public class COverWorldNPC : CAnimatedSprite
 
         this.dialog.setText("dialogo");
         this.dialog.setXY(0, 0);
-        this.dialog.setSortingLayerName("Dialog");
 
     }
 
