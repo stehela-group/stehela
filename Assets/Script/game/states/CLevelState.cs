@@ -11,6 +11,8 @@ public class CLevelState : CGameState
     
     private CBackgroundFloor mBackgroundFloor;
     private COverWorldNPC mOverworldNPC;
+
+    private CSprite shadow;
     public CLevelState()
 	{
 	}
@@ -19,6 +21,7 @@ public class CLevelState : CGameState
 	{
         base.init();
         mMap = new CTileMap();
+         
         setState(CLevelState.IN_PROGRESS);
         //mBackground = new CBackground();
         //mBackground.setXY(0, 0);
@@ -30,12 +33,20 @@ public class CLevelState : CGameState
 
         mOverworldNPC = new COverWorldNPC();
         mOverworldNPC.setXY(CGameConstants.SCREEN_WIDTH - 100, CGameConstants.SCREEN_HEIGHT / 2);
+        mOverworldNPC.setXY(500, 300);
 
         /*CGame.inst().setPlayer(mPlayer);*/
 
         mBackgroundFloor = new CBackgroundFloor();
         mBackgroundFloor.setXY(0, 0);
         mBackgroundFloor.setSortingLayerName("Background");
+
+        shadow = new CSprite();
+        shadow.setImage(Resources.Load<Sprite>("Sprites/dialogShadow/shadow"));
+        shadow.setName("Background_shadow");
+        shadow.setSortingLayerName("UI");
+        shadow.setXY(0, 0);
+        shadow.setVisible(false);
     }
 
 	override public void update()
@@ -43,8 +54,14 @@ public class CLevelState : CGameState
         base.update();
         mMap.update();
        // mBackground.update();
+
+
+
         mOverworldPlayer.update();
         mOverworldNPC.update();
+
+
+
 
         if (this.getState() == CLevelState.IN_PROGRESS)
         {
@@ -54,6 +71,17 @@ public class CLevelState : CGameState
                 return;
             }
         }
+
+
+        if (mOverworldNPC.collides(mOverworldPlayer))
+        {
+            
+            shadow.setVisible(true);
+            
+            mOverworldNPC.mensaje();
+
+        }
+
 
     }
 

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class CText : CGameObject
+public class CText : CSprite
 {
 	private TextMeshPro displayText;
 	private GameObject text;
@@ -80,4 +80,5 @@ public class CText : CGameObject
 	{
 		this.displayText.enableWordWrapping = wrapping;
 	}
+   
 }
