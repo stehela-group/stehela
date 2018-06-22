@@ -67,7 +67,9 @@ public class CLevelState : CGameState
         {
             if (mOverworldPlayer.getX() > 500)
             {
+                shadow.setVisible(false);
                 this.setState(CLevelState.FINISHED);
+
                 return;
             }
         }

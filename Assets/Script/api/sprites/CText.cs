@@ -2,16 +2,27 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class CText : CSprite
+public class CText : CGameObject
 {
 	private TextMeshPro displayText;
+
+	private static GameObject UICanvas = new GameObject();
 	private GameObject text;
 	public CText(string text)
 	{
 		this.text = new GameObject();
+
+		if(! CText.UICanvas.GetComponent<Canvas>())
+		{
+			CText.UICanvas.AddComponent<Canvas>();
+			CText.UICanvas.name = "Canvas";
+		}
+
 		this.displayText = this.text.AddComponent<TextMeshPro>();
 		this.displayText.SetText(text);
 		this.setName(text);
+
+		this.text.transform.SetParent(CText.UICanvas.transform);
 	}
 
 	public void setText(string newText)
@@ -81,5 +92,10 @@ public class CText : CSprite
 		this.displayText.enableWordWrapping = wrapping;
 	}
 
+ 
+	public static void setSortingLayerName(string aSortingLayerName)
+	{
+		CText.UICanvas.GetComponent<Canvas>().sortingLayerName = aSortingLayerName;
+	}
  
 }
