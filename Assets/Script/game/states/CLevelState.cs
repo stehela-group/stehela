@@ -12,7 +12,6 @@ public class CLevelState : CGameState
     private CBackgroundFloor mBackgroundFloor;
     private COverWorldNPC mOverworldNPC;
 
-    private CSprite shadow;
     public CLevelState()
 	{
 	}
@@ -41,18 +40,14 @@ public class CLevelState : CGameState
         mBackgroundFloor.setXY(0, 0);
         mBackgroundFloor.setSortingLayerName("Background");
 
-        shadow = new CSprite();
-        shadow.setImage(Resources.Load<Sprite>("Sprites/dialogShadow/shadow"));
-        shadow.setName("Background_shadow");
-        shadow.setSortingLayerName("UI");
-        shadow.setXY(0, 0);
-        shadow.setVisible(false);
+        DialogManager.init();
     }
 
 	override public void update()
 	{
         base.update();
         mMap.update();
+        DialogManager.update();
        // mBackground.update();
 
 
@@ -65,9 +60,8 @@ public class CLevelState : CGameState
 
         if (this.getState() == CLevelState.IN_PROGRESS)
         {
-            if (mOverworldPlayer.getX() > 500)
+            if (mOverworldPlayer.getX() > 1000)
             {
-                shadow.setVisible(false);
                 this.setState(CLevelState.FINISHED);
 
                 return;
@@ -77,11 +71,7 @@ public class CLevelState : CGameState
 
         if (mOverworldNPC.collides(mOverworldPlayer))
         {
-            
-            shadow.setVisible(true);
-            
             mOverworldNPC.mensaje();
-
         }
 
 
@@ -90,6 +80,7 @@ public class CLevelState : CGameState
 	override public void render()
 	{
         base.render();
+        DialogManager.render();
         mMap.render();
         //mBackground.render();
         mOverworldPlayer.render();
@@ -99,6 +90,7 @@ public class CLevelState : CGameState
 	override public void destroy()
 	{
         base.destroy();
+        DialogManager.destroy();
         mMap.destroy();
         mMap = null;
         mBackgroundFloor.destroy();
