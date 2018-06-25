@@ -35,6 +35,7 @@ public class COverWorldNPC : CAnimatedSprite
 
     public void mensaje()
     {
+        
         DialogManager.startDialog(new string[] {
             "Pepito",
             "Pepote",

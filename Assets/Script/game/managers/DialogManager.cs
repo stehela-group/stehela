@@ -52,6 +52,7 @@ public class DialogManager
             {
                 currentDialog++;
                 text.setText(dialog[currentDialog]);
+                text.setXY(500, 800);
             }
             else if(CKeyboard.firstPress(CKeyboard.ENTER) && currentDialog == dialog.Length - 1)
             {
@@ -72,7 +73,8 @@ public class DialogManager
 
     public static void startDialog(string[] textos)
     {
-        if(textos.Length <= 0 || dialog != null)
+        text.setXY(500, 800);
+        if (textos.Length <= 0 || dialog != null)
         {
             return;
         }
