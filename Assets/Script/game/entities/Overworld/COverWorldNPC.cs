@@ -10,12 +10,13 @@ public class COverWorldNPC : CAnimatedSprite
 
     public COverWorldNPC()
     {
-        setFrames(Resources.LoadAll<Sprite>("Sprites/tiles/tile000"));
+        setFrames(Resources.LoadAll<Sprite>("Sprites/NPC/KairusWolrd"));
         setName("Overworld NPC");
         setSortingLayerName("Personajes");
 
         setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
         setBoundAction(CGameObject.NONE);
+        setScale(4);
     }
 
     override public void update()

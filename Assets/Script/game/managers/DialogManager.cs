@@ -28,7 +28,7 @@ public class DialogManager
 
         background = new CSprite();
         //Esta tambien el shadow solo que llena toda la pantalla
-        background.setImage(Resources.Load<Sprite>("Sprites/dialogShadow/shadow2"));
+        background.setImage(Resources.Load<Sprite>("Sprites/dialogShadow/shadow3"));
         background.setName("Dialog - Background");
         background.setSortingLayerName("UI");
         background.setXY(0, 0);
