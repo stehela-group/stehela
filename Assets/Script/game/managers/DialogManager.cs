@@ -84,17 +84,13 @@ static public class DialogManager
 
     public static void startDialog(string[] textos, string picture = null)
     {
-        if (picture == null )
-        {
-            
-        }
-
-        else
+        if (picture != null )
         {
             characterPortrait.setImage(Resources.Load<Sprite>(picture));
             characterPortrait.setVisible(true);
         }
-        
+
+         
         
         if (textos.Length <= 0 || dialog != null)
         {
