@@ -56,8 +56,6 @@ public class CLevelState : CGameState
         mOverworldNPC.update();
 
 
-
-
         if (this.getState() == CLevelState.IN_PROGRESS)
         {
             if (mOverworldPlayer.getX() > 1000)
@@ -67,11 +65,13 @@ public class CLevelState : CGameState
                 return;
             }
         }
-
-
+        
+        //TODO: Realizar manager de NPC Y chequear colicion con cualquier Npc
         if (mOverworldNPC.collides(mOverworldPlayer))
         {
-            mOverworldNPC.mensaje();
+            //if (DialogManager.init().getDialog() == null)
+
+                mOverworldNPC.mensaje();
         }
 
 

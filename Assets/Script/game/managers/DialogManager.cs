@@ -5,18 +5,16 @@ using UnityEngine.UI;
 using TMPro;
 
 
-public class DialogManager 
+static public class DialogManager 
 {
     static private bool mInitialized = false;
-    static private CSprite background;
+    static private CSprite shadow;
+    static private CSprite characterPortrait;
     static private CText text;
     static private string[] dialog;
     static private int currentDialog;
 
-    public DialogManager()
-	{
-		throw new UnityException ("Error in DialogManager(). You're not supposed to instantiate this class.");
-	}
+    private static int MARGIN = 80;
 	
 	public static void init()
 	{
@@ -26,55 +24,69 @@ public class DialogManager
 		}
 		mInitialized = true;
 
-        background = new CSprite();
-          //Esta tambien el shadow solo que llena toda la pantalla
-        background.setImage(Resources.Load<Sprite>("Sprites/dialogShadow/shadow3"));
-        background.setName("Dialog - Background");
-        background.setSortingLayerName("UI");
-        background.setXY(0, 0);
-        background.setWidth(CGameConstants.SCREEN_WIDTH);
-        background.setVisible(false);
+        shadow = new CSprite();
+        //Esta tambien el shadow solo que llena toda la pantalla
+        shadow.setImage(Resources.Load<Sprite>("Sprites/dialogShadow/shadow"));
+        shadow.setName("Dialog - Background");
+        shadow.setSortingLayerName("UI");
+        shadow.setXY(0, CGameConstants.SCREEN_HEIGHT / 3 * 2);
+        shadow.setWidth(CGameConstants.SCREEN_WIDTH);
+        shadow.setVisible(false);
+
+        characterPortrait = new CSprite();
+        characterPortrait.setName("Character - Portrait");
+        characterPortrait.setSortingLayerName("UI");
+        characterPortrait.setXY(shadow.getX() + MARGIN, shadow.getY() + MARGIN);
+        characterPortrait.setVisible(false);
+        characterPortrait.setSortingOrder(1);
 
         text = new CText("");
-        text.setXY(0, 0);
-        text.setFontSize(300f);
+        text.setFontSize(500.0f);
         text.setVisible(false);
-        text.setWidth(CGameConstants.SCREEN_WIDTH);
-	}
+        text.setXY(CGameConstants.SCREEN_WIDTH / 4 + MARGIN, shadow.getY() + MARGIN);
+        text.setWidth(CGameConstants.SCREEN_WIDTH / 4 * 3 - MARGIN * 2);
+
+    }
 
 	public static void update()
 	{
-        background.update();
+        shadow.update();
         text.update();
+        characterPortrait.update();
 
-        if(dialog != null)
+
+        if (dialog != null)
         {
             if(CKeyboard.firstPress(CKeyboard.ENTER) && dialog.Length > 0 && currentDialog < dialog.Length - 1)
             {
                 currentDialog++;
                 text.setText(dialog[currentDialog]);
-                text.setXY(500, 800);
             }
             else if(CKeyboard.firstPress(CKeyboard.ENTER) && currentDialog == dialog.Length - 1)
             {
                 dialog = null;
                 text.setText("");
-                background.setVisible(false);
+                shadow.setVisible(false);
                 text.setVisible(false);
                 currentDialog = 0;
+
+                characterPortrait.setVisible(false);
             }
         }
 	}
 
     public static void render()
     {
-        background.render();
+        shadow.render();
         text.render();
+        characterPortrait.render();
     }
 
-    public static void startDialog(string[] textos)
+    public static void startDialog(string[] textos, string picture)
     {
-        text.setXY(500, 800);
+        
+        characterPortrait.setImage(Resources.Load<Sprite>(picture));
+        characterPortrait.setVisible(true);
         if (textos.Length <= 0 || dialog != null)
         {
             return;
@@ -85,7 +97,7 @@ public class DialogManager
 
         text.setText(dialog[currentDialog]);
 
-        background.setVisible(true);
+        shadow.setVisible(true);
         text.setVisible(true);
     }
 
@@ -100,9 +112,11 @@ public class DialogManager
 		{
 			mInitialized = false;
 
-            background.destroy();
+            shadow.destroy();
             text.destroy();
-		}
+            characterPortrait.destroy();
+
+        }
 	}
 }
 

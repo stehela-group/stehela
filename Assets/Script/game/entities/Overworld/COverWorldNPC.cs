@@ -7,10 +7,12 @@ using TMPro;
 
 public class COverWorldNPC : CAnimatedSprite
 {
+    private string portraitAddress;
 
     public COverWorldNPC()
     {
-        setFrames(Resources.LoadAll<Sprite>("Sprites/NPC/KairusWolrd"));
+        portraitAddress = "Sprites/NPC/Kairus_Portrait";
+        setFrames(Resources.LoadAll<Sprite>("Sprites/NPC/KairusWorld"));
         setName("Overworld NPC");
         setSortingLayerName("Personajes");
 
@@ -43,10 +45,9 @@ public class COverWorldNPC : CAnimatedSprite
             "esas raíces fueron cortadas por aquellos que juraron protegerlas.",
             "El gran dia 50 años atrás fue la última vez que este viejo vio algo similar.. ",
             "Y pensar que volverían a aparecer 50 años después tan cerca del lugar del suceso.."
-
-        });
+            
+        }, portraitAddress);
     }
-
 }
 
 
