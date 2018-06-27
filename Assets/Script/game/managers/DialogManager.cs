@@ -82,11 +82,20 @@ static public class DialogManager
         characterPortrait.render();
     }
 
-    public static void startDialog(string[] textos, string picture)
+    public static void startDialog(string[] textos, string picture = null)
     {
+        if (picture == null )
+        {
+            
+        }
+
+        else
+        {
+            characterPortrait.setImage(Resources.Load<Sprite>(picture));
+            characterPortrait.setVisible(true);
+        }
         
-        //characterPortrait.setImage(Resources.Load<Sprite>(picture));
-        characterPortrait.setVisible(true);
+        
         if (textos.Length <= 0 || dialog != null)
         {
             return;

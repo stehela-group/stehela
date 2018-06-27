@@ -38,7 +38,8 @@ public class COverWorldNPC : CAnimatedSprite
 
     public void mensaje()
     {
- 
+
+        
 
         DialogManager.startDialog(new string[] {
             "Que marca peculiar posees en el estómago joven.. ",
@@ -47,8 +48,9 @@ public class COverWorldNPC : CAnimatedSprite
             "El gran dia 50 años atrás fue la última vez que este viejo vio algo similar.. ",
             "Y pensar que volverían a aparecer 50 años después tan cerca del lugar del suceso.."
             
-        },portraitAddress = null);
+        });
     }
+    
 }
 
 
