@@ -49,7 +49,7 @@ public class BattleEntity : CAnimatedSprite
         base.update();
 
         this.lifeText.setText("Vida: " + this.currentHealth + "/" + this.maxHealth);
-        this.lifeText.setXY(this.getX(), this.getY() - 20 /* MARGEN */);
+        this.lifeText.setXY(this.getX() +20 /* MARGEN*/, this.getY() - 20 /* MARGEN */);
         this.lifeText.update();
 
         switch (this.getState())
@@ -115,10 +115,13 @@ public class BattleEntity : CAnimatedSprite
         switch (this.getState())
         {
             case (BattleEntity.IDLE):
+                this.gotoAndStop(0);
                 break;
             case (BattleEntity.RECEIVING_DAMAGE):
                 break;
             case (BattleEntity.ATTACKING):
+
+                this.gotoAndStop(1);
                 break;
             case (BattleEntity.DEAD):
                 break;

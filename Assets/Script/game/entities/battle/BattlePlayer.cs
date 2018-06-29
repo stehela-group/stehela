@@ -23,7 +23,7 @@ public class BattlePlayer : BattleEntity
         setSortingLayerName("Personajes");
         setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
         setBoundAction(CGameObject.STOP);
-        setXY(100, 600);
+        setXY(309, 444);
         setScale(4);
         this.initialX = this.getX();
         //setFlip(true);
@@ -37,15 +37,18 @@ public class BattlePlayer : BattleEntity
         switch (this.getState())
         {
             case ATTACKING:
+                this.gotoAndStop(2);
                 if (getX() >= this.initialX + 50)
                 {
                     this.setVelX(-50);
 
+                    
                 }
 
                 if (getX() <= this.initialX - 50)
                 {
                     this.setVelX(50);
+
 
                 }
 
@@ -53,6 +56,7 @@ public class BattlePlayer : BattleEntity
                   
 
             default:
+                this.gotoAndStop(1);
                 break;
         }
 
@@ -75,6 +79,7 @@ public class BattlePlayer : BattleEntity
         if(aState == BattlePlayer.ATTACKING)
         {
             this.setVelX(50);
+            
         }
 
         if (aState == BattlePlayer.IDLE)

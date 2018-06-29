@@ -218,9 +218,9 @@ class BattleState : CGameState
 			entry.Key.render();
 		}
 
-		foreach (var player in this.playerParty)
+		foreach (var entity in this.playerParty)
 		{
-			player.render();
+			entity.render();
 		}
 
 		foreach (var enemy in this.enemyParty)
