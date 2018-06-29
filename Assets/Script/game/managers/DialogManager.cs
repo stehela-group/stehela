@@ -11,8 +11,8 @@ static public class DialogManager
     static private CSprite shadow;
     static private CSprite characterPortrait;
     static private CText text;
-    static private string[] dialog;
     static private int currentDialog;
+    static private List<Dialog> dialogs;
 
     private static int MARGIN = 80;
 	
@@ -23,6 +23,8 @@ static public class DialogManager
 			return;
 		}
 		mInitialized = true;
+
+        dialogs = new List<Dialog>();
 
         shadow = new CSprite();
         //Esta tambien el shadow solo que llena toda la pantalla
@@ -55,16 +57,35 @@ static public class DialogManager
         characterPortrait.update();
 
 
-        if (dialog != null)
+        if(dialogs.Count > 0 && CKeyboard.firstPress(CKeyboard.ENTER))
         {
-            if(CKeyboard.firstPress(CKeyboard.ENTER) && dialog.Length > 0 && currentDialog < dialog.Length - 1)
+
+            if (dialogs[currentDialog].hasNextDialog())
+            {
+                text.setText(dialogs[currentDialog].goToNextDialog());
+            }
+            else if(currentDialog < dialogs.Count - 1)
             {
                 currentDialog++;
-                text.setText(dialog[currentDialog]);
+
+                if(dialogs[currentDialog].hasPortrait())
+                {
+                    if(dialogs[currentDialog - 1].getPortrait() != dialogs[currentDialog].getPortrait())
+                    {
+                        characterPortrait.setImage(Resources.Load<Sprite>(dialogs[currentDialog].getPortrait()));
+                        characterPortrait.setVisible(true);
+                    }
+                }
+                else
+                {
+                    characterPortrait.setVisible(false);
+                }
+
+                text.setText(dialogs[currentDialog].getCurrentDialog());
             }
-            else if(CKeyboard.firstPress(CKeyboard.ENTER) && currentDialog == dialog.Length - 1)
+            else
             {
-                dialog = null;
+                dialogs.Clear();
                 text.setText("");
                 shadow.setVisible(false);
                 text.setVisible(false);
@@ -82,25 +103,29 @@ static public class DialogManager
         characterPortrait.render();
     }
 
-    public static void startDialog(string[] textos, string picture = null)
+    //En esta funcion lo que hacemos es aceptar el dialogo y la fotoo del peronaje que habla 
+    public static void startDialog(Dialog newDialog)
     {
-        if (picture != null )
-        {
-            characterPortrait.setImage(Resources.Load<Sprite>(picture));
-            characterPortrait.setVisible(true);
-        }
+        DialogManager.startDialog(new List<Dialog>() { newDialog });
+    }
 
-         
-        
-        if (textos.Length <= 0 || dialog != null)
+    public static void startDialog(List<Dialog> newDialogs)
+    {
+        if(newDialogs.Count <= 0 && newDialogs[0].getText().Length <= 0 || dialogs.Count > 0)
         {
             return;
         }
 
-        dialog = textos;
+        if (newDialogs[0].hasPortrait())
+        {
+            characterPortrait.setImage(Resources.Load<Sprite>(newDialogs[0].getPortrait()));
+            characterPortrait.setVisible(true);
+        }
+
+        dialogs = newDialogs;
         currentDialog = 0;
 
-        text.setText(dialog[currentDialog]);
+        text.setText(dialogs[currentDialog].getCurrentDialog());
 
         shadow.setVisible(true);
         text.setVisible(true);
@@ -108,7 +133,7 @@ static public class DialogManager
 
     public static bool isTalking()
     {
-        return dialog != null;
+        return dialogs.Count > 0;
     }
 	
 	public static void destroy()
@@ -123,6 +148,8 @@ static public class DialogManager
 
         }
 	}
+
+
 }
 
  
