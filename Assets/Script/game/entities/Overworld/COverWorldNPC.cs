@@ -38,21 +38,32 @@ public class COverWorldNPC : CAnimatedSprite
 
     public void mensaje()
     {
+		string[] text = null;
+        if(BattleData.lastBattleOutcome == BattleData.BattleOutcome.NO_BATTLE)
+        {
+            text = new string[] {
+                "Que marca peculiar posees en el estómago joven. ",
+                "Ten cuidado, hay criaturas peligrosas fuera de esta sala.",
+                "Deberás matarlos al mismo tiempo si quieres que no vuelvan a levantarse."
+            };
+        }
+        else if(BattleData.lastBattleOutcome == BattleData.BattleOutcome.WON)
+        {
+			text = new string[] {
+				"¡Los has vencido! Creí que nunca se irían.",
+				"*AIU BRBRBRBR* ¿Qué ha sido eso?",
+				"Oh no, creo que han venido más."
+			};
+        }
+        else {
+			text = new string[] {
+				"Te han tirado dentro y quedaste insconsciente...",
+                "Hace " + BattleData.battlesLost + " días.",
+                "Siguen fuera, no han entrado porque no caben por la puerta."
+			};
+        }
 
-        
-
-        DialogManager.startDialog(new List<Dialog>() {new Dialog(new string[] {
-            "Que marca peculiar posees en el estómago joven.. ",
-            "Este viejo recuerda como si fuera ayer el dia que ",
-            "esas raíces fueron cortadas por aquellos que juraron protegerlas.",
-            "El gran dia 50 años atrás fue la última vez que este viejo vio algo similar.. ",
-            "Y pensar que volverían a aparecer 50 años después tan cerca del lugar del suceso.."
-
-        }, portraitAddress), new Dialog(new string[] {
-            "PEPE",
-            "EL",
-            "POLLO",
-        }, portraitAddress)});
+        DialogManager.startDialog(new Dialog(text, portraitAddress));
     }
     
 }
