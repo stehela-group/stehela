@@ -58,7 +58,7 @@ public class CLevelState : CGameState
 
         if (this.getState() == CLevelState.IN_PROGRESS)
         {
-            if (mOverworldPlayer.getX() > 1000)
+            if (mOverworldPlayer.getX() >= CGameConstants.SCREEN_WIDTH)
             {
                 this.setState(CLevelState.FINISHED);
 

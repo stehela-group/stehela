@@ -189,4 +189,14 @@ public class CSprite : CGameObject
 	{
 		return mRegistration;
 	}
+
+	public void setParentObject(Transform transform)
+	{
+		this.mSprite.transform.SetParent(transform);
+	}
+
+	public Transform getTransform()
+	{
+		return this.mSprite.transform;
+	}
 }

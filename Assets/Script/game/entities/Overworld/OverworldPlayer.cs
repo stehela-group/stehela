@@ -37,10 +37,11 @@ public class COverWorldPlayer : CAnimatedSprite
 
         mRect = new CSprite();
         mRect.setImage(Resources.Load<Sprite>("Sprites/ui/pixel"));
-        mRect.setSortingLayerName("Player");
+        mRect.setSortingLayerName("Personajes");
         mRect.setSortingOrder(20);
         mRect.setAlpha(0.5f);
         mRect.setName("player_debug_rect");
+        mRect.setParentObject(this.getTransform());
     }
 
     override public void update()
@@ -65,7 +66,7 @@ public class COverWorldPlayer : CAnimatedSprite
                 setState(STATE_WALKING);
                 return;
             }
-            if (CKeyboard.pressed(CKeyboard.DOWN) && isSouth(getX(), getY() + 1))
+            if (CKeyboard.pressed(CKeyboard.DOWN) && !isSouth(getX(), getY() + 1))
             {
                 setState(STATE_WALKING);
                 return;
@@ -244,7 +245,7 @@ public class COverWorldPlayer : CAnimatedSprite
 
     private void moveVertical()
     {
-        if (!(CKeyboard.pressed(CKeyboard.UP) || CKeyboard.pressed(CKeyboard.DOWN)))
+        if (!( CKeyboard.pressed(CKeyboard.UP) || CKeyboard.pressed(CKeyboard.DOWN) ))
         {
             setVelY(0);
             return;
