@@ -11,6 +11,7 @@ public class CLevelState : CGameState
     
     private CBackgroundFloor mBackgroundFloor;
     private COverWorldNPC mOverworldNPC;
+
     public CLevelState()
 	{
 	}
@@ -31,36 +32,55 @@ public class CLevelState : CGameState
 
         mOverworldNPC = new COverWorldNPC();
         mOverworldNPC.setXY(CGameConstants.SCREEN_WIDTH - 100, CGameConstants.SCREEN_HEIGHT / 2);
+        mOverworldNPC.setXY(500, 300);
 
         /*CGame.inst().setPlayer(mPlayer);*/
 
         mBackgroundFloor = new CBackgroundFloor();
         mBackgroundFloor.setXY(0, 0);
         mBackgroundFloor.setSortingLayerName("Background");
+
+        DialogManager.init();
     }
 
 	override public void update()
 	{
         base.update();
         mMap.update();
+        DialogManager.update();
        // mBackground.update();
+
+
+
         mOverworldPlayer.update();
         mOverworldNPC.update();
 
+
         if (this.getState() == CLevelState.IN_PROGRESS)
         {
-            if (CKeyboard.pressed(CKeyboard.SPACE))
+            if (mOverworldPlayer.getX() > 1000)
             {
                 this.setState(CLevelState.FINISHED);
+
                 return;
             }
         }
+        
+        //TODO: Realizar manager de NPC Y chequear colicion con cualquier Npc
+        if (mOverworldNPC.collides(mOverworldPlayer))
+        {
+            //if (DialogManager.init().getDialog() == null)
+
+                mOverworldNPC.mensaje();
+        }
+
 
     }
 
 	override public void render()
 	{
         base.render();
+        DialogManager.render();
         mMap.render();
         //mBackground.render();
         mOverworldPlayer.render();
@@ -70,6 +90,7 @@ public class CLevelState : CGameState
 	override public void destroy()
 	{
         base.destroy();
+        DialogManager.destroy();
         mMap.destroy();
         mMap = null;
         mBackgroundFloor.destroy();

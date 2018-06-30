@@ -59,7 +59,7 @@ public class CButtonSprite : CAnimatedSprite
 		setScale (scale);
 		gotoAndStop (frame);
 
-		this.buttonText.setXY(this.getX(), this.getY());
+		this.buttonText.setXY(this.getX() - this.getWidth() / 2 , this.getY() - this.getHeight() / 2);
 		this.buttonText.update();
 	}
 

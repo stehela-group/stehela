@@ -47,6 +47,6 @@ TagManager:
   - name: Personajes
     uniqueID: 3619101117
     locked: 0
-  - name: Game
+  - name: UI
     uniqueID: 506403503
     locked: 0
