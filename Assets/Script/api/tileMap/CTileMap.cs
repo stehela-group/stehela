@@ -10,15 +10,15 @@ public class CTileMap
     public const int MAP_HEIGHT = 12;
 
     //48x48 pixeles mide cada tile, aumenta la distancia
-    public const int TILE_WIDTH = 48 * 2;
-    public const int TILE_HEIGHT = 48 * 2;
+    public const int TILE_WIDTH = 96;
+    public const int TILE_HEIGHT = 96;
 
     //Es una lista de listas de tiles (clase nuestra). Una referencia de una clase nuestra de CTile
     private List<List<CTile>> mMap;
 
     // Cantidad de tiles que hay.
     // TODO ver la cantidad de tiles diferentes
-    private const int NUM_TILES = 6;
+    private const int NUM_TILES = 2;
 
     // Array con los sprites de los tiles.
     private Sprite[] mTiles;

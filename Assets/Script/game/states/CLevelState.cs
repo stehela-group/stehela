@@ -19,6 +19,7 @@ public class CLevelState : CGameState
 	{
         base.init();
         mMap = new CTileMap();
+        CGame.inst().setMap(mMap);
         setState(CLevelState.IN_PROGRESS);
         //mBackground = new CBackground();
         //mBackground.setXY(0, 0);
@@ -48,7 +49,7 @@ public class CLevelState : CGameState
 
         if (this.getState() == CLevelState.IN_PROGRESS)
         {
-            if (mOverworldPlayer.getX() > 500)
+            if (CKeyboard.pressed(CKeyboard.SPACE))
             {
                 this.setState(CLevelState.FINISHED);
                 return;
