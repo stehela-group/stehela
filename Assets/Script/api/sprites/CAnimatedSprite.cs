@@ -26,6 +26,11 @@ public class CAnimatedSprite : CSprite
 	{
 		base.render ();
 
+		if(mFrame == null)
+		{
+			return;
+		}
+		
 		int frame = mAnim.getCurrentFrame () - 1;
 
 		if (frame < 0 || frame >= mFrame.Length) 

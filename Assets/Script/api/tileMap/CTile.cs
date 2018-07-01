@@ -13,7 +13,7 @@ public class CTile : CSprite
 		setTileIndex(aTileIndex);
 
 		setImage (aSprite);
-		setSortingLayerName ("TileMap");
+		setSortingLayerName ("MapExplorer");
 	}
 
 	public void setTileIndex(int aTileIndex)
@@ -38,5 +38,7 @@ public class CTile : CSprite
 
 	override public void destroy()
 	{
+		base.destroy();
+		this.mTileIndex = 0;
 	}
 }

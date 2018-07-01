@@ -4,117 +4,149 @@ using System.Collections.Generic;
 
 public class CTileMap
 {
-	public const int MAP_WIDTH = 17;
-	public const int MAP_HEIGHT = 13;
+	//Objeto que contiene todos los tiles
+	private GameObject mMapObject;
 
-	public const int TILE_WIDTH = 48;
-	public const int TILE_HEIGHT = 48;
+    //Cantidad de columnas
+    public const int MAP_WIDTH = 20;
+    //Cantidad de filas
+    public const int MAP_HEIGHT = 12;
 
-	private List<List<CTile>> mMap;
+    //48x48 pixeles mide cada tile, aumenta la distancia
+    public const int TILE_WIDTH = 96;
+    public const int TILE_HEIGHT = 96;
 
-	// Cantidad de tiles que hay.
-	private const int NUM_TILES = 6;
+    //Es una lista de listas de tiles (clase nuestra). Una referencia de una clase nuestra de CTile
+    private List<List<CTile>> mMap;
 
-	// Array con los sprites de los tiles.
-	private Sprite[] mTiles;
+    // Cantidad de tiles que hay.
+    // TODO ver la cantidad de tiles diferentes
+    private const int NUM_TILES = 2;
 
-	// La pantalla tiene 17 columnas x 13 filas de tiles.
-	public static int[][] LEVEL_001 = {
-		new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-		new int[] {1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1},
-		new int[] {1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1},
-		new int[] {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
-		new int[] {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
-		new int[] {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
-		new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		new int[] {0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0},
-		new int[] {0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0},
-		new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-		new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-		new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-	};
+    // Array con los sprites de los tiles.
+    private Sprite[] mTiles;
 
-	public CTileMap(int aLevel)
-	{
-		mTiles = new Sprite [NUM_TILES];
-		mTiles [0] = Resources.Load<Sprite> ("Sprites/tiles/tile000");
-		mTiles [1] = Resources.Load<Sprite> ("Sprites/tiles/tile001");
-		mTiles [2] = Resources.Load<Sprite> ("Sprites/tiles/tile002");
-		mTiles [3] = Resources.Load<Sprite> ("Sprites/tiles/tile003");
-		mTiles [4] = Resources.Load<Sprite> ("Sprites/tiles/tile004");
-		mTiles [5] = Resources.Load<Sprite> ("Sprites/tiles/tile005");
+    // La pantalla tiene 17 columnas x 13 filas de tiles.
+    // En el caso de hacer otro nivel copiamos el level estatico en otro.
+    //Es el mapa con el indice de los tipos de tiles, despues hay que hacer el mapa
+    //TODO Ver la cantidad optima para el overworld.
+    public static int[][] LEVEL_001 = {
+        new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1,1,1},
+        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
+        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
+        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
+        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0},
+        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0},
+        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0},
+        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0},
+        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
+        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
+        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
+        new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1,1,1},
 
-		loadLevel (aLevel);
-	}
+    };
 
-	public void loadLevel(int aLevel)
-	{
-		mMap = new List<List<CTile>> ();
+    //Se cargan los sprites de los tiles
+    //TODO hacer manager de assets
+    public CTileMap()
+    {
+        mMapObject = new GameObject();
+        mMapObject.name = "Mapa";
+        mTiles = new Sprite[NUM_TILES];
+        mTiles[0] = Resources.Load<Sprite>("Sprites/tiles/empty_tile");
+        mTiles[1] = Resources.Load<Sprite>("Sprites/tiles/tile_wall1");
+        /*mTiles[2] = Resources.Load<Sprite>("Sprites/tiles/tile002");
+        mTiles[3] = Resources.Load<Sprite>("Sprites/tiles/tile003");
+        mTiles[4] = Resources.Load<Sprite>("Sprites/tiles/tile004");
+        mTiles[5] = Resources.Load<Sprite>("Sprites/tiles/tile005");*/
 
-		for (int y = 0; y < MAP_HEIGHT; y++) 
-		{
-			mMap.Add (new List<CTile> ());			
+        //TODO: Cargar todo junto con LOADALL
+        loadLevel();
+    }
 
-			for (int x = 0; x < MAP_WIDTH; x++) 
-			{
-				int index = LEVEL_001 [y] [x];
-				CTile tile = new CTile(x * TILE_WIDTH, y * TILE_HEIGHT, index, mTiles[index]);
-				mMap [y].Add (tile);
-			}
-		}
-	}
+    //Construye el mapa
+    //mMap es una lista de listas de elementos de CTiles    
+    public void loadLevel()
+    {
+        mMap = new List<List<CTile>>();
+        //Mientras que y sea menor que el maximo de altura del mapa se agregan tiles.
+        //Aca se crean las filas vacias.
+        for (int y = 0; y < MAP_HEIGHT; y++)
+        {
+            //Se le agrega una fila, para eso es el add, se le agrega vacia.
+            //Se van agregando de a 1 los tiles con arrays vacios.
+            mMap.Add(new List<CTile>());
 
-	public void update()
-	{
-		for (int y = 0; y < MAP_HEIGHT; y++) 
-		{
-			for (int x = 0; x < MAP_WIDTH; x++) 
-			{
-				mMap [y] [x].update ();
-			}
-		}
-	}
+            //Mientras que la columna sea menor que el maximo se repite la iteracion.
+            //Aca se llenan los arrays vacios de columnas con los tipos de tiles
+            for (int x = 0; x < MAP_WIDTH; x++)
+            {
+                //Nos trae el indice de tiles (0, 1, 2...etc)
+                int index = LEVEL_001[y][x];
+                CTile tile = new CTile(x * TILE_WIDTH, y * TILE_HEIGHT, index, mTiles[index]);
+                tile.setName("Tile - " + y + ","+ x);
+                tile.setParentObject(mMapObject.transform);
+                //Agrega el tile creado al array
+                mMap[y].Add(tile);
+            }
+        }
+    }
 
-	public void render()
-	{
-		for (int y = 0; y < MAP_HEIGHT; y++) 
-		{
-			for (int x = 0; x < MAP_WIDTH; x++) 
-			{
-				mMap [y] [x].render ();
-			}
-		}
-	}
+    //Es como un manager de tiles
+    public void update()
+    {
+        //Si la iteracion no pasa el maximo se repite
+        for (int y = 0; y < MAP_HEIGHT; y++)
+        {
+            //Si la iteracion no pasa el maximo se repite
+            for (int x = 0; x < MAP_WIDTH; x++)
+            {
+                //se update los tiles a medida que cambie
+                mMap[y][x].update();
+            }
+        }
+    }
 
-	public void destroy()
-	{
-		for (int y = MAP_HEIGHT - 1; y >= 0; y--) 
-		{
-			for (int x = MAP_WIDTH - 1; x > 0; x--) 
-			{
-				mMap [y] [x].destroy ();
-				mMap [y] [x] = null;
-			}
-			mMap.RemoveAt (y);
-		}
+    public void render()
+    {
+        for (int y = 0; y < MAP_HEIGHT; y++)
+        {
+            for (int x = 0; x < MAP_WIDTH; x++)
+            {
+                mMap[y][x].render();
+            }
+        }
+    }
 
-		mMap = null;
-	}
+    public void destroy()
+    {
+        for (int y = MAP_HEIGHT - 1; y >= 0; y--)
+        {
+            for (int x = MAP_WIDTH - 1; x >= 0; x--)
+            {
+                mMap[y][x].destroy();
+                mMap[y][x] = null;
+            }
+            mMap.RemoveAt(y);
+        }
 
-	public int getTileIndex(int aX, int aY)
-	{
-		if (aX < 0 || aX > MAP_WIDTH || aY < 0 || aY > MAP_HEIGHT) 
-		{
-			return 0;
-		} 
-		else 
-		{
-			return mMap [aY] [aX].getTileIndex ();
-		}
-	}
+        mMap = null;
+    }
 
-	/*public CTile getTile(int aX, int aY)
+    //Parametros: aX es la columna, aY es la fila.
+    public int getTileIndex(int aX, int aY)
+    {
+        if (aX < 0 || aX >= MAP_WIDTH || aY < 0 || aY >= MAP_HEIGHT)
+        {
+            return 0;
+        }
+        else
+        {
+            return mMap[aY][aX].getTileIndex();
+        }
+    }
+
+    /*public CTile getTile(int aX, int aY)
 	{
 		return mMap [aY] [aX];
 	}*/

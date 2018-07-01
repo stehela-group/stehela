@@ -81,6 +81,8 @@ public class CSprite : CGameObject
 	public void setImage(Sprite aSprite)
 	{
 		mSpriteRenderer.sprite = aSprite;
+		this.setHeight((int) aSprite.rect.height);
+		this.setWidth((int) aSprite.rect.width);
 	}
 
 	public void setFlip(bool aFlip)
@@ -153,7 +155,7 @@ public class CSprite : CGameObject
 		return color.a;
 	}
 
-	public void setVisible(bool aIsVisible)
+	virtual public void setVisible(bool aIsVisible)
 	{
 		mSpriteRenderer.enabled = aIsVisible;
 	}
@@ -168,7 +170,17 @@ public class CSprite : CGameObject
 		mSprite.transform.localScale = new Vector3 (aScale, aScale, 0.0f);
 	}
 
-	public void setRegistration(int aRegistration)
+    public void setScaleX(float aScaleX)
+    {
+        mSprite.transform.localScale = new Vector3(aScaleX, mSprite.transform.localScale.y, 0.0f);
+    }
+
+    public void setScaleY(float aScaleY)
+    {
+        mSprite.transform.localScale = new Vector3(mSprite.transform.localScale.x, aScaleY, 0.0f);
+    }
+
+    public void setRegistration(int aRegistration)
 	{
 		mRegistration = aRegistration;
 	}
@@ -176,5 +188,15 @@ public class CSprite : CGameObject
 	public int getRegistration()
 	{
 		return mRegistration;
+	}
+
+	public void setParentObject(Transform transform)
+	{
+		this.mSprite.transform.SetParent(transform);
+	}
+
+	public Transform getTransform()
+	{
+		return this.mSprite.transform;
 	}
 }

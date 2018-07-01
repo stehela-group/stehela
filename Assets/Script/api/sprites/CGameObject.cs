@@ -21,7 +21,24 @@ public class CGameObject
 	private int mWidth = 100;
 	private int mHeight = 100;
 
-	public CGameObject()
+    private float mFriction = 1.0f;
+
+
+    public const int NONE = 0;
+    public const int STOP = 1;
+    public const int WRAP = 2;
+    public const int BOUNCE = 3;
+    public const int DIE = 4;
+
+    private int mMinX = 0;
+    private int mMinY = 0;
+    private int mMaxX = 0;
+    private int mMaxY = 0;
+
+    // Comportamiento de bordes del objeto
+    public int mBoundAction = NONE;
+
+    public CGameObject()
 	{
 		mPos = new CVector ();
 		mVel = new CVector ();
@@ -239,4 +256,115 @@ public class CGameObject
 			return false;
 		}
 	}
+    public void setFriction(float aFriction)
+    {
+        mFriction = aFriction;
+    }
+
+    public float getFriction()
+    {
+        return mFriction;
+    }
+
+    // COMPORTAMIENTO QUE ALCANZA EL OBJETO AL TOCAR SUS PROPIOS BORDES DEFINIDOS.
+    public void setBoundAction(int aBoundAction)
+    {
+        mBoundAction = aBoundAction;
+    }
+
+    // El máximo y mínimo que puede llegar el objeto
+    public void setBounds(int aMinX, int aMinY, int aMaxX, int aMaxY)
+    {
+        mMinX = aMinX;
+        mMinY = aMinY;
+        mMaxX = aMaxX;
+        mMaxY = aMaxY;
+    }
+
+    // Sirve para chequear los bordes.
+    public void checkBounds()
+    {
+        // Si es none no se hace nada.
+        if (mBoundAction == NONE)
+        {
+            return;
+        }
+
+        bool left = getX() < mMinX;
+        bool right = getX() > mMaxX;
+        bool up = getY() < mMinY;
+        bool down = getY() > mMaxY;
+
+        // Si no toca los bordes no hace nada (no pasa nada).
+
+        //Si no se va ni para izquierda o para derecha o para abajo o para arriba
+        if (!(left || right || up || down))
+        {
+            return;
+        }
+
+        // WRAP: el objeto desaparece y aparece del lado contrario.
+        if (mBoundAction == WRAP)
+        {
+            if (left)  //si se va para la izquierda
+            {
+                setX(mMaxX);   // aparece en la derecha
+            }
+            if (right)   //si se va para la derecha
+            {
+                setX(mMinX);  // aparece en la izquierda
+            }
+            if (up)   //si se va por arribe
+            {
+                setY(mMaxY);   // aparece abajo
+            }
+            if (down)   //si se va por abajo
+            {
+                setY(mMinY);   //aprarece arriba
+            }
+        }
+        else
+        {
+            if (left)
+            {
+                setX(mMinX);
+            }
+            if (right)
+            {
+                setX(mMaxX);
+            }
+            if (up)
+            {
+                setY(mMinY);
+            }
+            if (down)
+            {
+                setY(mMaxY);
+            }
+        }
+
+        //En el caso que sea STOP o DIE el objeto deja de moverse
+        if (mBoundAction == STOP || mBoundAction == DIE)
+        {
+            setVelXY(0, 0);
+        }
+        //En el caso bounce el objeto rebota del borde
+        else if (mBoundAction == BOUNCE)
+        {
+            if (right || left)
+            {
+                setVelX(getVelX() * -1);
+            }
+            if (up || down)
+            {
+                setVelY(getVelY() * -1);
+            }
+        }
+        //El objeto muere
+        if (mBoundAction == DIE)
+        {
+            mIsDead = true;
+            return;
+        }
+    }
 }
