@@ -4,21 +4,24 @@ using System.Collections.Generic;
 
 public class CTileMap
 {
+	//Objeto que contiene todos los tiles
+	private GameObject mMapObject;
+
     //Cantidad de columnas
     public const int MAP_WIDTH = 20;
     //Cantidad de filas
     public const int MAP_HEIGHT = 12;
 
     //48x48 pixeles mide cada tile, aumenta la distancia
-    public const int TILE_WIDTH = 48 * 2;
-    public const int TILE_HEIGHT = 48 * 2;
+    public const int TILE_WIDTH = 96;
+    public const int TILE_HEIGHT = 96;
 
     //Es una lista de listas de tiles (clase nuestra). Una referencia de una clase nuestra de CTile
     private List<List<CTile>> mMap;
 
     // Cantidad de tiles que hay.
     // TODO ver la cantidad de tiles diferentes
-    private const int NUM_TILES = 6;
+    private const int NUM_TILES = 2;
 
     // Array con los sprites de los tiles.
     private Sprite[] mTiles;
@@ -32,10 +35,10 @@ public class CTileMap
         new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
         new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
         new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
-        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
-        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
-        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
-        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
+        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0},
+        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0},
+        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0},
+        new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0},
         new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
         new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
         new int[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1},
@@ -47,6 +50,8 @@ public class CTileMap
     //TODO hacer manager de assets
     public CTileMap()
     {
+        mMapObject = new GameObject();
+        mMapObject.name = "Mapa";
         mTiles = new Sprite[NUM_TILES];
         mTiles[0] = Resources.Load<Sprite>("Sprites/tiles/empty_tile");
         mTiles[1] = Resources.Load<Sprite>("Sprites/tiles/tile_wall1");
@@ -79,6 +84,8 @@ public class CTileMap
                 //Nos trae el indice de tiles (0, 1, 2...etc)
                 int index = LEVEL_001[y][x];
                 CTile tile = new CTile(x * TILE_WIDTH, y * TILE_HEIGHT, index, mTiles[index]);
+                tile.setName("Tile - " + y + ","+ x);
+                tile.setParentObject(mMapObject.transform);
                 //Agrega el tile creado al array
                 mMap[y].Add(tile);
             }

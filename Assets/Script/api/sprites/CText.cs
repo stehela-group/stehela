@@ -5,13 +5,27 @@ using TMPro;
 public class CText : CGameObject
 {
 	private TextMeshPro displayText;
+
+	private static GameObject UICanvas = new GameObject();
 	private GameObject text;
 	public CText(string text)
 	{
 		this.text = new GameObject();
+
+		if(! CText.UICanvas.GetComponent<Canvas>())
+		{
+			Canvas canvas = CText.UICanvas.AddComponent<Canvas>();
+			CText.UICanvas.name = "Canvas";
+			canvas.sortingLayerName = "UI";
+		}
+
 		this.displayText = this.text.AddComponent<TextMeshPro>();
 		this.displayText.SetText(text);
+		this.displayText.rectTransform.pivot = new Vector2(0, 1);
 		this.setName(text);
+
+		this.text.transform.SetParent(CText.UICanvas.transform);
+		this.displayText.sortingLayerID = SortingLayer.NameToID("UI");
 	}
 
 	public void setText(string newText)
@@ -25,7 +39,6 @@ public class CText : CGameObject
 	override public void update()
 	{
 		base.update();
-
 		this.displayText.rectTransform.sizeDelta = new Vector2(this.getWidth(), this.getHeight());
 	}
 
@@ -34,6 +47,8 @@ public class CText : CGameObject
 		base.render();
 
 		Vector3 pos = new Vector3(getX(), getY() * -1, 0.0f);
+
+		this.text.transform.position = pos;
 		this.displayText.transform.position = pos;
 	}
 
@@ -80,4 +95,10 @@ public class CText : CGameObject
 	{
 		this.displayText.enableWordWrapping = wrapping;
 	}
+ 
+	public static void setSortingLayerName(string aSortingLayerName)
+	{
+		CText.UICanvas.GetComponent<Canvas>().sortingLayerName = aSortingLayerName;
+	}
+ 
 }
