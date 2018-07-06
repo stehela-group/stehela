@@ -4,8 +4,8 @@ using System.Collections;
 public class COverWorldPlayer : CAnimatedSprite
 {
     private const float SPEED = 400.0f;
-    private const int HEIGHT = 230;
-    private const int WIDTH = 150;
+    private const int HEIGHT = 32;
+    private const int WIDTH = 32;
     // Variables auxiliares que se cargan cuando llamamos a checkPoints().
     private int mTileTopLeft;
     private int mTileTopRight;
@@ -29,7 +29,7 @@ public class COverWorldPlayer : CAnimatedSprite
 
         setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
         setBoundAction(CGameObject.STOP);
-
+        setScale(5f);
         setRegistration(CSprite.REG_TOP_LEFT);
         setWidth(WIDTH);
         setHeight(HEIGHT);
@@ -176,7 +176,7 @@ public class COverWorldPlayer : CAnimatedSprite
         if (getState() == STATE_STAND)
         {
             stopMove();
-            gotoAndStop(1);
+            initAnimation(1, 12, 9, true);
         }
         if (getState() == STATE_WALKING)
         {

@@ -5,20 +5,21 @@ using UnityEngine.UI;
 using TMPro;
 
 
-public class COverWorldNPC : CAnimatedSprite
+public class COverWorldNPCKairus : CAnimatedSprite
 {
     private string portraitAddress;
+    private const int STATE_IDLE = 1;
 
-    public COverWorldNPC()
+    public COverWorldNPCKairus()
     {
         portraitAddress = "Sprites/NPC/Kairus_Portrait";
-        setFrames(Resources.LoadAll<Sprite>("Sprites/NPC/KairusWorld"));
-        setName("Overworld NPC");
+        setFrames(Resources.LoadAll<Sprite>("Sprites/KairusOverworld"));
+        setName("Overworld NPC Kairus");
         setSortingLayerName("Personajes");
-
+        setScale(6.5f);
         setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
         setBoundAction(CGameObject.NONE);
-        setScale(4);
+        setState(STATE_IDLE);
     }
 
     override public void update()
@@ -42,9 +43,12 @@ public class COverWorldNPC : CAnimatedSprite
         if(BattleData.lastBattleOutcome == BattleData.BattleOutcome.NO_BATTLE)
         {
             text = new string[] {
-                "Que marca peculiar posees en el estómago joven. ",
-                "Ten cuidado, hay criaturas peligrosas fuera de esta sala.",
-                "Deberás matarlos al mismo tiempo si quieres que no vuelvan a levantarse."
+                "Te he estado esperando, Yo soy Kairus, el líder de los Tifus y el asesino de la última persona con el concepto de muerte en este mundo, tu padre.",
+                "Encontré la fluctuación del espacio que te tenía atrapado hace 13 años y he esperado al dia que salieras de ella.",
+                "Lo lamento, aunque mis disculpas no puedan arreglar la atrocidad que he cometido me veo obligado a decirlas de igual manera.",
+                "He vivido hasta este momento solo para que tu fueras juez y verdugo de mis acciones.",
+                "Si quieres que viva y te ayude en la travesía que estas por recorrer, así será, si por otro lado quieres que page con mi vida, tambien asi sera."
+
             };
         }
         else if(BattleData.lastBattleOutcome == BattleData.BattleOutcome.WON)
@@ -65,7 +69,16 @@ public class COverWorldNPC : CAnimatedSprite
 
         DialogManager.startDialog(new Dialog(text, portraitAddress));
     }
-    
+    public void setState(int aState)
+    {
+        base.setState(aState);
+
+        if (getState() == STATE_IDLE)
+        {
+            initAnimation(1, 13, 16, true);
+
+        }
+    }
 }
 
 

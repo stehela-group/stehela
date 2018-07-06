@@ -3,14 +3,18 @@ using System.Collections;
 
 public class CLevelState : CGameState
 {
-    private COverWorldPlayer mOverworldPlayer;
+    public static COverWorldPlayer mOverworldPlayer;
     private CTileMap mMap;
 
     public const int IN_PROGRESS = 0;
     public const int FINISHED = 1;
-    
+
     private CBackgroundFloor mBackgroundFloor;
-    private COverWorldNPC mOverworldNPC;
+    private COverWorldNPCKairus mOverworldNPCKairus;
+    private COverWorldNPC1 mOverworldNPC1;
+    public static COverWorldNPC2 mOverworldNPC2;
+
+
 
     public CLevelState()
 	{
@@ -25,15 +29,20 @@ public class CLevelState : CGameState
         //mBackground = new CBackground();
         //mBackground.setXY(0, 0);
 
-        
         mOverworldPlayer = new COverWorldPlayer();
-        mOverworldPlayer.setXY(CGameConstants.SCREEN_WIDTH / 2, CGameConstants.SCREEN_HEIGHT / 2);
+        //mOverworldPlayer.setXY(CGameConstants.SCREEN_WIDTH / 2, CGameConstants.SCREEN_HEIGHT / 2);
         mOverworldPlayer.setXY(300, 300);
 
-        mOverworldNPC = new COverWorldNPC();
-        mOverworldNPC.setXY(CGameConstants.SCREEN_WIDTH - 100, CGameConstants.SCREEN_HEIGHT / 2);
-        mOverworldNPC.setXY(500, 300);
 
+        mOverworldNPCKairus = new COverWorldNPCKairus();
+        //mOverworldNPC.setXY(CGameConstants.SCREEN_WIDTH - 100, CGameConstants.SCREEN_HEIGHT / 2);
+        mOverworldNPCKairus.setXY(1600, 700);
+
+        mOverworldNPC1 = new COverWorldNPC1();
+        mOverworldNPC1.setXY(900, 40);
+
+        mOverworldNPC2 = new COverWorldNPC2();
+        mOverworldNPC2.setXY(900, 870);
         /*CGame.inst().setPlayer(mPlayer);*/
 
         mBackgroundFloor = new CBackgroundFloor();
@@ -53,7 +62,9 @@ public class CLevelState : CGameState
 
 
         mOverworldPlayer.update();
-        mOverworldNPC.update();
+        mOverworldNPCKairus.update();
+        mOverworldNPC1.update();
+        mOverworldNPC2.update();
 
 
         if (this.getState() == CLevelState.IN_PROGRESS)
@@ -67,11 +78,23 @@ public class CLevelState : CGameState
         }
         
         //TODO: Realizar manager de NPC Y chequear colicion con cualquier Npc
-        if (mOverworldNPC.collides(mOverworldPlayer))
+        if (mOverworldNPCKairus.collides(mOverworldPlayer))
         {
             //if (DialogManager.init().getDialog() == null)
 
-                mOverworldNPC.mensaje();
+                mOverworldNPCKairus.mensaje();
+        }
+        if (mOverworldNPC1.collides(mOverworldPlayer))
+        {
+            //if (DialogManager.init().getDialog() == null)
+
+            mOverworldNPC1.mensaje();
+        }
+        if (mOverworldNPC2.collides(mOverworldPlayer))
+        {
+            //if (DialogManager.init().getDialog() == null)
+
+            mOverworldNPC2.mensaje();
         }
 
 
@@ -84,7 +107,9 @@ public class CLevelState : CGameState
         mMap.render();
         //mBackground.render();
         mOverworldPlayer.render();
-        mOverworldNPC.render();
+        mOverworldNPCKairus.render();
+        mOverworldNPC1.render();
+        mOverworldNPC2.render();
     }
 
 	override public void destroy()
@@ -98,7 +123,12 @@ public class CLevelState : CGameState
 
         mOverworldPlayer.destroy();
         mOverworldPlayer = null;
-        mOverworldNPC.destroy();
-        mOverworldNPC = null;
+        mOverworldNPCKairus.destroy();
+        mOverworldNPCKairus = null;
+        mOverworldNPC1.destroy();
+        mOverworldNPC1 = null;
+        mOverworldNPC2.destroy();
+        mOverworldNPC1 = null;
     }
+
 }
