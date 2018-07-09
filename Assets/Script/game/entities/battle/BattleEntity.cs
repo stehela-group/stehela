@@ -19,6 +19,10 @@ public class BattleEntity : CAnimatedSprite
     protected string name;
 
     protected CText lifeText = new CText("");
+    protected CText receivedDamage = new CText("");
+
+    protected bool showDamage = false;
+
 
     private List<Skill> skillsList = new List<Skill>();
 
@@ -42,7 +46,16 @@ public class BattleEntity : CAnimatedSprite
 		this.lifeText.setAlignment(TextAlignmentOptions.Left);
 		this.lifeText.setFontSize(450f);
         this.lifeText.setWrapping(false);
-     }
+
+        this.receivedDamage.setColor(Color.red);
+        this.receivedDamage.setAlignment(TextAlignmentOptions.Right);
+        this.receivedDamage.setFontSize(450f);
+        this.receivedDamage.setWrapping(false);
+        this.receivedDamage.setVisible(false);
+      
+
+
+    }
 
     override public void update()
     {
@@ -51,6 +64,33 @@ public class BattleEntity : CAnimatedSprite
         this.lifeText.setText("Vida: " + this.currentHealth + "/" + this.maxHealth);
         this.lifeText.setXY(this.getX() +20 /* MARGEN*/, this.getY() - 20 /* MARGEN */);
         this.lifeText.update();
+        
+        this.receivedDamage.update();
+        
+        if (showDamage)
+        {
+           
+            // move text, when finished stop showing
+            if (receivedDamage.getX() >= this.getX() + 20 && receivedDamage.getY() >= this.getY() +20 )
+            {
+                receivedDamage.setVisible(false);
+                receivedDamage.setVelX(0);
+                receivedDamage.setVelY(0);
+                receivedDamage.setAccelY(0);
+                showDamage = false;
+                return;
+            }
+            else
+            {
+
+            }
+        }
+
+
+
+
+
+
 
         switch (this.getState())
         {
@@ -112,6 +152,7 @@ public class BattleEntity : CAnimatedSprite
     {
         base.render();
         this.lifeText.render();
+        this.receivedDamage.render();
         switch (this.getState())
         {
             case (BattleEntity.IDLE):
@@ -136,7 +177,9 @@ public class BattleEntity : CAnimatedSprite
         this.currentHealth = 0;
         this.lifeText.destroy();
         this.lifeText = null;
-        
+
+        this.receivedDamage.destroy();
+        this.receivedDamage = null;
         foreach (var skill in this.skillsList)
         {
             skill.destroy();
@@ -238,5 +281,20 @@ public class BattleEntity : CAnimatedSprite
 		}
 
 		return null;
+    }
+
+    public void setDamageText(int damageText)
+    {
+        receivedDamage.setText("-" +damageText);
+        receivedDamage.setXY(this.getX()+200, this.getY());
+
+        receivedDamage.setVelY(-10);
+        receivedDamage.setAccelY(50);
+        receivedDamage.setVelX(30);
+
+
+        receivedDamage.setVisible(true);
+        showDamage = true;
+
     }
 }

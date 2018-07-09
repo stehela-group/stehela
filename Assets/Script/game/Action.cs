@@ -53,8 +53,11 @@ public class Action: CGameObject
                     }
                     else
                     { //el pocentaje de daño de skill se multiplica por el attackDamage del caster.
-                        target.setHealth(target.getHealth() - skill.getDamage() * caster.getAttackDamage() / 100);
-                        
+
+                        int damgeTotal = skill.getDamage() * caster.getAttackDamage() / 100;
+                        target.setHealth(target.getHealth() - damgeTotal);
+
+                        target.setDamageText(damgeTotal);
                         target.setState(BattleEntity.RECEIVING_DAMAGE);
                     }
                 }
