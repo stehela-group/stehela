@@ -67,13 +67,13 @@ public class COverWorldNPC1 : CAnimatedSprite
 
         DialogManager.startDialog(new Dialog(text, portraitAddress1));
     }
-    public void setState(int aState)
+    public override void setState(int aState)
     {
         base.setState(aState);
 
         if (getState() == STATE_IDLE)
         {
-            initAnimation(1, 8, 8, true);
+            initAnimation(0, 7, 8, true);
 
         }
     }

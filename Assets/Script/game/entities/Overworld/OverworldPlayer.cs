@@ -4,8 +4,8 @@ using System.Collections;
 public class COverWorldPlayer : CAnimatedSprite
 {
     private const float SPEED = 400.0f;
-    private const int HEIGHT = 32;
-    private const int WIDTH = 32;
+    private const int HEIGHT = 32 * 5;
+    private const int WIDTH = 32 * 5;
     // Variables auxiliares que se cargan cuando llamamos a checkPoints().
     private int mTileTopLeft;
     private int mTileTopRight;
@@ -18,6 +18,8 @@ public class COverWorldPlayer : CAnimatedSprite
 
     private const int STATE_STAND = 0;
     private const int STATE_WALKING = 1;
+    private const int X_OFFSET_BOUNDING_BOX = 4 * 5;
+    private const int Y_OFFSET_BOUNDING_BOX = 4 * 5;
 
     private CSprite mRect;
 
@@ -30,9 +32,12 @@ public class COverWorldPlayer : CAnimatedSprite
         setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
         setBoundAction(CGameObject.STOP);
         setScale(5f);
+
         setRegistration(CSprite.REG_TOP_LEFT);
+
         setWidth(WIDTH);
         setHeight(HEIGHT);
+
         setState(STATE_STAND);
 
         mRect = new CSprite();
@@ -41,7 +46,6 @@ public class COverWorldPlayer : CAnimatedSprite
         mRect.setSortingOrder(20);
         mRect.setAlpha(0.5f);
         mRect.setName("player_debug_rect");
-        mRect.setParentObject(this.getTransform());
     }
 
     override public void update()
@@ -54,6 +58,7 @@ public class COverWorldPlayer : CAnimatedSprite
             if (CKeyboard.pressed(CKeyboard.LEFT) && !isLeft(getX() - 1, getY()))
             {
                 setState(STATE_WALKING);
+                
                 return;
             }
             if (CKeyboard.pressed(CKeyboard.RIGHT) && !isRight(getX() + 1, getY()))
@@ -84,15 +89,17 @@ public class COverWorldPlayer : CAnimatedSprite
             moveVertical();
         }
         // MOSTRAR TODA EL AREA DEL DIBUJO.
-        mRect.setXY(getX(), getY());
-        mRect.setScaleX(WIDTH);
-        mRect.setScaleY(HEIGHT);
-        mRect.update();
+        
     }
 
     override public void render()
     {
         base.render();
+        
+        mRect.setXY(getX(), getY());
+        mRect.setScaleX(WIDTH);
+        mRect.setScaleY(HEIGHT);
+        mRect.update();
         mRect.render();
     }
 
@@ -175,17 +182,14 @@ public class COverWorldPlayer : CAnimatedSprite
         
         if (getState() == STATE_STAND)
         {
+            initAnimation(0, 11, 9, true);
             stopMove();
-            initAnimation(1, 12, 9, true);
         }
         if (getState() == STATE_WALKING)
         {
-            return;
+            //initAnimation(13, 36, 9, true);
         }
-        if (getState() == STATE_WALKING)
-        {
-            return;
-        }
+
 
     }
     private void stopMove()
@@ -220,7 +224,7 @@ public class COverWorldPlayer : CAnimatedSprite
                 {
                     // No hay pared, se puede mover.
                     setVelX(-400);
-                    //setFlip(true);
+                    setFlip(true);
                 }
             }
             else if (CKeyboard.pressed(CKeyboard.RIGHT))
@@ -237,7 +241,7 @@ public class COverWorldPlayer : CAnimatedSprite
                 {
                     // No hay pared, se puede mover.
                     setVelX(400);
-                    //setFlip(false);
+                    setFlip(false);
                 }
             }
         }
