@@ -4,6 +4,7 @@ public class CAnimatedSprite : CSprite
 {
     private Sprite[] mFrame;
 
+    // TODO: SACAR EL ANIM.
     private CAnim mAnim;
 
     public CAnimatedSprite()
@@ -26,11 +27,7 @@ public class CAnimatedSprite : CSprite
     {
         base.render();
 
-        if (mFrame == null)
-        {
-            return;
-        }
-
+        // TODO: ARREGLAR QUE LOS FRAMES EMPIECEN EN 0.
         int frame = mAnim.getCurrentFrame() - 1;
 
         if (frame < 0 || frame >= mFrame.Length)
@@ -56,5 +53,10 @@ public class CAnimatedSprite : CSprite
     public void initAnimation(int aStartFrame, int aEndFrame, int aFPS, bool aIsLoop)
     {
         mAnim.init(aStartFrame, aEndFrame, aFPS, aIsLoop);
+    }
+
+    public bool isEnded()
+    {
+        return mAnim.isEnded();
     }
 }

@@ -73,7 +73,7 @@ public class COverWorldNPC1 : CAnimatedSprite
 
         if (getState() == STATE_IDLE)
         {
-            initAnimation(0, 7, 8, true);
+            initAnimation(1, 8, 8, true);
 
         }
     }

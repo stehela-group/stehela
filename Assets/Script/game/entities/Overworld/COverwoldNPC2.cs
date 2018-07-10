@@ -95,16 +95,16 @@ public class COverWorldNPC2 : CAnimatedSprite
 
         if (getState() == STATE_IDLE)
         {
-            initAnimation(0, 15, 9, true);
+            initAnimation(1, 16, 6, true);
 
         }
         else if (getState() == STATE_TRANSFORM)
         {
-            initAnimation(16, 40, 9, false);
+            initAnimation(17, 41, 6, false);
         }
         else if(getState() == STATE_NEW_IDLE)
         {
-            initAnimation(41, 54, 9, true);
+            initAnimation(42, 55, 6, true);
         }
 
     }

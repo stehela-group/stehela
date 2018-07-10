@@ -75,7 +75,7 @@ public class COverWorldNPCKairus : CAnimatedSprite
 
         if (getState() == STATE_IDLE)
         {
-            initAnimation(0, 12, 16, true);
+            initAnimation(1, 12, 16, true);
 
         }
     }

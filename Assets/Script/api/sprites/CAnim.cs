@@ -61,8 +61,8 @@ public class CAnim
     {
         // If animation is made in Flash, rest one to the numbers (Flash starts counting the frames in 1) but
         // in the array, we need to start counting from zero. Comment if the animations were not done in Flash.
-        //aStartFrame -= 1;
-        //aEndFrame -= 1;
+        aStartFrame -= 1;
+        aEndFrame -= 1;
 
         mStartFrame = aStartFrame;
         mEndFrame = aEndFrame;

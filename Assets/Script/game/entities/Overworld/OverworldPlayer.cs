@@ -25,7 +25,7 @@ public class COverWorldPlayer : CAnimatedSprite
 
     public COverWorldPlayer()
     {
-        setFrames(Resources.LoadAll<Sprite>("Sprites/worldPlayer"));
+        setFrames(Resources.LoadAll<Sprite>("Sprites/PlayerWalking"));
         setName("Overworld player");
         setSortingLayerName("Personajes");
 
@@ -182,12 +182,12 @@ public class COverWorldPlayer : CAnimatedSprite
         
         if (getState() == STATE_STAND)
         {
-            initAnimation(0, 11, 9, true);
+            initAnimation(1, 12, 12, true);
             stopMove();
         }
         if (getState() == STATE_WALKING)
         {
-            //initAnimation(13, 36, 9, true);
+            //initAnimation(13, 35, 9, true);
         }
 
 
