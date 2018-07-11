@@ -13,9 +13,12 @@ public class CTileMap
     public const int MAP_HEIGHT = 12;
 
     //48x48 pixeles mide cada tile, aumenta la distancia
-    public const int TILE_WIDTH = 96;
-    public const int TILE_HEIGHT = 96;
+    public const int TILE_WIDTH = 48*2;
+    public const int TILE_HEIGHT = 48*2;
 
+    // Ancho y alto del nivel en pixeles.
+    public const int WORLD_WIDTH = MAP_WIDTH * TILE_WIDTH;
+    public const int WORLD_HEIGHT = MAP_HEIGHT * TILE_HEIGHT;
     //Es una lista de listas de tiles (clase nuestra). Una referencia de una clase nuestra de CTile
     private List<List<CTile>> mMap;
 
@@ -46,6 +49,10 @@ public class CTileMap
 
     };
 
+    private int mCurrentLevel;
+
+    // Tile auxiliar, caminable, que se retorna cuando accedemos afuera del mapa.
+    private CTile mEmptyTile;
     //Se cargan los sprites de los tiles
     //TODO hacer manager de assets
     public CTileMap()

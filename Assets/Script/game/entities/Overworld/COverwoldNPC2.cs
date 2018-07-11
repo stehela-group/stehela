@@ -94,22 +94,22 @@ public class COverWorldNPC2 : CAnimatedSprite
 
         DialogManager.startDialog(new Dialog(text, portraitAddress2));
     }
-    public void setState(int aState)
+    public override void setState(int aState)
     {
         base.setState(aState);
 
         if (getState() == STATE_IDLE)
         {
-            initAnimation(1, 16, 9, true);
+            initAnimation(1, 16, 6, true);
 
         }
         else if (getState() == STATE_TRANSFORM)
         {
-            initAnimation(17, 41, 9, false);
+            initAnimation(17, 41, 6, false);
         }
         else if(getState() == STATE_NEW_IDLE)
         {
-            initAnimation(42, 55, 9, true);
+            initAnimation(42, 55, 6, true);
         }
 
     }

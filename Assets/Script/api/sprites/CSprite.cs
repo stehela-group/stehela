@@ -10,15 +10,29 @@ public class CSprite : CGameObject
 	private Transform mTransform;
 
 	private bool mFlip = false;
-	private float mRotation = 0.0f;
+
+
+    // Angle of the sprite (in degrees). Positive angles are clockwise and negative angles are counterclockwise.
+    //  -90
+    //   |      /
+    //   |    /   
+    //   |  /     -   
+    //   |/                
+    //   +--------- 0
+    //   |\
+    //   |  \
+    //   |    \   +
+    //   |      \    
+    //  +90
+
+
+    private float mRotation = 0.0f;
 	private bool mIsRotatingSprite = false;
 
 	public const int REG_CENTER = 0;
 	public const int REG_TOP_LEFT = 1;
 	private int mRegistration = REG_CENTER;
-
-	/*public static int PLAYER_WIDTH = 64;
-	public static int PLAYER_HEIGHT = 74;*/
+    private int mScore;
 
 	public CSprite()
 	{
@@ -26,9 +40,6 @@ public class CSprite : CGameObject
 		mSpriteRenderer = mSprite.AddComponent<SpriteRenderer> ();
 
 		mTransform = mSprite.transform;
-        /*
-		setWidth (PLAYER_WIDTH);
-		setHeight (PLAYER_HEIGHT)*/;
 	}
 
 	override public void update()
@@ -59,16 +70,16 @@ public class CSprite : CGameObject
 		{
 			if (mFlip) 
 			{
-				mTransform.rotation = Quaternion.Euler (new Vector3 (0, 180, mRotation));
+				mTransform.rotation = Quaternion.Euler (new Vector3 (0, 180, mRotation*-1.0f));
 			} 
 			else 
 			{
-				mTransform.rotation = Quaternion.Euler (new Vector3 (0, 0, mRotation));
+				mTransform.rotation = Quaternion.Euler (new Vector3 (0, 0, mRotation*-1.0f));
 			}
 		} 
 		else 
 		{
-			mTransform.rotation = Quaternion.Euler (new Vector3 (0, 0, mRotation));
+			mTransform.rotation = Quaternion.Euler (new Vector3 (0, 0, mRotation*-1.0f));
 		}
 	}
 
@@ -81,8 +92,8 @@ public class CSprite : CGameObject
 	public void setImage(Sprite aSprite)
 	{
 		mSpriteRenderer.sprite = aSprite;
-		this.setHeight((int) aSprite.rect.height);
-		this.setWidth((int) aSprite.rect.width);
+		//this.setHeight((int) aSprite.rect.height);
+		//this.setWidth((int) aSprite.rect.width);
 	}
 
 	public void setFlip(bool aFlip)
@@ -94,8 +105,9 @@ public class CSprite : CGameObject
 	{
 		return mFlip;
 	}
-
-	public void setRotation(float aRotation)
+    // Pone la rotacion del sprite.
+    // Angulo en grados.
+    public void setRotation(float aRotation)
 	{
 		mIsRotatingSprite = true;
 		mRotation = aRotation;
@@ -199,4 +211,26 @@ public class CSprite : CGameObject
 	{
 		return this.mSprite.transform;
 	}
+    public void hideInUnityHierarchy()
+    {
+        mSprite.hideFlags = HideFlags.HideInHierarchy;
+    }
+    public void lookAt(float aX, float aY)
+    {
+        float xDiff = aX - getX();
+        float yDiff = aY - getY();
+        float aRad = Mathf.Atan2(yDiff, xDiff);
+        float aDeg = CMath.radToDeg(aRad);
+        setRotation(aDeg);
+    }
+
+    public void setScore(int aScore)
+    {
+        mScore = aScore;
+    }
+
+    public int getScore()
+    {
+        return mScore;
+    }
 }

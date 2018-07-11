@@ -74,13 +74,13 @@ public class COverWorldNPCKairus : CAnimatedSprite
 
         DialogManager.startDialog(new Dialog(text, portraitAddress));
     }
-    public void setState(int aState)
+    public override void setState(int aState)
     {
         base.setState(aState);
 
         if (getState() == STATE_IDLE)
         {
-            initAnimation(1, 13, 16, true);
+            initAnimation(1, 12, 16, true);
 
         }
     }

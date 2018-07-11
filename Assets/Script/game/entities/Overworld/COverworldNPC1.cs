@@ -74,7 +74,7 @@ public class COverWorldNPC1 : CAnimatedSprite
 
         DialogManager.startDialog(new Dialog(text, portraitAddress1));
     }
-    public void setState(int aState)
+    public override void setState(int aState)
     {
         base.setState(aState);
 

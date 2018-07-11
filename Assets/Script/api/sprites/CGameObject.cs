@@ -37,6 +37,20 @@ public class CGameObject
 
     // Comportamiento de bordes del objeto
     public int mBoundAction = NONE;
+    // Platform game -------------------------------------------------------------
+    // Variables auxiliares que se cargan cuando llamamos a checkPoints().
+    protected bool mTileTopLeft; // Si es caminables (true) o no (false).
+    protected bool mTileTopRight;
+    protected bool mTileDownLeft;
+    protected bool mTileDownRight;
+    protected int mLeftX; // Columna de la izquierda.
+    protected int mRightX;
+    protected int mUpY;
+    protected int mDownY;
+
+    private int mXOffsetBoundingBox = 0;
+    private int mYOffsetBoundingBox = 0;
+    //-----------------------------------------------------------------------------
 
     public CGameObject()
 	{
@@ -366,5 +380,15 @@ public class CGameObject
             mIsDead = true;
             return;
         }
+    }
+
+    public void setXOffsetBoundingBox(int aXOffsetBoundingBox)
+    {
+        mXOffsetBoundingBox = aXOffsetBoundingBox;
+    }
+
+    public void setYOffsetBoundingBox(int aYOffsetBoundingBox)
+    {
+        mYOffsetBoundingBox = aYOffsetBoundingBox;
     }
 }
