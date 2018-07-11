@@ -10,13 +10,20 @@ public class COverWorldNPC1 : CAnimatedSprite
     private const int STATE_IDLE = 1;
     private string portraitAddress1;
 
+    protected const int WIDTH = 32;
+    protected const int HEIGHT = 32;
     public COverWorldNPC1()
     {
         portraitAddress1 = null;
         setFrames(Resources.LoadAll<Sprite>("Sprites/NPC1"));
         setName("Overworld NPC1");
         setSortingLayerName("Personajes");
-        setScale(5.0f);
+        setScale(5);
+
+        //se multiplica por 5 por la escala.
+        setWidth(WIDTH * 5);
+        setHeight(HEIGHT * 5);
+
         setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
         setBoundAction(CGameObject.NONE);
         setState(STATE_IDLE);

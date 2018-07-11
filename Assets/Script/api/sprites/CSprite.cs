@@ -17,8 +17,8 @@ public class CSprite : CGameObject
 	public const int REG_TOP_LEFT = 1;
 	private int mRegistration = REG_CENTER;
 
-	public static int PLAYER_WIDTH = 64;
-	public static int PLAYER_HEIGHT = 74;
+	/*public static int PLAYER_WIDTH = 64;
+	public static int PLAYER_HEIGHT = 74;*/
 
 	public CSprite()
 	{
@@ -26,9 +26,9 @@ public class CSprite : CGameObject
 		mSpriteRenderer = mSprite.AddComponent<SpriteRenderer> ();
 
 		mTransform = mSprite.transform;
-
+        /*
 		setWidth (PLAYER_WIDTH);
-		setHeight (PLAYER_HEIGHT);
+		setHeight (PLAYER_HEIGHT)*/;
 	}
 
 	override public void update()

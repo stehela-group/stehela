@@ -31,8 +31,9 @@ public class COverWorldPlayer : CAnimatedSprite
         setBoundAction(CGameObject.STOP);
         setScale(5f);
         setRegistration(CSprite.REG_TOP_LEFT);
-        setWidth(WIDTH);
-        setHeight(HEIGHT);
+        //como se escala en 5, el width se multiplica.
+        setWidth(WIDTH*5);
+        setHeight(HEIGHT*5);
         setState(STATE_STAND);
 
         mRect = new CSprite();

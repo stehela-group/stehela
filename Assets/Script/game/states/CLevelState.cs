@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public class CLevelState : CGameState
 {
@@ -14,6 +17,9 @@ public class CLevelState : CGameState
     private COverWorldNPC1 mOverworldNPC1;
     public static COverWorldNPC2 mOverworldNPC2;
 
+    private CSprite shadow;
+
+    protected Dictionary<CSprite, CGameObject> shadowDictionary = new Dictionary<CSprite, CGameObject>();
 
 
     public CLevelState()
@@ -32,7 +38,7 @@ public class CLevelState : CGameState
         mOverworldPlayer = new COverWorldPlayer();
         //mOverworldPlayer.setXY(CGameConstants.SCREEN_WIDTH / 2, CGameConstants.SCREEN_HEIGHT / 2);
         mOverworldPlayer.setXY(300, 300);
-
+        
 
         mOverworldNPCKairus = new COverWorldNPCKairus();
         //mOverworldNPC.setXY(CGameConstants.SCREEN_WIDTH - 100, CGameConstants.SCREEN_HEIGHT / 2);
@@ -49,6 +55,11 @@ public class CLevelState : CGameState
         mBackgroundFloor.setXY(0, 0);
         mBackgroundFloor.setSortingLayerName("Background");
 
+        createShadow(mOverworldPlayer);
+        createShadow(mOverworldNPCKairus);
+        createShadow(mOverworldNPC1);
+        createShadow(mOverworldNPC2);
+
         DialogManager.init();
     }
 
@@ -56,7 +67,8 @@ public class CLevelState : CGameState
 	{
         base.update();
         mMap.update();
-        DialogManager.update();
+        
+            DialogManager.update();
        // mBackground.update();
 
 
@@ -66,6 +78,13 @@ public class CLevelState : CGameState
         mOverworldNPC1.update();
         mOverworldNPC2.update();
 
+        //Debug.Log(shadowDictionary.Count);
+        foreach (var entry in this.shadowDictionary)
+        {
+            Debug.Log(entry.Value.getX() + entry.Value.getWidth() / 2 - entry.Key.getWidth() / 2);
+           entry.Key.setXY(entry.Value.getX() + entry.Value.getWidth() / 10-entry.Key.getWidth()/10, entry.Value.getY() + entry.Value.getWidth()  -entry.Key.getHeight()/10+108);
+            
+        }
 
         if (this.getState() == CLevelState.IN_PROGRESS)
         {
@@ -110,6 +129,11 @@ public class CLevelState : CGameState
         mOverworldNPCKairus.render();
         mOverworldNPC1.render();
         mOverworldNPC2.render();
+
+        foreach (var entity in this.shadowDictionary)
+        {
+            entity.Key.render();
+        }
     }
 
 	override public void destroy()
@@ -129,6 +153,24 @@ public class CLevelState : CGameState
         mOverworldNPC1 = null;
         mOverworldNPC2.destroy();
         mOverworldNPC1 = null;
+
+        foreach (var entity in this.shadowDictionary)
+        {
+            entity.Key.destroy();
+        }
     }
 
+    private void createShadow(CGameObject entity)
+    {
+        shadow = new CSprite();
+        shadow.setName("shadow");
+        shadow.setImage(Resources.Load<Sprite>("Sprites/shadow/shadow"));
+        // Lo seteamos en los pies del entity ingresado.
+        shadow.setSortingLayerName("shadows");
+        shadow.setWidth(200);
+        shadow.setHeight(80);
+        shadowDictionary.Add(shadow, entity);
+
+
+    }
 }

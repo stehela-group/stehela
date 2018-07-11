@@ -18,8 +18,8 @@ public class CGameObject
 
 	private int mType;
 
-	private int mWidth = 100;
-	private int mHeight = 100;
+	private int mWidth = 0;
+	private int mHeight = 0;
 
     private float mFriction = 1.0f;
 

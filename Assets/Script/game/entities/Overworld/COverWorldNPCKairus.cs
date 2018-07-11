@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using System;
 
 public class COverWorldNPCKairus : CAnimatedSprite
 {
     private string portraitAddress;
     private const int STATE_IDLE = 1;
+    private const int WIDTH = 32;
+    private const int HEIGHT = 32;
 
     public COverWorldNPCKairus()
     {
@@ -16,7 +18,10 @@ public class COverWorldNPCKairus : CAnimatedSprite
         setFrames(Resources.LoadAll<Sprite>("Sprites/KairusOverworld"));
         setName("Overworld NPC Kairus");
         setSortingLayerName("Personajes");
-        setScale(6.5f);
+        setScale(5);
+        //se multiplica por 6 por la escala.
+        setWidth(WIDTH * 5);
+        setHeight(HEIGHT * 5);
         setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
         setBoundAction(CGameObject.NONE);
         setState(STATE_IDLE);
