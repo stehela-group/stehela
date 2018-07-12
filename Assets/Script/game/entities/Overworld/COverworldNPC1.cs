@@ -45,6 +45,8 @@ public class COverWorldNPC1 : CAnimatedSprite
 
     public void mensaje()
     {
+
+       
         string[] text = null;
         if (BattleData.lastBattleOutcome == BattleData.BattleOutcome.NO_BATTLE)
         {

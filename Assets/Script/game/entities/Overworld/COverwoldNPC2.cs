@@ -20,7 +20,7 @@ public class COverWorldNPC2 : CAnimatedSprite
         
         portraitAddress2 = null;
         setFrames(Resources.LoadAll<Sprite>("Sprites/NPC2"));
-        setName("Overworld NPC1");
+        setName("Overworld NPC2");
         setSortingLayerName("Personajes");
         setScale(5);
 
@@ -66,6 +66,8 @@ public class COverWorldNPC2 : CAnimatedSprite
 
     public void mensaje()
     {
+
+        
         string[] text = null;
         if (BattleData.lastBattleOutcome == BattleData.BattleOutcome.NO_BATTLE)
         {
