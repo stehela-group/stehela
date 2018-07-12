@@ -5,9 +5,9 @@ public class BattlePlayer : BattleEntity
 {
     private float initialX;
 
-	public BattlePlayer()
+
+    public BattlePlayer()
 	{
-		this.setName("Player");
 
         this.setMaxHealth(150);
         this.setHealth(getMaxHealth());
@@ -18,7 +18,7 @@ public class BattlePlayer : BattleEntity
 		this.skills.Add(new Hielo());
         this.skills.Add(new Envenenar());
 
-        setFrames (Resources.LoadAll <Sprite>("Sprites/player"));
+        setFrames (Resources.LoadAll <Sprite>("Sprites/animatedBattlePlayer"));
         setName("Player");
         setSortingLayerName("Personajes");
         setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
@@ -28,16 +28,22 @@ public class BattlePlayer : BattleEntity
         this.initialX = this.getX();
         //setFlip(true);
 
+        this.slash.setFlip(true);
+        this.slash.setXY(slash.getX() + 30, slash.getY() + 30);
+
     }
 
     override public void update()
     {
         base.update();
-
+        
         switch (this.getState())
         {
+            case IDLE:
+                this.initAnimation(1, 8, 8, true);
+                break;
             case ATTACKING:
-                this.gotoAndStop(2);
+                this.gotoAndStop(9);
                 if (getX() >= this.initialX + 50)
                 {
                     this.setVelX(-50);
@@ -56,7 +62,7 @@ public class BattlePlayer : BattleEntity
                   
 
             default:
-                this.gotoAndStop(1);
+                this.initAnimation(1,8,8,true);
                 break;
         }
 
@@ -86,6 +92,7 @@ public class BattlePlayer : BattleEntity
         {
             setX(initialX);
             this.setVelX(0);
+            this.initAnimation(1, 8, 8, true);
         }
     }
 

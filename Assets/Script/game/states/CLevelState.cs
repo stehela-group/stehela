@@ -68,7 +68,7 @@ public class CLevelState : CGameState
         base.update();
         mMap.update();
         
-            DialogManager.update();
+        DialogManager.update();
        // mBackground.update();
 
 

@@ -59,4 +59,12 @@ public class CAnimatedSprite : CSprite
     {
         return mAnim.isEnded();
     }
+    public void stopAnimation()
+    {
+        mAnim.pauseAnimation();
+    }
+    public void proceedAnimation()
+    {
+        mAnim.continueAnimation();
+    }
 }
