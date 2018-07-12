@@ -16,6 +16,8 @@ public class CLevelState : CGameState
     private COverWorldNPCKairus mOverworldNPCKairus;
     private COverWorldNPC1 mOverworldNPC1;
     public static COverWorldNPC2 mOverworldNPC2;
+    public static COverWorldNPC3 mOverworldNPC3;
+
 
     private CSprite shadow;
 
@@ -49,6 +51,10 @@ public class CLevelState : CGameState
 
         mOverworldNPC2 = new COverWorldNPC2();
         mOverworldNPC2.setXY(900, 870);
+
+        mOverworldNPC3 = new COverWorldNPC3();
+        mOverworldNPC3.setXY(600, 500);
+
         /*CGame.inst().setPlayer(mPlayer);*/
 
         mBackgroundFloor = new CBackgroundFloor();
@@ -59,6 +65,7 @@ public class CLevelState : CGameState
         createShadow(mOverworldNPCKairus);
         createShadow(mOverworldNPC1);
         createShadow(mOverworldNPC2);
+        createShadow(mOverworldNPC3);
 
         DialogManager.init();
     }
@@ -77,12 +84,13 @@ public class CLevelState : CGameState
         mOverworldNPCKairus.update();
         mOverworldNPC1.update();
         mOverworldNPC2.update();
+        mOverworldNPC3.update();
 
         //Debug.Log(shadowDictionary.Count);
         foreach (var entry in this.shadowDictionary)
         {
             Debug.Log(entry.Value.getX() + entry.Value.getWidth() / 2 - entry.Key.getWidth() / 2);
-           entry.Key.setXY(entry.Value.getX() + entry.Value.getWidth() / 10-entry.Key.getWidth()/10, entry.Value.getY() + entry.Value.getWidth()  -entry.Key.getHeight()/10+108);
+           entry.Key.setXY(entry.Value.getX() + entry.Value.getWidth() / 10-entry.Key.getWidth()/10, entry.Value.getY() + entry.Value.getWidth()  -entry.Key.getHeight()/10);
             
         }
 
@@ -116,6 +124,14 @@ public class CLevelState : CGameState
             mOverworldNPC2.mensaje();
         }
 
+        if (mOverworldNPC3.collides(mOverworldPlayer))
+        {
+            //if (DialogManager.init().getDialog() == null)
+
+            mOverworldNPC3.mensaje();
+        }
+
+
 
     }
 
@@ -129,6 +145,7 @@ public class CLevelState : CGameState
         mOverworldNPCKairus.render();
         mOverworldNPC1.render();
         mOverworldNPC2.render();
+        mOverworldNPC3.render();
 
         foreach (var entity in this.shadowDictionary)
         {
@@ -153,6 +170,12 @@ public class CLevelState : CGameState
         mOverworldNPC1 = null;
         mOverworldNPC2.destroy();
         mOverworldNPC1 = null;
+
+
+        mOverworldNPC3.destroy();
+        mOverworldNPC3 = null;
+
+
 
         foreach (var entity in this.shadowDictionary)
         {

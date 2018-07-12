@@ -72,9 +72,14 @@ public class COverWorldNPC2 : CAnimatedSprite
         if (BattleData.lastBattleOutcome == BattleData.BattleOutcome.NO_BATTLE)
         {
             text = new string[] {
-                "HAHA, ES INTERESANTE VER A ALGUIEN CON ASPECTO HUMANOIDE POR ESTOS LADOS. ",
-                "PENSÉ QUE USTEDES SE HABIAN EXTINTO AL MOMENTO DE HACER EL NUDO DE ALMAS.",
-                "QUE INTERESANTE, INCLUSO LUEGO DE HABER DESTRUIDO EL MUNDO Y HACERNOS VIVIR EN ESTE MUNDO SIN VIDA O MUERTE TODAVÍA SE ATREVEN A SEGUIR EXISTIENDO, JAJAJAJAJAJA, INTERESANTE SIN DUDA."
+                "Una cara nueva, es raro ver caras nuevas hoy en dia.. ",
+                "Te gusta el mural que está en mi espalda? Representa la era ",
+                "mortal y a los 2 grandes clanes que protegían el árbol de la ",
+                "muerte llamado los Tifus  y el árbol de la vida llamados lo Cires,",
+                "aquella época donde la vida y la muerte seguían existiendo.. ",
+                "Solo han pasado 50 años y parece como si fuera una eternidad.. ",
+                "Nose porque te cuento esto, por tu vista parecería que no lo supieras.. ",
+                " Pero desde que acabó la era mortal no ha habido nacimientos, así que no tendría sentido que no lo supieras"
             };
         }
         else if (BattleData.lastBattleOutcome == BattleData.BattleOutcome.WON)

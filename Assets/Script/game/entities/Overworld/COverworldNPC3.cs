@@ -5,18 +5,18 @@ using UnityEngine.UI;
 using TMPro;
 
 
-public class COverWorldNPC1 : CAnimatedSprite
+public class COverWorldNPC3 : CAnimatedSprite
 {
     private const int STATE_IDLE = 1;
-    private string portraitAddress1;
+    private string portraitAddress3;
 
     protected const int WIDTH = 32;
     protected const int HEIGHT = 32;
-    public COverWorldNPC1()
+    public COverWorldNPC3()
     {
-        portraitAddress1 = null;
-        setFrames(Resources.LoadAll<Sprite>("Sprites/NPC1"));
-        setName("Overworld NPC1");
+        portraitAddress3 = null;
+        setFrames(Resources.LoadAll<Sprite>("Sprites/NPC3"));
+        setName("Overworld NPC3");
         setSortingLayerName("Personajes");
         setScale(5);
 
@@ -47,14 +47,21 @@ public class COverWorldNPC1 : CAnimatedSprite
     public void mensaje()
     {
 
-       
+
         string[] text = null;
         if (BattleData.lastBattleOutcome == BattleData.BattleOutcome.NO_BATTLE)
         {
             text = new string[] {
-                "Que marca peculiar posees en el estómago joven. ",
-                "Ten cuidado, hay criaturas peligrosas fuera de esta sala.",
-                "Deberás matarlos al mismo tiempo si quieres que no vuelvan a levantarse."
+
+              "HAHA, ES INTERESANTE VER A ALGUIEN CON ASPECTO HUMANOIDE POR ESTOS LADOS,",
+              "PENSÉ QUE USTEDES SE HABIAN EXTINTO AL MOMENTO DE HACER EL NUDO DE ALMAS,",
+              "QUE INTERESANTE, INCLUSO LUEGO DE HABER DESTRUIDO EL MUNDO Y HACERNOS",
+              "VIVIR EN ESTE MUNDO SIN VIDA O MUERTE TODAVÍA",
+              "SE ATREVEN A SEGUIR EXISTIENDO, JAJAJAJAJAJA, INTERESANTE SIN DUDA"
+
+
+
+
             };
         }
         else if (BattleData.lastBattleOutcome == BattleData.BattleOutcome.WON)
@@ -62,7 +69,7 @@ public class COverWorldNPC1 : CAnimatedSprite
             text = new string[] {
                 "¡Los has vencido! Creí que nunca se irían.",
                 "*AIU BRBRBRBR* ¿Qué ha sido eso?",
-                "Oh no, creo que han venido más ."
+                "Oh no, creo que han venido más."
             };
         }
         else
@@ -74,7 +81,7 @@ public class COverWorldNPC1 : CAnimatedSprite
             };
         }
 
-        DialogManager.startDialog(new Dialog(text, portraitAddress1));
+        DialogManager.startDialog(new Dialog(text, portraitAddress3));
     }
     public override void setState(int aState)
     {
@@ -82,7 +89,7 @@ public class COverWorldNPC1 : CAnimatedSprite
 
         if (getState() == STATE_IDLE)
         {
-            initAnimation(1, 8, 8, true);
+            initAnimation(1, 6, 6, true);
 
         }
     }
