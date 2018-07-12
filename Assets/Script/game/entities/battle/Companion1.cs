@@ -14,5 +14,8 @@ public class Companion1 : BattleEntity
 
         this.skills.Add(new Atacar());
 		this.skills.Add(new Curar());
-	}
+
+        this.slash.setFlip(true);
+        this.slash.setXY(slash.getX() + 30, slash.getY() + 30);
+    }
 }

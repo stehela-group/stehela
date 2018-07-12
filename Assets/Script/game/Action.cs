@@ -56,8 +56,10 @@ public class Action: CGameObject
 
                         int damgeTotal = skill.getDamage() * caster.getAttackDamage() / 100;
                         target.setHealth(target.getHealth() - damgeTotal);
+                        
+                        
 
-                        target.setDamageText(damgeTotal);
+                        target.getDamaged(damgeTotal);
                         target.setState(BattleEntity.RECEIVING_DAMAGE);
                     }
                 }

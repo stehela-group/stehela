@@ -9,7 +9,7 @@ static public class DialogManager
 {
     static private bool mInitialized = false;
     static private CSprite shadow;
-    static private CSprite characterPortrait;
+    static private CAnimatedSprite characterPortrait;
     static private CText text;
     static private int currentDialog;
     static private List<Dialog> dialogs;
@@ -35,7 +35,7 @@ static public class DialogManager
         shadow.setWidth(CGameConstants.SCREEN_WIDTH);
         shadow.setVisible(false);
 
-        characterPortrait = new CSprite();
+        characterPortrait = new CAnimatedSprite();
         characterPortrait.setName("Character - Portrait");
         characterPortrait.setSortingLayerName("UI");
         characterPortrait.setXY(shadow.getX() + MARGIN, shadow.getY() + MARGIN);
@@ -55,9 +55,8 @@ static public class DialogManager
         shadow.update();
         text.update();
         characterPortrait.update();
-
-
-        if(dialogs.Count > 0 && CKeyboard.firstPress(CKeyboard.ENTER))
+        
+        if (dialogs.Count > 0 && CKeyboard.firstPress(CKeyboard.ENTER))
         {
 
             if (dialogs[currentDialog].hasNextDialog())
@@ -72,7 +71,9 @@ static public class DialogManager
                 {
                     if(dialogs[currentDialog - 1].getPortrait() != dialogs[currentDialog].getPortrait())
                     {
-                        characterPortrait.setImage(Resources.Load<Sprite>(dialogs[currentDialog].getPortrait()));
+                        characterPortrait.setFrames(Resources.LoadAll<Sprite>(dialogs[currentDialog].getPortrait()));
+                        characterPortrait.gotoAndPlay(1);
+                        characterPortrait.proceedAnimation();
                         characterPortrait.setVisible(true);
                     }
                 }
@@ -100,7 +101,10 @@ static public class DialogManager
     {
         shadow.render();
         text.render();
-        characterPortrait.render();
+        if (characterPortrait.isVisible()){
+            characterPortrait.render();
+        }
+        
     }
 
     //En esta funcion lo que hacemos es aceptar el dialogo y la fotoo del peronaje que habla 
@@ -118,7 +122,9 @@ static public class DialogManager
 
         if (newDialogs[0].hasPortrait())
         {
-            characterPortrait.setImage(Resources.Load<Sprite>(newDialogs[0].getPortrait()));
+            characterPortrait.setFrames(Resources.LoadAll<Sprite>(newDialogs[0].getPortrait()));
+            characterPortrait.gotoAndPlay(1);
+            characterPortrait.proceedAnimation();
             characterPortrait.setVisible(true);
         }
 
@@ -148,8 +154,4 @@ static public class DialogManager
 
         }
 	}
-
-
 }
-
- 
