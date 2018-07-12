@@ -6,7 +6,7 @@ public class CBackground : CSprite
 {
     public CBackground()
     {
-        setImage(Resources.Load<Sprite>("Sprites/Background/game_background"));
+        setImage(Resources.Load<Sprite>("Sprites/Background/game_background_2"));
         // Define el nombre del background cuando se crea.
         setName("Background_Battle");
 
