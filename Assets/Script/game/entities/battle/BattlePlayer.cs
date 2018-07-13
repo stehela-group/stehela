@@ -20,7 +20,7 @@ public class BattlePlayer : BattleEntity
 
         setState(IDLE);
         setFrames (Resources.LoadAll <Sprite>("Sprites/animatedBattlePlayer"));
-        setName("Player");
+        setName("Rizu");
         setSortingLayerName("Personajes");
         setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
         setBoundAction(CGameObject.STOP);

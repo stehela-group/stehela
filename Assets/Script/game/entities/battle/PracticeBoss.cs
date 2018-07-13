@@ -18,8 +18,9 @@ public class PracticeBoss : BattleEntity
         setSortingLayerName("Personajes");
         setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
         setBoundAction(CGameObject.STOP);
-		setXY(1100, 60);
-        setScale(2);
+        //setXY(1100, 60);
+        this.setXY(1350, 50);
+        setScale(3);
 
         this.skills.Add(new Atacar());
         this.skills.Add(new Curar());

@@ -3,7 +3,7 @@ public class Companion1 : BattleEntity
 {
 	public Companion1()
 	{
-		this.setName("prototype_ally");
+		this.setName("Kairus");
         setFrames(Resources.LoadAll<Sprite>("Sprites/battleAlly"));
 
         this.setMaxHealth(120);

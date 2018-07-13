@@ -154,7 +154,7 @@
     public void setSkillName(string name)
     {
         this.name = name;
-        this.setName("Skill - " + this.name);
+        this.setName(" " + this.name);
     }
 
     public string getSkillName()
