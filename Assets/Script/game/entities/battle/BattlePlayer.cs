@@ -18,6 +18,7 @@ public class BattlePlayer : BattleEntity
 		this.skills.Add(new Hielo());
         this.skills.Add(new Envenenar());
 
+        setState(IDLE);
         setFrames (Resources.LoadAll <Sprite>("Sprites/animatedBattlePlayer"));
         setName("Player");
         setSortingLayerName("Personajes");
@@ -36,11 +37,28 @@ public class BattlePlayer : BattleEntity
     override public void update()
     {
         base.update();
-        
-        switch (this.getState())
+
+        if (getState() == IDLE)
+        {
+            
+        }
+        else if (getState() == ATTACKING)
+        {
+            this.gotoAndStop(9);
+            if (getX() >= this.initialX + 50)
+            {
+                this.setVelX(-50);
+            }
+            else if (getX() <= this.initialX - 50)
+            {
+                this.setVelX(50);
+            }
+        }
+
+        /*switch (this.getState())
         {
             case IDLE:
-                this.initAnimation(1, 8, 8, true);
+                //initAnimation(1, 8, 16, true);
                 break;
             case ATTACKING:
                 this.gotoAndStop(9);
@@ -62,9 +80,9 @@ public class BattlePlayer : BattleEntity
                   
 
             default:
-                this.initAnimation(1,8,8,true);
+                //this.initAnimation(1,16,8,true);
                 break;
-        }
+        }*/
 
     }
     override public void render()
@@ -90,9 +108,9 @@ public class BattlePlayer : BattleEntity
 
         if (aState == BattlePlayer.IDLE)
         {
-            setX(initialX);
+            this.setX(initialX);
             this.setVelX(0);
-            this.initAnimation(1, 8, 8, true);
+            this.initAnimation(1, 8, 16, true);
         }
     }
 
@@ -100,20 +118,20 @@ public class BattlePlayer : BattleEntity
     {
         if (CKeyboard.pressed(CKeyboard.LEFT))
         {
-            setVelX(-50);
+            this.setVelX(-50);
         }
         if (CKeyboard.pressed(CKeyboard.RIGHT))
         {
-            setVelX(50);
+            this.setVelX(50);
         }
 
         if (CKeyboard.pressed(CKeyboard.UP))
         {
-            setVelY(50);
+            this.setVelY(50);
         }
         if (CKeyboard.pressed(CKeyboard.DOWN))
         {
-            setVelY(-50);
+            this.setVelY(-50);
         }
     }
 }
