@@ -37,6 +37,11 @@ public class CGameObject
 
     // Comportamiento de bordes del objeto
     public int mBoundAction = NONE;
+    // Velocidad Maxima.
+    private float mMaxSpeed = CMath.INFINITY;
+    // Max. acceleration.
+    private float mMaxAccel = CMath.INFINITY;
+
     // Platform game -------------------------------------------------------------
     // Variables auxiliares que se cargan cuando llamamos a checkPoints().
     protected bool mTileTopLeft; // Si es caminables (true) o no (false).
@@ -165,9 +170,21 @@ public class CGameObject
 	{
 		mTimeState = mTimeState + Time.deltaTime;
 
-		mVel = mVel + mAccel * Time.deltaTime;
-		mPos = mPos + mVel * Time.deltaTime;
-	}
+        // Truncate acceleration.
+        mAccel.truncate(mMaxAccel);
+
+        mVel = mVel + mAccel * Time.deltaTime;
+
+        // Apply friction.
+        mVel.mul(mFriction);
+
+        // Truncate speed.  
+        mVel.truncate(mMaxSpeed);
+
+        mPos = mPos + mVel * Time.deltaTime;
+
+        checkBounds();
+    }
 	
 	virtual public void render()
 	{
@@ -382,6 +399,13 @@ public class CGameObject
         }
     }
 
+    public void stopMove()
+    {
+        setVelXY(0, 0);
+        setAccelX(0);
+        setAccelY(0);
+    }
+
     public void setXOffsetBoundingBox(int aXOffsetBoundingBox)
     {
         mXOffsetBoundingBox = aXOffsetBoundingBox;
@@ -390,5 +414,82 @@ public class CGameObject
     public void setYOffsetBoundingBox(int aYOffsetBoundingBox)
     {
         mYOffsetBoundingBox = aYOffsetBoundingBox;
+    }
+
+    //--------------------------------------------------------------
+    // PLATFORM GAME 
+    //--------------------------------------------------------------
+
+    // Devuelve true si hay un techo arriba del personaje.
+    public bool isRoof(float aX, float aY)
+    {
+        // se cargan las variables.
+        checkPoints(aX, aY);
+
+        if (!mTileTopLeft || !mTileTopRight)
+            return true;
+        else
+            return false;
+    }
+    // Devuelve true si hay un piso abajo del personaje.
+    public bool isFloor(float aX, float aY)
+    {
+        // Esto carga las variables...
+        checkPoints(aX, aY);
+
+        if (!mTileDownLeft || !mTileDownRight)
+            return true;
+        else
+            return false;
+    }
+
+    // Devuelve true si hay una pared en el lado izquierdo del personaje.
+    public bool isWallLeft(float aX, float aY)
+    {
+        // Esto carga las variables...
+        checkPoints(aX, aY);
+
+        if (!mTileTopLeft || !mTileDownLeft)
+            return true;
+        else
+            return false;
+    }
+
+    // Devuelve true si hay una pared en el lado derecho del personaje.
+    public bool isWallRight(float aX, float aY)
+    {
+        // Esto carga las variables...
+        checkPoints(aX, aY);
+
+        if (!mTileTopRight || !mTileDownRight)
+            return true;
+        else
+            return false;
+    }
+    public void checkPoints(float aX, float aY)
+    {
+        int x = (int)aX;
+        int y = (int)aY;
+
+        // Columna del lado izquierdo del personaje.
+        mLeftX = (x + mXOffsetBoundingBox) / CTileMap.TILE_WIDTH;
+        // Columna del lado derecho del personaje. -1 porque es el pixel de adentro. x+w es la coordenada del pixel de afuera.
+        mRightX = (x + getWidth() - 1 - mXOffsetBoundingBox) / CTileMap.TILE_WIDTH;
+        // Fila de arriba del personaje.
+        mUpY = (y + mYOffsetBoundingBox) / CTileMap.TILE_HEIGHT;
+        // Fila de los pies del personaje.
+        mDownY = (y + getHeight() - 1) / CTileMap.TILE_HEIGHT;
+
+        CTileMap map = CGame.inst().getMap();
+
+        mTileTopLeft = map.getTile(mLeftX, mUpY).isWalkable();
+        mTileTopRight = map.getTile(mRightX, mUpY).isWalkable();
+        mTileDownLeft = map.getTile(mLeftX, mDownY).isWalkable();
+        mTileDownRight = map.getTile(mRightX, mDownY).isWalkable();
+
+        //Debug.Log ("Esquina superior izquierda hay un tile: " + mTileTopLeft);
+        //Debug.Log ("Esquina superior derecha hay un tile: " + mTileTopRight);
+        //Debug.Log ("Esquina inferior izquierda hay un tile: " + mTileDownLeft);
+        //Debug.Log ("Esquina inferior derecha hay un tile: " + mTileDownRight);
     }
 }

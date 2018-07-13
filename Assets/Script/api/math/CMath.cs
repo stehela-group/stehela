@@ -3,6 +3,9 @@ using System.Collections;
 
 public class CMath
 {
+    public const float INFINITY = float.MaxValue;
+    public const float MIN_INFINITY = float.MinValue;
+
 	public static int randomIntBetween(int aMin, int aMax)
 	{
 		return Random.Range (aMin, aMax + 1);
