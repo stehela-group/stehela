@@ -10,15 +10,15 @@ public class COverWorldNPC3 : CAnimatedSprite
     private const int STATE_IDLE = 1;
     private string portraitAddress;
 
-    protected const int WIDTH = 32;
-    protected const int HEIGHT = 32;
+    protected const int WIDTH = 32 * 6;
+    protected const int HEIGHT = 32 * 6;
     public COverWorldNPC3()
     {
         setFrames(Resources.LoadAll<Sprite>("Sprites/NPC3"));
         portraitAddress = "Sprites/animatedPortraitNPC3";
         setName("Overworld NPC3");
         setSortingLayerName("Personajes");
-        setScale(5);
+        setScale(6);
 
         //se multiplica por 5 por la escala.
         setWidth(WIDTH * 5);

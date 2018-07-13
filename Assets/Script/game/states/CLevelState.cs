@@ -90,7 +90,7 @@ public class CLevelState : CGameState
         foreach (var entry in this.shadowDictionary)
         {
             Debug.Log(entry.Value.getX() + entry.Value.getWidth() / 2 - entry.Key.getWidth() / 2);
-           entry.Key.setXY(entry.Value.getX() + entry.Value.getWidth() / 10-entry.Key.getWidth()/10, entry.Value.getY() + entry.Value.getWidth()  -entry.Key.getHeight()/10);
+           entry.Key.setXY(entry.Value.getX() + (entry.Value.getWidth()/2) -(entry.Key.getWidth()/2), entry.Value.getY() + (entry.Value.getHeight()) -entry.Key.getHeight()/2);
             
         }
 
