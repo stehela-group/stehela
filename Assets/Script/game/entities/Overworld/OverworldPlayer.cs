@@ -119,7 +119,7 @@ public class COverWorldPlayer : CAnimatedSprite
             if (isFloor(getX(), getY()))
             {
                 //Reposicionar el personaje contra la pared que no la traspase del lado inferior.
-                setY(((mDownY) * CTileMap.TILE_HEIGHT - getHeight()) - Y_OFFSET_BOUNDING_BOX);
+                setY(((mDownY) * CTileMap.TILE_HEIGHT - getHeight()) -   Y_OFFSET_BOUNDING_BOX);
             }
             if (!(CKeyboard.pressed(CKeyboard.LEFT) || CKeyboard.pressed(CKeyboard.RIGHT) || CKeyboard.pressed(CKeyboard.UP) || CKeyboard.pressed(CKeyboard.DOWN)))
             {
