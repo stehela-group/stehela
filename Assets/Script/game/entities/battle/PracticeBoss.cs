@@ -14,7 +14,7 @@ public class PracticeBoss : BattleEntity
         this.setAttackDamage(35);
         setFrames(Resources.LoadAll<Sprite>("Sprites/enemyBoss"));
         initAnimation(1, 8, 8, true);
-        render();
+        //render();
         setSortingLayerName("Personajes");
         setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
         setBoundAction(CGameObject.STOP);
@@ -51,7 +51,7 @@ public class PracticeBoss : BattleEntity
         }
 
         return null;
-    }
 
- 
+
+    }
 }

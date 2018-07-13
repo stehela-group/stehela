@@ -138,8 +138,8 @@ public class COverWorldPlayer : CAnimatedSprite
         base.render();
         
         mRect.setXY(getX(), getY());
-        mRect.setScaleX(WIDTH);
-        mRect.setScaleY(HEIGHT);
+        mRect.setScaleX(WIDTH*5);
+        mRect.setScaleY(HEIGHT*5);
         mRect.update();
         mRect.render();
     }

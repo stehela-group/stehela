@@ -8,14 +8,13 @@ using TMPro;
 public class COverWorldNPC1 : CAnimatedSprite
 {
     private const int STATE_IDLE = 1;
-    private string portraitAddress1;
-
+    private string portraitAddress;
     protected const int WIDTH = 32;
     protected const int HEIGHT = 32;
     public COverWorldNPC1()
     {
-        portraitAddress1 = null;
         setFrames(Resources.LoadAll<Sprite>("Sprites/NPC1"));
+        portraitAddress = "Sprites/animatedPortraitNPC1";
         setName("Overworld NPC1");
         setSortingLayerName("Personajes");
         setScale(5);
@@ -62,7 +61,7 @@ public class COverWorldNPC1 : CAnimatedSprite
             text = new string[] {
                 "¡Los has vencido! Creí que nunca se irían.",
                 "*AIU BRBRBRBR* ¿Qué ha sido eso?",
-                "Oh no, creo que han venido más."
+                "Oh no, creo que han venido más ."
             };
         }
         else
@@ -74,7 +73,7 @@ public class COverWorldNPC1 : CAnimatedSprite
             };
         }
 
-        DialogManager.startDialog(new Dialog(text, portraitAddress1));
+        DialogManager.startDialog(new Dialog(text, portraitAddress));
     }
     public override void setState(int aState)
     {
