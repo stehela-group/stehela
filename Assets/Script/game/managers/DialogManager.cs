@@ -72,8 +72,8 @@ static public class DialogManager
                     if(dialogs[currentDialog - 1].getPortrait() != dialogs[currentDialog].getPortrait())
                     {
                         characterPortrait.setFrames(Resources.LoadAll<Sprite>(dialogs[currentDialog].getPortrait()));
-                        characterPortrait.gotoAndPlay(1);
-                        characterPortrait.proceedAnimation();
+                        //characterPortrait.gotoAndPlay(1);
+                        //characterPortrait.proceedAnimation();
                         characterPortrait.setVisible(true);
                     }
                 }
