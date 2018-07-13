@@ -9,6 +9,8 @@ class BattleState : CGameState
 	public const int PLAYER_WON = 2;
 	public const int PLAYER_LOST = 3;
 
+
+
     private CBackground mBackground;
 
     //private turnActionManager mTurnActionManager;
@@ -60,6 +62,9 @@ class BattleState : CGameState
         foreach (var entity in this.playerParty)
         {
             CButtonSprite playerButton = new CButtonSprite(entity.getName());
+            playerButton.setFrames(Resources.LoadAll<Sprite>("Sprites/button/buttons2"));
+            playerButton.setName("PlayerButton");
+            
             playerButton.setXY( 200, (playerButton.getHeight() * this.playerPartyButtons.Count) + 50);
             //playerButton.setSortingLayerName("Game");
             this.playerPartyButtons.Add(playerButton, entity);
@@ -100,13 +105,16 @@ class BattleState : CGameState
 						foreach (var skill in this.selectedBattleEntity.getSkills())
 						{
 							CButtonSprite skillButton = new CButtonSprite(skill.getName());
+                            skillButton.setFrames(Resources.LoadAll<Sprite>("Sprites/button/buttons2"));
+                            skillButton.setName("SkillrButton");
 
-							/*
+
+                            /*
 								Posición de botones:
 								X = Ancho de pantalla - (Ancho de Botón + Margen)
 								Y = Alto de pantalla - (Alto de Botón * (Cantidad total de Skills - Cantidad de skills ya mostradas en botones))
 							 */
-							skillButton.setXY(CGameConstants.SCREEN_WIDTH - (skillButton.getWidth() * 2.5f),
+                            skillButton.setXY(CGameConstants.SCREEN_WIDTH - (skillButton.getWidth() * 2.5f),
 								CGameConstants.SCREEN_HEIGHT - (skillButton.getHeight() * (this.selectedBattleEntity.getSkills().Count - this.skillButtons.Count)));
                             //skillButton.setSortingLayerName("Game");
                             this.skillButtons.Add(skillButton, skill);
@@ -388,8 +396,12 @@ class BattleState : CGameState
 			{
 				CButtonSprite playerButton = new CButtonSprite(entity.getName());
 				this.targetButtons.Add(playerButton, entity);
-			}
-		}
+                playerButton.setFrames(Resources.LoadAll<Sprite>("Sprites/button/buttons2"));
+                playerButton.setName("PlayerButton");
+
+
+            }
+        }
 
 		if(this.selectedSkill.getPossibleTargets() == Skill.Target.ENEMIES || this.selectedSkill.getPossibleTargets() == Skill.Target.BOTH)
 		{
@@ -397,8 +409,12 @@ class BattleState : CGameState
 			{
 				CButtonSprite enemyButton = new CButtonSprite(entity.getName());
 				this.targetButtons.Add(enemyButton, entity);
-			}
-		}
+
+                enemyButton.setFrames(Resources.LoadAll<Sprite>("Sprites/button/buttons2"));
+                enemyButton.setName("PlayerButton");
+
+            }
+        }
 
 		int settedButtons = 0;
 		foreach (var entry in this.targetButtons)

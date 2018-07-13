@@ -17,7 +17,7 @@ public class CButtonSprite : CAnimatedSprite
 		this.setSortingLayerName("UI");
 
 		this.buttonText = new CText(buttonText);
-		this.buttonText.setColor(Color.black);
+		this.buttonText.setColor(Color.white);
 		this.buttonText.setWidth(this.getWidth());
 		this.buttonText.setHeight(this.getHeight());
 		this.buttonText.setAlignment(TextAlignmentOptions.Midline);
