@@ -10,16 +10,15 @@ public class COverWorldNPC2 : CAnimatedSprite
     private const int STATE_IDLE = 1;
     private const int STATE_TRANSFORM = 2;
     private const int STATE_NEW_IDLE = 3;
-    private string portraitAddress2;
+    private string portraitAddress;
     private  float mTimer = 0;
 
     private const int WIDTH = 32;
     private const int HEIGHT = 32;
     public COverWorldNPC2()
     {
-        
-        portraitAddress2 = null;
         setFrames(Resources.LoadAll<Sprite>("Sprites/NPC2"));
+        portraitAddress = "Sprites/animatedPortraitNPC2";
         setName("Overworld NPC2");
         setSortingLayerName("Personajes");
         setScale(5);
@@ -99,7 +98,7 @@ public class COverWorldNPC2 : CAnimatedSprite
             };
         }
 
-        DialogManager.startDialog(new Dialog(text, portraitAddress2));
+        DialogManager.startDialog(new Dialog(text, portraitAddress));
     }
     public override void setState(int aState)
     {

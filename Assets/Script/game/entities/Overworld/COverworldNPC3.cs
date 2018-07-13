@@ -8,14 +8,14 @@ using TMPro;
 public class COverWorldNPC3 : CAnimatedSprite
 {
     private const int STATE_IDLE = 1;
-    private string portraitAddress3;
+    private string portraitAddress;
 
     protected const int WIDTH = 32;
     protected const int HEIGHT = 32;
     public COverWorldNPC3()
     {
-        portraitAddress3 = null;
         setFrames(Resources.LoadAll<Sprite>("Sprites/NPC3"));
+        portraitAddress = "Sprites/animatedPortraitNPC3";
         setName("Overworld NPC3");
         setSortingLayerName("Personajes");
         setScale(5);
@@ -81,7 +81,7 @@ public class COverWorldNPC3 : CAnimatedSprite
             };
         }
 
-        DialogManager.startDialog(new Dialog(text, portraitAddress3));
+        DialogManager.startDialog(new Dialog(text, portraitAddress));
     }
     public override void setState(int aState)
     {
