@@ -137,11 +137,11 @@ public class COverWorldPlayer : CAnimatedSprite
     {
         base.render();
         
-        mRect.setXY(getX(), getY());
+        /*mRect.setXY(getX(), getY());
         mRect.setScaleX(WIDTH*5);
         mRect.setScaleY(HEIGHT*5);
         mRect.update();
-        mRect.render();
+        mRect.render();*/
     }
 
     override public void destroy()
@@ -228,7 +228,7 @@ public class COverWorldPlayer : CAnimatedSprite
         }
         if (getState() == STATE_WALKING)
         {
-            //initAnimation(13, 35, 9, true);
+            initAnimation(13, 36, 12, true);
         }
 
 

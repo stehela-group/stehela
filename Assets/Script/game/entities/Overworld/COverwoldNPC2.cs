@@ -34,7 +34,6 @@ public class COverWorldNPC2 : CAnimatedSprite
     override public void update()
     {
         base.update();
-        mTimer = mTimer + 1;
        
         if (getState() == STATE_IDLE)
         { 
@@ -45,11 +44,12 @@ public class COverWorldNPC2 : CAnimatedSprite
         }
         if (getState() == STATE_TRANSFORM)
         {
-           if (mTimer >= 7)
+           if (this.isEnded())
             {
                 setState(STATE_NEW_IDLE);
             }
         }
+
         
     }
 

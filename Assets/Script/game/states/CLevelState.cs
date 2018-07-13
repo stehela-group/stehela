@@ -53,7 +53,7 @@ public class CLevelState : CGameState
         mOverworldNPC2.setXY(900, 870);
 
         mOverworldNPC3 = new COverWorldNPC3();
-        mOverworldNPC3.setXY(600, 500);
+        mOverworldNPC3.setXY((CGameConstants.SCREEN_WIDTH / 2 - 170), (CGameConstants.SCREEN_HEIGHT / 2 - 180 ));
 
         /*CGame.inst().setPlayer(mPlayer);*/
 
