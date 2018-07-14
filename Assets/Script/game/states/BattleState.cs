@@ -369,6 +369,7 @@ class BattleState : CGameState
 			if(this.deadEnemiesCount == this.enemyParty.Count)
 			{
 				this.setState(BattleState.PLAYER_WON);
+
 				return;
 			}
 			else if(this.deadEnemiesCount > 0)
