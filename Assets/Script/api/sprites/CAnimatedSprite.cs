@@ -67,4 +67,9 @@ public class CAnimatedSprite : CSprite
     {
         mAnim.continueAnimation();
     }
+
+    public Sprite[] getFrames()
+    {
+        return this.mFrame;
+    }
 }
