@@ -109,7 +109,7 @@ public class BattlePlayer : BattleEntity
         {
             this.setX(initialX);
             this.setVelX(0);
-            this.initAnimation(1, 8, 16, true);
+            this.initAnimation(1, 8, 8, true);
         }
     }
 
