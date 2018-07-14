@@ -24,7 +24,7 @@ public class CTileMap
 
     // Cantidad de tiles que hay.
     // TODO ver la cantidad de tiles diferentes
-    private const int NUM_TILES = 2;
+    private const int NUM_TILES = 3;
 
     // Array con los sprites de los tiles.
     private Sprite[] mTiles;
@@ -34,35 +34,19 @@ public class CTileMap
     //Es el mapa con el indice de los tipos de tiles, despues hay que hacer el mapa
     //TODO Ver la cantidad optima para el overworld.
     public static int[] LEVEL_001 = {
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1,1,1,
-        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1,
-        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1,
-        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1,
-        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0,
-        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0,
-        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0,
-        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0,
-        1, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1,
-        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1,
-        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,1,
+        2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1,1,2,
+        2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,2,
+        2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,2,
+        2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,2,
+        2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0,
+        2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0,
+        2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0,
+        2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0,
+        2, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,2,
+        2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,2,
+        2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,2,
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,1,1,1,1,1
 
-    };
-    public static int[] LEVEL_002 =
-    {
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
-        1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
-        1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
-        1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
-        1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
-        0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
     };
 
     private int mCurrentLevel;
@@ -78,13 +62,13 @@ public class CTileMap
         mTiles = new Sprite[NUM_TILES];
         mTiles[0] = Resources.Load<Sprite>("Sprites/tiles/empty_tile");
         mTiles[1] = Resources.Load<Sprite>("Sprites/tiles/tile_wall1");
-        /*mTiles[2] = Resources.Load<Sprite>("Sprites/tiles/tile002");
-        mTiles[3] = Resources.Load<Sprite>("Sprites/tiles/tile003");
+        mTiles[2] = Resources.Load<Sprite>("Sprites/tiles/wall002");
+        /*mTiles[3] = Resources.Load<Sprite>("Sprites/tiles/tile003");
         mTiles[4] = Resources.Load<Sprite>("Sprites/tiles/tile004");
         mTiles[5] = Resources.Load<Sprite>("Sprites/tiles/tile005");*/
 
         //TODO: Cargar todo junto con LOADALL
-        buildLevel (1);
+        buildLevel(1);
 
         mEmptyTile = new CTile(0, 0, 0, mTiles[0]);
         mEmptyTile.setVisible(false);
