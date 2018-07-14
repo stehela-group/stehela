@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class CGame : MonoBehaviour
@@ -20,9 +20,9 @@ public class CGame : MonoBehaviour
 		CMouse.init();
 		CKeyboard.init ();
 
-        setState(new CLevelState());
-        //setState(new BattleState());
-    }
+
+    setState(new CMainMenuState());
+	}
 
 	static public CGame inst()
 	{

@@ -123,8 +123,7 @@ static public class DialogManager
         if (newDialogs[0].hasPortrait())
         {
             characterPortrait.setFrames(Resources.LoadAll<Sprite>(newDialogs[0].getPortrait()));
-            characterPortrait.gotoAndPlay(1); // Errorr creo ACA 
-            characterPortrait.proceedAnimation();
+            characterPortrait.initAnimation(1, characterPortrait.getFrames().Length, 2, true);
             characterPortrait.setVisible(true);
         }
 
