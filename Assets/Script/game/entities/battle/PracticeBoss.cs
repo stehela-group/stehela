@@ -13,7 +13,7 @@ public class PracticeBoss : BattleEntity
         this.setHealth(getMaxHealth());
         this.setAttackDamage(35);
         setFrames(Resources.LoadAll<Sprite>("Sprites/enemyBoss"));
-        initAnimation(1, 8, 8, true);
+        setState(IDLE);
         //render();
         setSortingLayerName("Personajes");
         setBounds(0, 0, CGameConstants.SCREEN_WIDTH, CGameConstants.SCREEN_HEIGHT);
@@ -53,6 +53,45 @@ public class PracticeBoss : BattleEntity
 
         return null;
 
+
+    }
+    override public void setState(int aState)
+    {
+        base.setState(aState);
+
+        if (aState == BattlePlayer.ATTACKING)
+        {
+            this.initAnimation(9, 14, 8, false);
+
+        }
+
+        if (aState == BattlePlayer.IDLE)
+        {
+            this.initAnimation(1, 8, 8, true);
+        }
+    }
+    override public void update()
+    {
+        base.update();
+
+        if (getState() == IDLE)
+        {
+
+        }
+        else if (getState() == ATTACKING)
+        {
+
+        }
+    }
+
+    override public void render()
+    {
+        base.render();
+    }
+
+    override public void destroy()
+    {
+        base.destroy();
 
     }
 }
