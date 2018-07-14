@@ -102,7 +102,7 @@ public class BattlePlayer : BattleEntity
         if(aState == BattlePlayer.ATTACKING)
         {
             this.setVelX(50);
-            this.initAnimation(10, 26, 16, false);
+            this.initAnimation(10, 31, 16, false);
         }
 
         if (aState == BattlePlayer.IDLE)
