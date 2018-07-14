@@ -65,7 +65,7 @@ public class CGame : MonoBehaviour
                 //GIVE player rewards.
 				BattleData.lastBattleOutcome = BattleData.BattleOutcome.WON;
 				BattleData.battlesWon++;
-                setState(new CMainMenuState());
+                setState(new CWinState());
                 return;
             }
             else if (mState.getState() == BattleState.PLAYER_LOST)
@@ -75,6 +75,13 @@ public class CGame : MonoBehaviour
 				BattleData.battlesLost++;
                 setState(new CLevelState());
                 return;
+            }
+        }
+        else if (mState is CWinState)
+        {
+            if (mState.getState() == CWinState.FINISHED)
+            {
+                setState(new CMainMenuState());
             }
         }
 	}

@@ -1,6 +1,8 @@
 using UnityEngine;
 public class Companion1 : BattleEntity
 {
+    private float initialX;
+
     public Companion1()
     {
         this.setName("Kairus");
@@ -16,7 +18,7 @@ public class Companion1 : BattleEntity
         this.skills.Add(new Curar());
 
         setState(IDLE);
-
+        this.initialX = this.getX();
         this.slash.setFlip(true);
         this.slash.setXY(slash.getX() + 30, slash.getY() + 30);
     }
@@ -30,6 +32,14 @@ public class Companion1 : BattleEntity
         }
         else if (getState() == ATTACKING)
         {
+            if (getX() >= this.initialX + 50)
+            {
+                this.setVelX(-50);
+            }
+            else if (getX() <= this.initialX - 50)
+            {
+                this.setVelX(50);
+            }
         }
     }
     override public void render()
@@ -48,7 +58,7 @@ public class Companion1 : BattleEntity
 
         if (aState == BattlePlayer.ATTACKING)
         {
-            //this.initAnimation(10, 26, 16, false);
+            this.initAnimation(19, 36, 16, false);
         }
 
         if (aState == BattlePlayer.IDLE)

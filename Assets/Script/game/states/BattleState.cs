@@ -82,6 +82,11 @@ class BattleState : CGameState
 
         switch (this.getState())
         {
+            case BattleState.PLAYER_WON:
+                {
+
+                    return;
+                }
             case BattleState.SELECTING_ACTIONS:
 				// Botones de seleccion de personaje
 				foreach (var entry in this.playerPartyButtons)
