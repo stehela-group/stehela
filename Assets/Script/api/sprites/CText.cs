@@ -100,5 +100,15 @@ public class CText : CGameObject
 	{
 		CText.UICanvas.GetComponent<Canvas>().sortingLayerName = aSortingLayerName;
 	}
- 
+
+    public void setPivot(float x, float y)
+    {
+        this.displayText.rectTransform.pivot = new Vector2(x, y);
+    }
+
+    public void setScale(float aScale)
+    {
+        this.displayText.transform.localScale = new Vector3(aScale, aScale, 0.0f);
+    }
+
 }
