@@ -25,7 +25,7 @@ public class CTile : CSprite
 		mTileIndex = aTileIndex;
 
         // Set walkable information.
-        if (aTileIndex == 1)
+        if (aTileIndex == 1 || aTileIndex == 2)
             mIsWalkable = false;
         else
             mIsWalkable = true;

@@ -44,7 +44,6 @@ public class BattlePlayer : BattleEntity
         }
         else if (getState() == ATTACKING)
         {
-            this.gotoAndStop(9);
             if (getX() >= this.initialX + 50)
             {
                 this.setVelX(-50);
@@ -103,7 +102,7 @@ public class BattlePlayer : BattleEntity
         if(aState == BattlePlayer.ATTACKING)
         {
             this.setVelX(50);
-            
+            this.initAnimation(10, 26, 16, false);
         }
 
         if (aState == BattlePlayer.IDLE)

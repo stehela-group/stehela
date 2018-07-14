@@ -61,7 +61,7 @@ public class PracticeBoss : BattleEntity
 
         if (aState == BattlePlayer.ATTACKING)
         {
-            this.initAnimation(9, 14, 8, false);
+            this.initAnimation(9, 23, 8, false);
 
         }
 
