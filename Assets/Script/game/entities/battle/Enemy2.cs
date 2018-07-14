@@ -11,7 +11,7 @@ public class Enemy2 : BattleEntity
         this.setName("prototype_minion");
         setFrames(Resources.LoadAll<Sprite>("Sprites/minionBoss"));
         setScale(3);
-        this.setMaxHealth(10);
+        this.setMaxHealth(150);
         this.setHealth(getMaxHealth());
         this.setAttackDamage(10);
         this.skills.Add(new Atacar());

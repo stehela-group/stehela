@@ -50,6 +50,7 @@ public class Action: CGameObject
                     // si la skill tiene porcentaje de curacion, cambia la vida actual del target para sumarle el porcentaje por el attackDamage del caster.
                     if (skill.getHeal() > 0){
                         target.setHealth(target.getHealth() + skill.getHeal() * caster.getAttackDamage() / 100);
+                        target.setState(BattleEntity.IDLE);
                     }
                     else
                     { //el pocentaje de daño de skill se multiplica por el attackDamage del caster.

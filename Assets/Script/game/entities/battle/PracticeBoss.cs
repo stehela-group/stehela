@@ -9,7 +9,7 @@ public class PracticeBoss : BattleEntity
 
         this.setName("Practice Boss");
 
-        this.setMaxHealth(10);
+        this.setMaxHealth(250);
         this.setHealth(getMaxHealth());
         this.setAttackDamage(35);
         setFrames(Resources.LoadAll<Sprite>("Sprites/enemyBoss"));
@@ -23,7 +23,7 @@ public class PracticeBoss : BattleEntity
         setScale(3);
 
         this.skills.Add(new Atacar());
-        this.skills.Add(new Curar());
+        //this.skills.Add(new Curar());
         this.skills.Add(new Corromper());
     }
 
